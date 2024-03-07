@@ -19,3 +19,29 @@ const agge = 26;
 const beverage = age >= 21 ? 'Beer' : 'Juice';
 console.log(beverage);
 
+// switch...case
+const day = "monday";
+
+switch (day) {
+	case "monday":
+		console.log("Go to school");
+		break;
+	case "tuesday":
+		console.log("Prepare theory videos");
+		break;
+	case "wednesday":
+	case "thursday":
+		console.log("write code examples");
+        break;
+	case "friday":
+		console.log("Record videos");
+        break;
+	case "saturday":
+	case "sunday":
+		console.log("Enjoy the weekend :D");
+		break;
+    default:
+        console.log('Not a valid day!');
+}
+
+
