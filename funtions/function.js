@@ -21,3 +21,11 @@ console.log(x);
 const multiply = (number1, number2) => number1 * number2;
 let y = multiply(10, 5);
 console.log(y);
+
+const Course =  function (name, price) {
+	this.name = name;
+	this.price = price;
+}
+
+const jsCourse = new Course ('Javascript', 1000);
+console.log(jsCourse);
