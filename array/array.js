@@ -26,7 +26,6 @@ console.log(friends.includes('Steven'));
 
 if(friends.includes('Steven')) {
     console.log('You have a friend called Steven')
-
 }
 
 
