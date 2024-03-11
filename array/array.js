@@ -61,3 +61,18 @@ const result = words.filter((word) => word.length > 6);
 
 console.log(result);
 // Expected output: Array ["exuberant", "destruction", "present"]
+
+// method reduce
+const numberList = [1, 2, 3, 4, 5];
+const sumFor = (numberList) => {
+	let sum = 0;
+	for (const number of numberList) {
+		sum += number;
+	}
+	return sum;
+};
+console.log(sumFor(numberList));
+//
+const initialValue = 0;
+const sumReduce = numberList.reduce((sum, number) => sum + number);
+console.log(sumReduce);
