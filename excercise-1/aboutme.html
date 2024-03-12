@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>About Me</title>
+  <style>
+    .listitem {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>About Me</h1>
+
+  <ul>
+    <li>Nickname: <span id="nickname"></span>
+    <li>Favorites: <span id="favorites"></span>
+    <li>Hometown: <span id="hometown"></span>
+  </ul>
+  <script>
+    document.body.style.fontfamily = "Arial, sans-serif";
+    document.getElementById("nickname").innerHTML = "Aeri";
+    document.getElementById("favorites").innerHTML = "Draw";
+    document.getElementById("hometown").innerHTML = "Tam Ky";
+    const changeStyle = document.getElementsByTagName("li");
+    for (i = 0; i < changeStyle; i++) {
+      changeStyle[i].className = "listitem";
+    }
+
+    var myImage = document.createElement("img");
+    myImage.src = "http://gotocon.com/dl/jaoo_aus2008/photos/speakers/Pamela_Fox.jpg";
+    document.body.appendChild(myImage);
+
+  </script>
+</body>
+
+</html>
