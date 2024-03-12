@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset=utf-8 />
+    <title>JS DOM paragraph style</title>
+</head>
+
+<body>
+    <p id='text'>JavaScript Exercises - w3resource</p>
+    <div>
+        <button id="jsstyle" onclick="js_style()">Style</button>
+    </div>
+    <script>
+        const btn = document.getElementById('jsstyle');
+        function js_style() {
+            const p = document.getElementById('text');
+            p.style.fontSize = '15pt';
+            p.style.fontFamily = 'Arial';
+            p.style.color = 'red';
+        }
+    </script>
+</body>
