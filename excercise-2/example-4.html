@@ -13,15 +13,21 @@
     function getAttributes() {
       const getValue = document.getElementById('w3r');
       const getType = getValue.type;
-      console.log(getType);
+      //  console.log(getType);
       const getHreflang = getValue.hreflang;
-      console.log(getHreflang);
+      //  console.log(getHreflang);
       const getRel = getValue.rel;
-      console.log(getRel);
+      // console.log(getRel);
       const getTarget = getValue.target;
-      console.log(getTarget);
+      // console.log(getTarget);
       const getHref = getValue.href;
-      console.log(getHref);
+      // console.log(getHref);
+      alert(`
+      type: ${getType} 
+      hrefLang: ${getHreflang} 
+      rel: ${getRel}
+      target: ${getTarget}
+      href: ${getHref}`)
     }
 
   </script>

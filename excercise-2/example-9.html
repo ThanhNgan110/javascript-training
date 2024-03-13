@@ -23,15 +23,13 @@
         <input type="button" onclick="getOptions()" value="Count and Output all items">
     </form>
     <script>
-        function getOptions() {
+        getOptions = () => {
             const lengthSelected = document.getElementById('mySelect').length;
             let items = "Dropdown list items:\n"
             for (let i = 0; i < lengthSelected; i++) {
-                items += lengthSelected.options[i].text;
+                items += document.getElementById('mySelect').options[i].textContent + "\n";
             }
-            alert(items);
-
-
+            alert(items + " " + "And" + " " + "lenght of this select is:" + " " + lengthSelected);
         }
     </script>
 </body>
