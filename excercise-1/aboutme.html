@@ -21,15 +21,16 @@
   </ul>
   <script>
     document.body.style.fontfamily = "Arial, sans-serif";
-    document.getElementById("nickname").innerHTML = "Aeri";
+    document.getElementById("nickname").innerHTML = "Thanh Ngan";
     document.getElementById("favorites").innerHTML = "Draw";
     document.getElementById("hometown").innerHTML = "Tam Ky";
-    const changeStyle = document.getElementsByTagName("li");
-    for (i = 0; i < changeStyle; i++) {
-      changeStyle[i].className = "listitem";
-    }
+    const listItem = document.querySelectorAll('ul>li');
+    listItem.forEach((item) => {
+      // console.log(item);
+      item.className = 'listitem';
+    })
 
-    var myImage = document.createElement("img");
+    const myImage = document.createElement("img");
     myImage.src = "http://gotocon.com/dl/jaoo_aus2008/photos/speakers/Pamela_Fox.jpg";
     document.body.appendChild(myImage);
 
