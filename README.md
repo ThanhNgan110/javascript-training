@@ -1,6 +1,5 @@
 # JAVASCRIPT PRACTICE
 
-
 ## OVERVIEW
 
 - This is the document provided required for Javascript practice
@@ -9,7 +8,7 @@
 ## TIMELINE
 
 - Expected: 9 Days (2024/03/14 - 2024/03/26)
-- Total:    
+- Total:
 
 ## TEAM SIZE
 
@@ -26,7 +25,6 @@
 - Products can be added to the cart. The cart form is displayed as a modal.
 - Users can check from the Cart. The checkout form is also displayed as a modal.
 
-
 ## TECHNICAL STACK
 
 - HTML5
@@ -35,20 +33,27 @@
 - Mock API
 
 ## How to run
+
 - Clone source
+
 ```
 https://github.com/ThanhNgan110/javascript-training
 ```
+
 - Git checkout feature/practice
+
 ```
 git checkout feature/practice
 ```
+
 - Install packages
+
 ```
 npm install
 ```
+
 - Run project
+
 ```
 npm start
 ```
-  
