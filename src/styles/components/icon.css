@@ -1,0 +1,39 @@
+.icon {
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.icon-location {
+  width: 15px;
+  height: 18px;
+  background-image: url('/src/assets/images/icons/icon-location.svg');
+}
+
+.icon-drop-down {
+  width: 7px;
+  height: 4px;
+  background-image: url('/src/assets/images/icons/icon-drop-down.svg');
+}
+
+.icon-logo {
+  background-image: url('/src/assets/images/header/logo.png');
+}
+
+.icon-heart {
+  width: 32px;
+  height: 32px;
+  background-image: url('/src/assets/images/icons/icon-heart.svg');
+}
+
+.icon-cart {
+  width: 34px;
+  height: 34px;
+  background-image: url('/src/assets/images/icons/icon-cart.svg');
+}
+
+.icon-search {
+  width: 20px;
+  height: 20px;
+  background-image: url('/src/assets/images/icons/icon-search.svg');
+}
