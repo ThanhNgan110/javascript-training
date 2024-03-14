@@ -1,0 +1,46 @@
+.header-top {
+  background-color: var(--color-mine-shaft);
+  display: flex;
+  justify-content: space-around;
+}
+
+.link {
+  color: var(--color-nobel);
+}
+
+.header-left {
+  gap: 8px;
+}
+
+.header-right {
+  gap: 40px;
+}
+
+.header-logo {
+  display: flex;
+  gap: 3px;
+}
+
+.header-bottom {
+  display: flex;
+  justify-content: space-around;
+}
+
+.name-logo {
+  font-weight: var(--font-weight-medium);
+  font-size: 32px;
+  color: var(--color-deep-fir);
+}
+
+.form-input-search {
+  position: relative;
+  display: flex;
+}
+
+.icon-search-absolute {
+  position: absolute;
+}
+
+.input-search {
+  width: 400px;
+}
