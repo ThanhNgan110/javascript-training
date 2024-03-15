@@ -69,3 +69,9 @@
   text-align: center;
   color: var(--color-white);
 }
+
+.icon-filter {
+  width: 20px;
+  height: 17px;
+  background-image: url('/src/assets/images/icons/icon-filter.svg');
+}
