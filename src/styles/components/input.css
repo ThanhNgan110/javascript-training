@@ -1,3 +1,8 @@
 .form-input {
   display: flex;
 }
+
+.input-search {
+  padding: 0 27px;
+  font-size: 15px;
+}
