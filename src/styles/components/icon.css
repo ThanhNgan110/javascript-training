@@ -37,3 +37,35 @@
   height: 20px;
   background-image: url('/src/assets/images/icons/icon-search.svg');
 }
+
+.icon-phone {
+  width: 28px;
+  height: 28px;
+  background-image: url('/src/assets/images/icons/icon-phone.svg');
+}
+
+.icon-home {
+  width: 24px;
+  height: 24px;
+  background-image: url('/src/assets/images/icons/icon-home.svg');
+}
+
+.icon-circle {
+  width: 18px;
+  height: 18px;
+}
+
+.icon-vertical {
+  width: 24px;
+}
+
+.icon-circle {
+  position: absolute;
+  left: 24px;
+  bottom: 27px;
+  background: var(--color-green);
+  padding: 2px;
+  border-radius: 11px;
+  text-align: center;
+  color: var(--color-white);
+}
