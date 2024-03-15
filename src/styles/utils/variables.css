@@ -1,7 +1,13 @@
 :root {
   --color-mine-shaft: #333333;
   --color-nobel: #B3B3B3;
+  --color-green: #00B207;
+  --color-white: #fff;
   --color-deep-fir: #002603;
+  --color-mercury: #E5E5E5 
+  --color-dove-gray:#666;
+  --color-tundora:#4D4D4D;
+  --color-cod-gray: #1A1A1A;
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
