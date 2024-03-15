@@ -2,6 +2,8 @@
   background-color: var(--color-mine-shaft);
   display: flex;
   justify-content: space-around;
+  gap: 135px;
+  padding: 13px 0;
 }
 
 .link {
@@ -39,8 +41,65 @@
 
 .icon-search-absolute {
   position: absolute;
+  top: 10px;
+  left: 5px;
 }
 
 .input-search {
   width: 400px;
+}
+
+.header-bottom {
+  padding: 24px 0;
+  border-bottom: 1px solid #E5E5E5;
+}
+
+.header-nav {
+  display: flex;
+  justify-content: space-around;
+  padding: 19.5px 0;
+}
+
+.nav-list {
+  display: flex;
+  gap: 51px;
+}
+
+.breadcrumbs {
+  background-image: url('/src/assets/images/header/Breadcrumbs.jpg');
+  background-repeat: no-repeat;
+}
+
+.link-item {
+  font-size: 14px;
+  color: var(--color-dove-gray);
+}
+
+.block-cart {
+  position: relative;
+  margin-right: 12px;
+}
+
+.block-total-cart {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.name-cart {
+  font-size: 14px;
+  color: var(--color-tundora);
+  font-weight: var(--font-weight-regular);
+  line-height: 13.2px;
+}
+
+.total-price {
+  font-size: 14px;
+  color: var(--color-cod-gray);
+  font-weight: var(--font-weight-medium);
+  line-height: 14px;
+}
+
+.link-phone {
+  color: var(  --color-tundora);
 }
