@@ -50,7 +50,7 @@
 }
 
 .header-bottom {
-  padding: 24px 0;
+  padding: 24px 129px;
   border-bottom: 1px solid #E5E5E5;
 }
 
@@ -101,5 +101,7 @@
 }
 
 .link-phone {
-  color: var(  --color-tundora);
+  color: var(--color-tundora);
+  display: flex;
+  align-items: center;
 }
