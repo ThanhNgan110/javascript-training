@@ -1,6 +1,29 @@
 .flex {
   display: flex;
-  justify-content: center;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.align-items-center {
   align-items: center;
 }
 
+.justify-content-center {
+  justify-content: center;
+}
+
+.justify-content-start {
+  justify-content: space-between !important;
+}
+
+.justify-content-arround {
+  justify-content: space-around;
+}
+
+.align-center {
+  align-items: center;
+}
