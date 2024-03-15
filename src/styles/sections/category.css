@@ -1,0 +1,33 @@
+.total-result {
+  font-weight: var(--font-weight-semibold);
+}
+
+.block-item {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.heading-secondary-mb {
+  margin-bottom: 20px;
+}
+
+.dropdown {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dropdown-toggle {
+  width: 166px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+}
+
+.rdo-category {
+  width: 20px;
+  height: 20px;
+  border-radius: 32px;
+}
