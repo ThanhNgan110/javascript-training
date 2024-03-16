@@ -4,6 +4,16 @@
   background-position: center;
 }
 
+.icon-small {
+  width: 20px;
+  height: 20px;
+}
+
+.icon-medium {
+  width: 32px;
+  height: 32px;
+}
+
 .icon-location {
   width: 15px;
   height: 18px;
@@ -27,8 +37,6 @@
 }
 
 .icon-cart {
-  width: 34px;
-  height: 34px;
   background-image: url('/src/assets/images/icons/icon-cart.svg');
 }
 
@@ -74,4 +82,16 @@
   width: 20px;
   height: 17px;
   background-image: url('/src/assets/images/icons/icon-filter.svg');
+}
+
+.icon-bag {
+  width: 20px;
+  height: 20px;
+  background-image: url('/src/assets/images/icons/icon-bag.svg');
+}
+
+.icon-top {
+  width: 12px;
+  height: 6px;
+  background-image: url('/src/assets/images/icons/icon-top.svg');
 }
