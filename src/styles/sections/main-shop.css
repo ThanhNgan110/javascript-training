@@ -84,3 +84,16 @@
   background-color: var(--color-concrete);
   border-radius: 50px;
 }
+
+.rounded {
+  background-color: var(--color-white);
+  padding: 20px 20px;
+  border-radius: 50px;
+  color: var(--color-dove-gray);
+}
+
+.block-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
