@@ -95,3 +95,15 @@
   height: 6px;
   background-image: url('/src/assets/images/icons/icon-top.svg');
 }
+
+.icon-chervon-down-left {
+  width: 20px;
+  height: 20px;
+  background-image: url('/src/assets/images/icons/icon-chevron-down-left.svg');
+}
+
+.icon-chervon-down-right {
+  width: 20px;
+  height: 20px;
+  background-image: url('/src/assets/images/icons/icon-chevron-down-right.svg');
+}
