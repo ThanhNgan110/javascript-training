@@ -107,3 +107,21 @@
   height: 20px;
   background-image: url('/src/assets/images/icons/icon-chevron-down-right.svg');
 }
+
+.icon-social {
+  width: 40px;
+  height: 40px;
+}
+
+.icon-social-instagram {
+  background-image: url('/src/assets/images/icons/icon-instagram.svg');
+}
+
+.icon-social-twitter {
+  background-image: url('/src/assets/images/icons/icon-twitter.svg');
+}
+
+.icon-social-pinterest {
+  background-image: url('/src/assets/images/icons/icon-pinterest.svg');
+}
+
