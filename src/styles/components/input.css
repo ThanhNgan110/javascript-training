@@ -3,6 +3,7 @@
 }
 
 .input-search {
-  padding: 0 27px;
+  padding: 12px 30px;
   font-size: 15px;
+  font-weight: var(--font-weight-regular);
 }
