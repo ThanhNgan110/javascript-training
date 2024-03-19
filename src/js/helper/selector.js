@@ -1,9 +1,8 @@
 // Retrieve an element from the DOM
-export const getElement = (selctor) => {
-  const element = document.querySelector(selctor);
-  console.log(element);
+export const getElement = (selector) => {
+  const element = document.querySelector(`.${selector}`);
+  console.log(element, selector);
   return element;
-}
+};
 
 // export const createElement ()
-
