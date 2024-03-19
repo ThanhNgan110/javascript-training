@@ -5,7 +5,7 @@ class ProductModel {
   }
 
   async getProducts() {
-    this.products = await this.productService.getProduct();
+    return await this.productService.getProduct();
   }
 }
-export {ProductModel}
+export { ProductModel };
