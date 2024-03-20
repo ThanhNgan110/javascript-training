@@ -1,7 +1,9 @@
 // Get element(s) by CSS selector:
-export const qs = (selector) => {
-  const element = document.querySelector(selector);
-  return element;
-};
+const getElementBySelector = selector => document.querySelector(selector);
+
 
 // export const createElement ()
+
+export { 
+  getElementBySelector
+};
