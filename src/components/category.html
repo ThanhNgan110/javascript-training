@@ -3,10 +3,16 @@
     <div class="flex justify-content-arround align-center">
       <button class="btn btn-filter">
         Filter <span class="icon icon-filter"></span></button>
-      <div class="dropdown">Sort by:
+      <p class="dropdown"> Sort by: <span class="icon icon-drop-down"></span>
+        <select id="select-options">
+          <option value="free" class="select-item">Lastest</option>
+          <option value="basic" class="select-item">Oldest</option>
+        </select>
+      </p>
+      <!-- <div class="dropdown">Sort by:
         <button type="button" class="dropdown-toggle">Latest<span class="icon icon-drop-down">
           </span></button>
-      </div>
+      </div> -->
       <div class="block-result">
         <span class="total-result">52</span> Results Found
       </div>
@@ -52,186 +58,6 @@
       </aside>
       <main>
         <div class="card-block">
-          <!-- <article class="card-product">
-            <img class="card-img" src="/src/assets/images/product/img_potatos.png">
-            <div class="card-body">
-              <div class="card-content">
-                <h3 class="product-name">Big Potatoos</h3>
-                <p class="product-price">$14.99</p>
-              </div>
-              <span class="border-circle">
-                <span class="icon icon-bag"></span>
-              </span>
-            </div>
-          </article>
-          <article class="card-product">
-            <img class="card-img" src="/src/assets/images/product/img_cabbage.png">
-            <div class="card-body">
-              <div class="card-content">
-                <h3 class="product-name">Big Potatoos</h3>
-                <p class="product-price">$14.99</p>
-              </div>
-              <span class="border-circle">
-                <span class="icon icon-bag"></span>
-              </span>
-            </div>
-          </article>
-          <article class="card-product">
-            <img class="card-img" src="/src/assets/images/product/img_finger.png">
-            <div class="card-body">
-              <div class="card-content">
-                <h3 class="product-name">Big Potatoos</h3>
-                <p class="product-price">$14.99</p>
-              </div>
-              <span class="border-circle">
-                <span class="icon icon-bag"></span>
-              </span>
-            </div>
-          </article>
-          <article class="card-product">
-            <img class="card-img" src="/src/assets/images/product/img_eggplant.png">
-            <div class="card-body">
-              <div class="card-content">
-                <h3 class="product-name">Big Potatoos</h3>
-                <p class="product-price">$14.99</p>
-              </div>
-              <span class="border-circle">
-                <span class="icon icon-bag"></span>
-              </span>
-            </div>
-          </article>
-          <article class="card-product">
-            <img class="card-img" src="/src/assets/images/product/img_cauliflower.png">
-            <div class="card-body">
-              <div class="card-content">
-                <h3 class="product-name">Big Potatoos</h3>
-                <p class="product-price">$14.99</p>
-              </div>
-              <span class="border-circle">
-                <span class="icon icon-bag"></span>
-              </span>
-            </div>
-          </article>
-          <article class="card-product">
-            <img class="card-img" src="/src/assets/images/product/img_apple.png">
-            <div class="card-body">
-              <div class="card-content">
-                <h3 class="product-name">Big Potatoos</h3>
-                <p class="product-price">$14.99</p>
-              </div>
-              <span class="border-circle">
-                <span class="icon icon-bag"></span>
-              </span>
-            </div>
-          </article>
-          <article class="card-product">
-            <img class="card-img" src="/src/assets/images/product/img_capsicum.png">
-            <div class="card-body">
-              <div class="card-content">
-                <h3 class="product-name">Big Potatoos</h3>
-                <p class="product-price">$14.99</p>
-              </div>
-              <span class="border-circle">
-                <span class="icon icon-bag"></span>
-              </span>
-            </div>
-          </article>
-          <article class="card-product">
-            <img class="card-img" src="/src/assets/images/product/img_chili.png">
-            <div class="card-body">
-              <div class="card-content">
-                <h3 class="product-name">Big Potatoos</h3>
-                <p class="product-price">$14.99</p>
-              </div>
-              <span class="border-circle">
-                <span class="icon icon-bag"></span>
-              </span>
-            </div>
-          </article>
-          <article class="card-product">
-            <img class="card-img" src="/src/assets/images/product/img_cucumber.png">
-            <div class="card-body">
-              <div class="card-content">
-                <h3 class="product-name">Big Potatoos</h3>
-                <p class="product-price">$14.99</p>
-              </div>
-              <span class="border-circle">
-                <span class="icon icon-bag"></span>
-              </span>
-            </div>
-          </article>
-          <article class="card-product">
-            <img class="card-img" src="/src/assets/images/product/img_littuce.png">
-            <div class="card-body">
-              <div class="card-content">
-                <h3 class="product-name">Big Potatoos</h3>
-                <p class="product-price">$14.99</p>
-              </div>
-              <span class="border-circle">
-                <span class="icon icon-bag"></span>
-              </span>
-            </div>
-          </article>
-          <article class="card-product">
-            <img class="card-img" src="/src/assets/images/product/img_ladies_finger.png">
-            <div class="card-body">
-              <div class="card-content">
-                <h3 class="product-name">Big Potatoos</h3>
-                <p class="product-price">$14.99</p>
-              </div>
-              <span class="border-circle">
-                <span class="icon icon-bag"></span>
-              </span>
-            </div>
-          </article>
-          <article class="card-product">
-            <img class="card-img" src="/src/assets/images/product/img_green_capsicum.png">
-            <div class="card-body">
-              <div class="card-content">
-                <h3 class="product-name">Big Potatoos</h3>
-                <p class="product-price">$14.99</p>
-              </div>
-              <span class="border-circle">
-                <span class="icon icon-bag"></span>
-              </span>
-            </div>
-          </article>
-          <article class="card-product">
-            <img class="card-img" src="/src/assets/images/product/img_red_chili.png">
-            <div class="card-body">
-              <div class="card-content">
-                <h3 class="product-name">Big Potatoos</h3>
-                <p class="product-price">$14.99</p>
-              </div>
-              <span class="border-circle">
-                <span class="icon icon-bag"></span>
-              </span>
-            </div>
-          </article>
-          <article class="card-product">
-            <img class="card-img" src="/src/assets/images/product/img_red_tomato.png">
-            <div class="card-body">
-              <div class="card-content">
-                <h3 class="product-name">Big Potatoos</h3>
-                <p class="product-price">$14.99</p>
-              </div>
-              <span class="border-circle">
-                <span class="icon icon-bag"></span>
-              </span>
-            </div>
-          </article>
-          <article class="card-product">
-            <img class="card-img" src="/src/assets/images/product/img_fressh_mango.png">
-            <div class="card-body">
-              <div class="card-content">
-                <h3 class="product-name">Big Potatoos</h3>
-                <p class="product-price">$14.99</p>
-              </div>
-              <span class="border-circle">
-                <span class="icon icon-bag"></span>
-              </span>
-            </div>
-          </article> -->
         </div>
         <div class="block-pagination">
           <a href="#" class="icon icon-chervon-down-left border-circle"></a>

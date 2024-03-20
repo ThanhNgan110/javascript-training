@@ -7,5 +7,6 @@ class ProductService {
   getProduct = () => {
     return handleRespone(api.END_POINT_PRODUCT, "GET");
   };
+
 }
 export { ProductService };
