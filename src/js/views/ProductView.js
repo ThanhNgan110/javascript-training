@@ -1,13 +1,13 @@
-import { qs } from "../helpers/selector";
+import { getElementBySelector } from "../helpers/selector";
 import { displayProduct } from "../templates/ProductTemplate";
 
 export class ProductView {
   constructor() {
-    this.cardBlock = qs(".card-block");
+    this.cardBlock = getElementBySelector(".card-block");
   }
 
   renderProduct(products) {
-    console.log('test',products);
+    // console.log('test',products);
     return (this.cardBlock.innerHTML = displayProduct(products));
   }
 }
