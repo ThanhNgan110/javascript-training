@@ -5,9 +5,7 @@ export default class ProductModel {
   };
 
   searchProductByName = (keyword) => {
-    console.log(this.data);
     const searchResults = this.data.filter((product) => product.name.includes(keyword));
-    console.log(searchResults);
     return searchResults;
   }
 }
