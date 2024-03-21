@@ -4,13 +4,10 @@ export default class ProductController {
   constructor(model, view) {
     this.model = model;
     this.view = view;
-    this.init();
-  }
-
-  init = () => {
+    
     this.renderProducts();
     this.handleSearch();
-  };
+  }
 
   renderProducts = async () => {
     const data = await ProductService.getAllProduct();
@@ -19,10 +16,14 @@ export default class ProductController {
   };
 
   handleSearch = () => {
-   this.view.bindSearchProduct((keyword) => {
-  console.log(keyword);
-   const resultSearch = this.model.searchProductByName(keyword);
-   this.view.renderProductGrid(resultSearch);
-   });
+    this.view.bindSearchProduct((keyword) => {
+      console.log(keyword);
+      const resultSearch = this.model.searchProductByName(keyword);
+      console.log(resultSearch.length);
+      if (resultSearch.length === 0) {
+        this.view.showContentMessage();
+      }
+      this.view.renderProductGrid(resultSearch);
+    });
   };
 }
