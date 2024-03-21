@@ -32,3 +32,8 @@
   border: none;
   padding: 16px 40px;
 }
+
+.btn-card {
+  background-color: var(--color-white);
+  border: var(--color-white);
+}
