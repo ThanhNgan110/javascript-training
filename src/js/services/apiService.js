@@ -2,8 +2,10 @@ import { api } from "../constants/api";
 
 export const handleRespone = async (endpoint, data, method) => {
   try {
-    let requestBody = '';
+    let requestBody = ''
     if(method!== 'GET') {
+      requestBody = json.stringfy(data);
+
     }
     const res = await fetch(`${api.URL_API}/${endpoint}`, {
       method: method,
