@@ -10,10 +10,8 @@ export default class ProductService {
     });
     if(!respone.ok) {
       throw new Error('Fetch api fail');
-    
     }
     const data = await respone.json();
-    return data;
-    
+    return data;   
   };
 }
