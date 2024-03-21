@@ -8,11 +8,8 @@ export default class ProductController {
 
   handleGetProduct = async () => {
     const data = await ProductService.getAllProduct();
-    console.log('hhi');
-    console.log('test', data);
     const products = this.model.createList(data);
     this.view.renderProduct(products);
-    // const data = await this.model.getProducts();
   };
 
   // handleSearch = () => {
