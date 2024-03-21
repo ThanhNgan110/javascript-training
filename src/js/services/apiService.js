@@ -2,9 +2,10 @@ import { api } from "../constants/api";
 
 export const handleRespone = async (endpoint, data, method) => {
   try {
-    let requestBody = '';
+    let requestBody = ''
     if(method!== 'GET') {
-        requestBody = JSON.stringify(data);
+      requestBody = json.stringfy(data);
+
     }
     const res = await fetch(`${api.URL_API}/${endpoint}`, {
       method: method,
@@ -15,7 +16,6 @@ export const handleRespone = async (endpoint, data, method) => {
     });
     if (res) {
       const result = await res.json();
-      console.log(result);
       return result;
     }
   } catch (error) {

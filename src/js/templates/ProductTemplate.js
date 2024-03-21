@@ -2,7 +2,6 @@ export const displayProduct = (products) => {
   let contentProduct = "";
   if (products.length > 0) {
     products.forEach((item) => {
-      // console.log("abc", item.product_name);
       contentProduct += productTemplate(item);
     });
   }
@@ -19,7 +18,10 @@ export const productTemplate = (product) => {
           <h3 class="product-name">${product_name}</h3>
           <p class="product-price">${product_price}</p>
       </div>
+      <button class="btn-card"> 
       <span class="border-circle"><span class="icon icon-bag"></span></span>
+      </button>
+     
   </div>
   </article>
   `;
