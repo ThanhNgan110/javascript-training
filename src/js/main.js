@@ -1,5 +1,5 @@
-import {ProductController} from "./controllers/ProductController";
-import {ProductModel} from "./models/ProductModel";
-import { ProductView } from "./views/ProductView";
+import ProductController from "./controllers/product.controller";
+import ProductModel from "./models/product.model";
+import ProductView from "./views/product.view";
 
 const app = new ProductController(new ProductModel() , new ProductView() );

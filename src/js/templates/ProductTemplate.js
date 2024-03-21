@@ -9,14 +9,15 @@ export const displayProduct = (products) => {
 };
 
 export const productTemplate = (product) => {
-  const { product_img, product_name, product_price } = product;
+  const { imgURL, name, price } = product;
+  console.log('test',product);
   return `
   <article class="card-product">
-  <img class="card-img" src="${product_img}">
+  <img class="card-img" src="${imgURL}">
   <div class="card-body">
       <div class="card-content">
-          <h3 class="product-name">${product_name}</h3>
-          <p class="product-price">${product_price}</p>
+          <h3 class="product-name">${name}</h3>
+          <p class="product-price">${price}</p>
       </div>
       <button class="btn-card"> 
       <span class="border-circle"><span class="icon icon-bag"></span></span>
