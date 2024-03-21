@@ -5,6 +5,7 @@ export const handleRespone = async (endpoint, data, method) => {
     let requestBody = '';
     if(method!== 'GET') {
         requestBody = JSON.stringify(data);
+        // console.log(requestBody);
     }
     const res = await fetch(`${api.URL_API}/${endpoint}`, {
       method: method,
@@ -15,7 +16,7 @@ export const handleRespone = async (endpoint, data, method) => {
     });
     if (res) {
       const result = await res.json();
-      console.log(result);
+      // console.log(result);
       return result;
     }
   } catch (error) {
