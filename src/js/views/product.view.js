@@ -9,6 +9,6 @@ export default class ProductView {
   }
 
   renderProduct(products) {
-    return (this.cardBlock.innerHTML = displayProduct(products));
+    this.cardBlock.innerHTML = displayProduct(products);
   }
 }
