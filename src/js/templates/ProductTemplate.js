@@ -25,3 +25,14 @@ export const productTemplate = (product) => {
   </article>
   `;
 };
+
+export const displayPagination = (countPage) => {
+  let paginationHTML = '';
+  paginationHTML += `<a href="#" class="icon icon-chervon-down-left border-circle"></a>`;
+  for (let number = 1; number<= countPage; number++) {
+    paginationHTML += `<a href="#" class="rounded">${number}</a>`
+  }
+  paginationHTML += `<a href="#" class="icon icon-chervon-down-right border-circle"></a>`;
+  return paginationHTML;
+};
+

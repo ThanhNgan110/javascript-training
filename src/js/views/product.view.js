@@ -1,5 +1,6 @@
-import { querySelector, $on } from "../helpers/selector";
-import { displayProduct } from "../templates/ProductTemplate";
+import { querySelector} from "../helpers/selector";
+import { displayProduct, displayPagination } from "../templates/ProductTemplate";
+
 
 export default class ProductView {
   constructor() {
@@ -7,6 +8,7 @@ export default class ProductView {
     this.searchForm = querySelector(".search-form");
     this.inputSearch = querySelector(".input-search");
     this.messageContent = querySelector(".message-empty");
+    this.blockPagination =  querySelector(".block-pagination");
   }
 
   renderProductGrid(products) {
@@ -16,13 +18,15 @@ export default class ProductView {
   bindSearchProduct(handler) {
     this.searchForm.addEventListener("submit", (e) => {
       e.preventDefault();
-      console.log(this.inputSearch.value);
-      console.log(typeof handler);
       handler(this.inputSearch.value);
     });
   }
 
   showContentMessage = () => {
     return (this.messageContent.style.display = "block");
-  };
+  }
+
+  renderPagination = (countPage) => {
+    this.blockPagination.innerHTML = displayPagination(countPage);
+  }
 }
