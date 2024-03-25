@@ -1,4 +1,5 @@
 import ProductEntity from "./entity/product.entity";
+import { page_limit } from "../constants/config";
 export default class ProductModel {
   createList = (data) => {
     return (this.data = data.map((item) => new ProductEntity(item)));
@@ -11,13 +12,14 @@ export default class ProductModel {
 
   getCountPage = () => {
     const totalProduct = this.data.length;
-    const page_limit = 15;
-    let endPage = totalProduct / page_limit;
-    if(totalProduct % page_limit != 0) {
+    const limit = page_limit;
+    let endPage = totalProduct / limit;
+    if(totalProduct % limit != 0) {
       endPage ++;
     }
     return endPage;
   }
+
 
 
 }
