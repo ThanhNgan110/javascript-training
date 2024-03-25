@@ -15,7 +15,6 @@ export class ProductService {
     return data;
   };
 
-
   static getAllProduct = async () => {
     const url = new URL(`${api.URL_API}/${api.END_POINT_PRODUCT}`);
     const respone = await fetch(url, {

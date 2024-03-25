@@ -6,20 +6,29 @@ export default class ProductModel {
   };
 
   searchProductByName = (keyword) => {
-    const searchResults = this.data.filter((product) => product.name.includes(keyword));
+    const searchResults = this.data.filter((product) =>
+      product.name.includes(keyword)
+    );
     return searchResults;
-  }
+  };
 
   getCountPage = () => {
     const totalProduct = this.data.length;
     const limit = page_limit;
     let endPage = totalProduct / limit;
-    if(totalProduct % limit != 0) {
-      endPage ++;
+    if (totalProduct % limit != 0) {
+      endPage++;
     }
     return endPage;
-  }
+  };
 
-
-
+  findProductById = (productId) => {
+    for (let product of this.data) {
+      if (product.id === productId) {
+        console.log("111", product);
+        return product;
+      }
+    }
+    return null;
+  };
 }

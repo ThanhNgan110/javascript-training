@@ -33,13 +33,12 @@ export default class ProductView {
     this.blockPagination.innerHTML = displayPagination(countPage);
   };
 
-  bindAddProductFromCart = () => {
+  bindAddProductFromCart = (handler) => {
     const btnCards = document.querySelectorAll(".btn-card");
     btnCards.forEach((btnCard) => {
       const productId = btnCard.dataset.id;
       btnCard.addEventListener("click", () => {
-        // handler(productId)
-        console.log("Add to Cart button clicked", productId);
+        handler(productId);
       });
     });
   };
