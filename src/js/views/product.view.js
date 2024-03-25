@@ -1,6 +1,8 @@
-import { querySelector} from "../helpers/selector";
-import { displayProduct, displayPagination } from "../templates/ProductTemplate";
-
+import { querySelector } from "../helpers/selector";
+import {
+  displayProduct,
+  displayPagination,
+} from "../templates/ProductTemplate";
 
 export default class ProductView {
   constructor() {
@@ -8,7 +10,8 @@ export default class ProductView {
     this.searchForm = querySelector(".search-form");
     this.inputSearch = querySelector(".input-search");
     this.messageContent = querySelector(".message-empty");
-    this.blockPagination =  querySelector(".block-pagination");
+    this.blockPagination = querySelector(".block-pagination");
+    // this.btnCard = querySelector(".btn-card");
   }
 
   renderProductGrid(products) {
@@ -24,9 +27,20 @@ export default class ProductView {
 
   showContentMessage = () => {
     return (this.messageContent.style.display = "block");
-  }
+  };
 
   renderPagination = (countPage) => {
     this.blockPagination.innerHTML = displayPagination(countPage);
-  }
+  };
+
+  bindAddProductFromCart = () => {
+    const btnCards = document.querySelectorAll(".btn-card");
+    btnCards.forEach((btnCard) => {
+      const productId = btnCard.dataset.id;
+      btnCard.addEventListener("click", () => {
+        // handler(productId)
+        console.log("Add to Cart button clicked", productId);
+      });
+    });
+  };
 }
