@@ -6,3 +6,4 @@ export default class ProductEntity {
     this.imgURL = data.imgURL
   }
 }
+

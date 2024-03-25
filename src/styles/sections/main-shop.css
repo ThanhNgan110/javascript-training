@@ -84,6 +84,8 @@
   padding: 10px 10px;
   background-color: var(--color-concrete);
   border-radius: 50px;
+  display: flex;
+  justify-content: center;
 }
 
 .rounded {

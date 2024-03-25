@@ -1,4 +1,5 @@
-import ProductService from "../services/product.service";
+import { ProductService } from "../services/product.service";
+import { CartService } from "../services/cart.service";
 
 export default class ProductController {
   constructor(model, view) {
@@ -10,10 +11,11 @@ export default class ProductController {
   }
 
   renderProducts = async () => {
-    const data = await ProductService.getAllProduct();
+    const data = await ProductService.getAllProductByPage(1);
     const products = this.model.createList(data);
     this.view.renderProductGrid(products);
     this.handlePagination();
+    this.handleAddProductCard();
   };
 
   handleSearch = () => {
@@ -26,9 +28,25 @@ export default class ProductController {
     });
   };
 
-  handlePagination = () => {
-   const countPage =  this.model.getCountPage(); 
-   this.view.renderPagination(countPage);
-  }
+  // handlePagination = () => {
+  //  const numberPage =  this.model.getCountPage();
+  //  console.log('test',numberPage);
+  //  this.view.renderPagination(numberPage);
+  // }
 
+  handlePagination = async () => {
+    const data = await ProductService.getAllProduct();
+    const products = this.model.createList(data);
+    const numberPage = this.model.getCountPage();
+    this.view.renderPagination(numberPage);
+  };
+
+  handleAddProductCard = () => {
+    this.view.bindAddProductFromCart((productId) => {
+      const product = this.model.findProductById(productId);
+      if (product) CartService.addProductFromCart(product);
+
+      // case id same -> update quantity
+    });
+  };
 }

@@ -1,3 +1,4 @@
+import { page_limit } from "../constants/config";
 export const displayProduct = (products) => {
   let contentProduct = "";
   if (products.length > 0) {
@@ -9,7 +10,7 @@ export const displayProduct = (products) => {
 };
 
 export const productTemplate = (product) => {
-  const { imgURL, name, price } = product;
+  const { id, imgURL, name, price } = product;
   return `
   <article class="card-product">
   <img class="card-img" src="${imgURL}">
@@ -18,8 +19,8 @@ export const productTemplate = (product) => {
           <h3 class="product-name">${name}</h3>
           <p class="product-price">${price}</p>
       </div>
-      <button class="btn-card"> 
-      <span class="border-circle"><span class="icon icon-bag"></span></span>
+      <button data-id=${id} class="btn-card"> 
+        <span class="border-circle"><span class="icon icon-bag"></span></span>
       </button>
   </div>
   </article>
@@ -27,12 +28,11 @@ export const productTemplate = (product) => {
 };
 
 export const displayPagination = (countPage) => {
-  let paginationHTML = '';
+  let paginationHTML = "";
   paginationHTML += `<a href="#" class="icon icon-chervon-down-left border-circle"></a>`;
-  for (let number = 1; number<= countPage; number++) {
-    paginationHTML += `<a href="#" class="rounded">${number}</a>`
+  for (let number = 1; number <= countPage; number++) {
+    paginationHTML += `<a href="page=${number}&limit=${page_limit}" class="rounded">${number}</a>`;
   }
   paginationHTML += `<a href="#" class="icon icon-chervon-down-right border-circle"></a>`;
   return paginationHTML;
 };
-
