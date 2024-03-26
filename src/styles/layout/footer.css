@@ -89,6 +89,8 @@
   font-size: 14px;
   font-weight: var(--font-weight-medium);
   color: var(--color-white);
+  border-bottom: 1px solid #20B526;
+  font-style: normal;
 }
 
 .address-infor {
