@@ -10,7 +10,7 @@
 
 .heading-secondary-mb {
   margin-bottom: 20px;
-  width: 141px
+  width: 145px
 }
 
 .dropdown {
@@ -53,6 +53,7 @@
   padding: 0 181px;
   margin-right: 24px;
   margin-top: 24px;
+  gap: 24px;
 }
 
 .block-category {
@@ -103,4 +104,20 @@
 
 .message-empty {
   display: none;
+}
+
+.block-left {
+  display: flex;
+  gap: 204px;
+}
+
+.wrapper-top {
+  padding: 0 180px;
+  justify-content: space-between;
+}
+
+.select-options {
+  padding: 10px 16px;
+  border: 1px solid var(--color-mercury);
+  border-radius: 4px;
 }
