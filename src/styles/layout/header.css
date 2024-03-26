@@ -8,6 +8,8 @@
 
 .link {
   color: var(--color-nobel);
+  font-size: 12px;
+  font-weight: var(--font-weight-regular);
 }
 
 .header-left {
@@ -26,6 +28,7 @@
 .header-bottom {
   display: flex;
   justify-content: space-around;
+  align-items: center;
 }
 
 .name-logo {
@@ -87,7 +90,7 @@
 }
 
 .name-cart {
-  font-size: 14px;
+  font-size: 11px;
   color: var(--color-tundora);
   font-weight: var(--font-weight-regular);
   line-height: 13.2px;
@@ -104,4 +107,6 @@
   color: var(--color-tundora);
   display: flex;
   align-items: center;
+  font-size: 14px;
+  font-weight: var(--font-weight-regular);
 }
