@@ -1,3 +1,40 @@
-title-sub {
+.title-sub {
   text-align: center;
- }
+}
+
+.wrapper-cart {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.cart-total {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-item {
+  display: flex;
+  align-items: center;
+}
+
+.product-title {
+  color: var(--color-cod-gray);
+  font-size: 16px;
+  font-weight: var(--font-weight-regular);
+}
+
+.product-subtotal {
+  display: flex;
+  align-items: center;
+}
+
+tr {
+  display: flex;
+  align-items: center;
+}
+
+table {
+  border: 1px solid var(--color-mercury);
+}
