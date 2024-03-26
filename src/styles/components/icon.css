@@ -68,14 +68,15 @@
 }
 
 .icon-circle {
-  position: absolute;
-  left: 24px;
-  bottom: 27px;
   background: var(--color-green);
-  padding: 2px;
-  border-radius: 11px;
   text-align: center;
   color: var(--color-white);
+  border-radius: 11px;
+  padding: 4px;
+  position: absolute;
+  bottom: 23px;
+  left: 14px;
+  font-size: 10px;
 }
 
 .icon-filter {
@@ -125,6 +126,9 @@
   background-image: url('/src/assets/images/icons/icon-pinterest.svg');
 }
 
+.icon-social-facebook {
+  background-image: url('/src/assets/images/icons/icon-media.svg');
+}
 .icon-close {
   width: 24px;
   height: 24px;
