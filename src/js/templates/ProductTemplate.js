@@ -17,7 +17,7 @@ export const productTemplate = (product) => {
   <div class="card-body">
       <div class="card-content">
           <h3 class="product-name">${name}</h3>
-          <p class="product-price">${price}</p>
+          <p class="product-price">$${price}</p>
       </div>
       <button data-id=${id} class="btn-card"> 
         <span class="border-circle"><span class="icon icon-bag"></span></span>
