@@ -2,32 +2,39 @@
 <div class="wrapper-cart">
   <table class="table">
     <thead>
-      <tr>
-        <th>PRODUCT</th>
+      <tr class="col-header">
+        <th class="col-product">PRODUCT</th>
         <th>PRICE</th>
         <th>QUANTITY</th>
         <th>SUBTOTAL</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
+      <tr class="col-tbody">
         <td>
           <div class="product-item">
             <img src="/src/assets/images/cart/img_green_capsicum.png" alt="Green Capsicum" />
             <p class="product-title"> Green Capsicum</p>
           </div>
-
         </td>
         <td>$14.00</td>
-        <td></td>
+        <td>
+          <div class="input-group quantity">
+            <button class="btn btn-minus "><span class="icon icon-minus"></span></button>
+            <input type="text" class="input-quantity" name="input-quantity" />
+            <button class="btn btn-plus "><span class="icon icon-plus"></span></button>
+          </div>
+        </td>
         <td>
           <div class="product-subtotal">
             $70.00
-            <span class="icon icon-close"></span>
           </div>
         </td>
+        <td>
+          <span class="icon icon-close"></span>
+        </td>
       </tr>
-      <tr>
+      <tr class="col-tbody">
         <td>
           <div class="product-item">
             <img src="/src/assets/images/cart/img_red_capsicum.png" alt="Red Capsicum" />
@@ -35,21 +42,29 @@
           </div>
         </td>
         <td>$14.00</td>
-        <td></td>
+        <td>
+          <div class="input-group quantity">
+            <button class="btn btn-minus "><span class="icon icon-minus"></span></button>
+            <input type="text" class="input-quantity" name="input-quantity" />
+            <button class="btn btn-plus "><span class="icon icon-plus"></span></button>
+          </div>
+        </td>
         <td>
           <div class="product-subtotal">
             $70.00
-            <span class="icon icon-close"></span>
           </div>
+        </td>
+        <td>
+          <span class="icon icon-close"></span>
         </td>
       </tr>
     </tbody>
   </table>
   <div class="cart-total">
-    <h3>Cart Total</h3>
-    <p> Subtotal:<span> $ 84.00</span></p>
-    <p>Shipping:<span>Free</span></p>
-    <p>Total:<span>  $84.00</span></p>
-    <button>Proceed to checkout</button>
+    <p class="name-total">Cart Total</p>
+    <p class="name-total-border"> Subtotal:<span> $ 84.00</span></p>
+    <p class="name-total-border">Shipping:<span>Free</span></p>
+    <p class="name-total-border total">Total:<span> $84.00</span></p>
+    <button class="btn btn-checkout">Proceed to checkout</button>
   </div>
 </div>
