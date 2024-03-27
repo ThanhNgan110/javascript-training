@@ -7,3 +7,9 @@
   font-size: 15px;
   font-weight: var(--font-weight-regular);
 }
+
+.input-group {
+  padding: 8px;
+  border-radius: 170px;
+  border: 1px solid #E6E6E6;
+}

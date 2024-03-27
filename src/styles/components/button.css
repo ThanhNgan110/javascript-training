@@ -38,3 +38,21 @@
   background-color: var(--color-white);
   border: var(--color-white);
 }
+
+.btn-minus, .btn-plus {
+  width: 34px;
+  height: 34px;
+  border-radius: 170px;
+  background-color: var(--color-concrete);
+  border: var(--color-white);
+}
+
+.btn-checkout {
+  padding: 16px 140px;
+  background-color: var( --color-green);
+  border-radius: 43px;
+  border: var(--color-white);
+  font-size: 16px;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-white);
+}

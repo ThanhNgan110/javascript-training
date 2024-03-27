@@ -135,3 +135,16 @@
   background-image: url('/src/assets/images/icons/icon-close.png');
 }
 
+.icon-minus {
+  width: 14px;
+  height: 14px;
+  background-image: url('/src/assets/images/icons/icon-minus.svg');
+}
+
+.icon-plus {
+  width: 14px;
+  height: 14px;
+  background-image: url('/src/assets/images/icons/icon-plus.svg');
+
+}
+
