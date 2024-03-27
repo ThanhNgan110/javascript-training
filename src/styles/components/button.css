@@ -49,10 +49,20 @@
 
 .btn-checkout {
   padding: 16px 140px;
-  background-color: var( --color-green);
+  background-color: var(--color-green);
   border-radius: 43px;
   border: var(--color-white);
   font-size: 16px;
   font-weight: var(--font-weight-semibold);
   color: var(--color-white);
+}
+
+.btn-return, .btn-update-cart {
+  background-color: var(--color-concrete);
+  padding: 14px 32px;
+  border: var(--color-white);
+  border-radius: 43px;
+  color: var(--color-tundora);
+  font-size: 14px;
+  font-weight: var(--font-weight-semibold);
 }
