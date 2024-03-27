@@ -7,6 +7,7 @@
   justify-content: center;
   gap: 24px;
   margin-top: 32px;
+  align-items: flex-start;
 }
 
 .cart-total {
@@ -32,7 +33,6 @@ table {
   border: 1px solid var(--color-mercury);
   border-collapse: unset;
   border-radius: 10px;
-  padding: 16px 0;
 }
 
 .input-quantity {
@@ -51,16 +51,15 @@ table {
   align-items: center;
   gap: 54px;
   display: flex;
+  padding: 12px 20px;
 }
 
 .col-header {
   justify-content: space-around;
   align-items: center;
   display: flex;
-}
-
-thead {
   border-bottom: 1px solid #E6E6E6;
+  padding: 16px 0;
 }
 
 .col-header th {
@@ -87,6 +86,27 @@ thead {
   border-bottom: 1px solid var(--color-mercury);
 }
 
+.name-total-border-none {
+  display: flex;
+  gap: 265px;
+  padding: 12px 0;
+}
+
 .total {
   margin-bottom: 20px;
+}
+
+.subtotal {
+  font-size: 14px;
+  font-weight: var(--font-weight-medium);
+}
+
+.col-btn td {
+  border-top: 1px solid #E6E6E6;
+} 
+
+.btn-group {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 20px;
 }
