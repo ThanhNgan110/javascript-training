@@ -145,6 +145,11 @@
   width: 14px;
   height: 14px;
   background-image: url('/src/assets/images/icons/icon-plus.svg');
+}
 
+.icon-next {
+  width: 9px;
+  height: 4px;
+  background-image: url("/src/assets/images/icons/icon-next.svg");
 }
 
