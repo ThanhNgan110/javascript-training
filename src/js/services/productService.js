@@ -7,7 +7,7 @@ export default class ProductService {
    * @function getAllProduct
    * @return {Promise<string>} The data of product.
    */
-   getAllProduct = async () => {
+  getAllProducts = async () => {
     try {
       const res = await fetch(`${api.URL_API}/${api.END_POINT_PRODUCT}`);
       if (res.ok) {
