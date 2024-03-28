@@ -36,7 +36,6 @@ export default class ProductController {
 
   handleAddProducts =  async (product_id) => {
     const producId = await ProductService.addProductFromCart(product_id);
-    console.log('idđ', producId);
   }
 
   
