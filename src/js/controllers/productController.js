@@ -11,13 +11,15 @@ export default class ProductController {
     // Explicit this binding
     //  this.view.bindDeleteProduct(this.handleDeleteProduct);
     this.view.bindSearchProducts(this.handleSearchProducts);
+    this.view.bindShowModal();
+    this.view.bindHiddenModal();
 
     // Display initial products
     this.handleRenderProductsGrid();
   }
 
   handleRenderProductsGrid = async () => {
-    const res = await this.service.getAllProduct();
+    const res = await this.service.getAllProducts();
     const products = res.data;
     if (!res.err && products) {
       this.model.setProducts(products);
@@ -28,6 +30,7 @@ export default class ProductController {
 
   handleSearchProducts = async (value) => {
     const res = await this.service.searchProductByName(value);
+    const products = res.data;
     if (products.length === 0) {
       this.view.displayMessage(res.err);
     }
@@ -38,4 +41,6 @@ export default class ProductController {
   handleAddProducts = async (product_id) => {
     const producId = await this.service.addProductFromCart(product_id);
   };
+
+  
 }
