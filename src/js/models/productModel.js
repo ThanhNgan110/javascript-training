@@ -7,5 +7,4 @@ export default class ProductModel {
   setProducts = (products) => {
     this.products = products.map((item) => new ProductEntity(item));
   }
-  
 }

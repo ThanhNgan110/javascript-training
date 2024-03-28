@@ -8,6 +8,7 @@ export default class ProductEntity {
     this.id = data.id;
     this.name = data.name;
     this.price = data.price;
+    this.amount = data.amount;
     this.imgURL = data.imgURL;
   }
 }

@@ -1,5 +1,12 @@
 import ProductController from "./controllers/productController";
-import ProductModel from "./models/productModel";
-import ProductView from "./views/productView";
+import CartController from "./controllers/cartController";
 
-const app = new ProductController(new ProductModel(), new ProductView());
+const productController = new ProductController();
+const cartController = new CartController();
+const init = {
+   productController,
+   cartController
+}
+
+const app = init;
+
