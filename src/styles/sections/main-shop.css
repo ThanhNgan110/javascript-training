@@ -110,7 +110,7 @@
 }
 
 .message-empty {
-  display: none;
+  display: block;
 }
 
 .block-left {

@@ -27,12 +27,12 @@ export const productTemplate = (product) => {
   `;
 };
 
-export const displayPagination = (countPage) => {
-  let paginationHTML = "";
-  paginationHTML += `<a href="#" class="icon icon-chervon-down-left icon-chervon-down-border"></a>`;
-  for (let number = 1; number <= countPage; number++) {
-    paginationHTML += `<a href="page=${number}&limit=${page_limit}" class="rounded">${number}</a>`;
-  }
-  paginationHTML += `<a href="#" class="icon icon-chervon-down-right icon-chervon-down-border"></a>`;
-  return paginationHTML;
-};
+// export const displayPagination = (countPage) => {
+//   let paginationHTML = "";
+//   paginationHTML += `<a href="#" class="icon icon-chervon-down-left icon-chervon-down-border"></a>`;
+//   for (let number = 1; number <= countPage; number++) {
+//     paginationHTML += `<a href="page=${number}&limit=${page_limit}" class="rounded">${number}</a>`;
+//   }
+//   paginationHTML += `<a href="#" class="icon icon-chervon-down-right icon-chervon-down-border"></a>`;
+//   return paginationHTML;
+// };

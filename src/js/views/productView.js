@@ -10,31 +10,26 @@ export default class ProductView {
     this.searchForm = querySelector(".search-form");
     this.inputSearch = querySelector(".input-search");
     this.messageContent = querySelector(".message-empty");
-    this.blockPagination = querySelector(".block-pagination");
-    // this.btnCard = querySelector(".btn-card");
   }
 
   renderProductGrid(products) {
     this.cardBlock.innerHTML = displayProduct(products);
   }
 
-  bindSearchProduct(handler) {
-    this.searchForm.addEventListener("submit", (e) => {
+  bindSearchProducts = (handler) => {
+    this.searchForm.addEventListener("click", (e) => {
       e.preventDefault();
       handler(this.inputSearch.value);
     });
-  }
-
-  showContentMessage = () => {
-    return (this.messageContent.style.display = "block");
   };
 
-  renderPagination = (countPage) => {
-    this.blockPagination.innerHTML = displayPagination(countPage);
+  displayMessage = (message) => {
+    return (this.messageContent.innerHTML = message);
   };
 
-  bindAddProductFromCart = (handler) => {
+  bindAddProducts = (handler) => {
     const btnCards = document.querySelectorAll(".btn-card");
+    console.log('btn-card',btnCards);
     btnCards.forEach((btnCard) => {
       const productId = btnCard.dataset.id;
       btnCard.addEventListener("click", () => {
@@ -42,4 +37,5 @@ export default class ProductView {
       });
     });
   };
+
 }
