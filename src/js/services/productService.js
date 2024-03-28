@@ -101,7 +101,26 @@ export default class ProductService {
 
   addProductFromCart = async (product_id) => {
     try {
+      // arrProduct use strore product
+      let arrProducts = [];
       const product = await this.findProductById(product_id);
+      // check product_id exits inside arrProducts 
+      const existingProduct = arrProducts.find((item) => item.id === product_id);
+      console.log(existingProduct);
+
+      if(existingProduct) {
+        existingProduct.amount += 1;
+      }
+
+      else {
+        arrProducts.push(product);
+
+      }
+      console.log('arr', arrProducts);
+
+
+      // Add arrProduct post api
+
       const res = await fetch(`${api.URL_API}/${api.END_POINT_CART}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
