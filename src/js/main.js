@@ -1,12 +1,12 @@
-// import ProductController from "./controllers/productController";
-// import ProductModel from "./models/productModel";
-// import ProductView from "./views/productView";
-// import ProductService from "./services/productService";
-
-// const app = new ProductController(new ProductModel(), new ProductView(), new ProductService());
-
 import ProductController from "./controllers/productController";
+import CartController from "./controllers/cartController";
 
+const productController = new ProductController();
+const cartController = new CartController();
+const init = {
+   productController,
+   cartController
+}
 
-const app = new ProductController();
+const app = init;
 
