@@ -10,6 +10,10 @@ export default class ProductView {
     this.searchForm = querySelector(".search-form");
     this.inputSearch = querySelector(".input-search");
     this.messageContent = querySelector(".message-empty");
+    this.modal = querySelector(".modal");
+    this.btnCloseModal = querySelector(".close-modal");
+    this.btnOpenModal = querySelector(".show-modal");
+    this.overlay = querySelector(".overlay");
   }
 
   renderProductGrid(products) {
@@ -29,7 +33,6 @@ export default class ProductView {
 
   bindAddProducts = (handler) => {
     const btnCards = document.querySelectorAll(".btn-card");
-    console.log('btn-card',btnCards);
     btnCards.forEach((btnCard) => {
       const productId = btnCard.dataset.id;
       btnCard.addEventListener("click", () => {
@@ -38,4 +41,15 @@ export default class ProductView {
     });
   };
 
+  bindShowModal = () => {
+    this.btnCloseModal.addEventListener('click', () => {
+      return this.modal.classList.add('hidden');
+    })
+  }
+
+  bindHiddenModal = () => {
+    this.btnOpenModal.addEventListener('click', () => {
+      return this.modal.classList.remove('hidden');
+    })
+  }
 }
