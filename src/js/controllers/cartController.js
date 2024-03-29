@@ -19,7 +19,6 @@ export default class CartController {
   handleRenderCart = async () => {
     const res = await this.service.getAllProductsFromCart();
     const products = res.data;
-    console.log(products);
     if (!res.err && products) {
       this.model.setCart(products);
     }
