@@ -1,4 +1,6 @@
 import { api } from "../constants/config";
+import CartService from "./cart.service";
+const cartService = new CartService();
 export default class ProductService {
   /**
    * Call api for get all product.
@@ -98,69 +100,41 @@ export default class ProductService {
    * @function addProductFromCart
    * @return {Promise<string>} The data of product.
    */
-
   addProductFromCart = async (product_id) => {
-    try {
-      // arrProduct use strore product
-      let arrProducts = [];
-      const product = await this.findProductById(product_id);
-      // check product_id exits inside arrProducts 
-      const existingProduct = arrProducts.find((item) => item.id === product_id);
-      console.log(existingProduct);
-
-      if(existingProduct) {
-        existingProduct.amount += 1;
-      }
-
-      else {
-        arrProducts.push(product);
-
-      }
-      console.log('arr', arrProducts);
-
-
-      // Add arrProduct post api
-
-      const res = await fetch(`${api.URL_API}/${api.END_POINT_CART}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(product.data),
+    const getProductCart = await cartService.getAllProductsFromCart();
+    console.log(getProductCart.data, "data product");
+    // Check getProductCart is array and get check getProductCart contain data
+    if (Array.isArray(getProductCart.data) && getProductCart.data.length > 0) {
+      const existingProduct = getProductCart.data.find((product) => {
+        return product.id === product_id;
       });
-      if (res.ok) {
-        const data = await res.json();
-        return {
-          data,
-          err: null,
-        };
+      if (existingProduct !== undefined) {
+        existingProduct.amount += 1;
+        getProductCart.data.push({ amount: existingProduct.amount });
+        const res = await fetch(
+          `${api.URL_API}/${api.END_POINT_CART}/${product_id}`,
+          {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(existingProduct),
+          }
+        );
+        if (res.ok) {
+          const data = await res.json();
+          return { data, err: null };
+        }
+      } else {
+        const product = await this.findProductById(product_id);
+        const res = await fetch(`${api.URL_API}/${api.END_POINT_CART}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(product.data),
+        });
+        if (res.ok) {
+          const data = await res.json();
+          return { data, err: null };
+        }
       }
-    } catch (error) {
-      return {
-        data: null,
-        err: error.message,
-      };
     }
   };
-
-  // static getProductByPage = async ({ page_limit = 15, page_number }) => {
-  //   try {
-  //     const res = await fetch(`${api.URL_API}/${api.END_POINT_PRODUCT}`);
-  //     if (res.ok) {
-  //       const data = await res.json();
-  //       const products = data.array.slice(
-  //         (page_number - 1) * page_size,
-  //         page_number * page_limit
-  //       );
-  //       console.log("1", products);
-  //       return {
-  //         data: products,
-  //         err: null,
-  //       };
-  //     }
-  //   } catch (error) {
-  //     return {
-  //       data: null,
-  //       err: error.message,
-  //     };
-  //   }
-  // };
 }
