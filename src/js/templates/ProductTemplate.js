@@ -10,7 +10,7 @@ export const displayProduct = (products) => {
 };
 
 export const productTemplate = (product) => {
-  const { id, imgURL, name, price } = product;
+  const { productId, imgURL, name, price } = product;
   return `
   <article class="card-product">
   <img class="card-img" src="${imgURL}">
@@ -19,7 +19,7 @@ export const productTemplate = (product) => {
           <h3 class="product-name">${name}</h3>
           <p class="product-price">$${price}</p>
       </div>
-      <button data-id=${id} class="btn-card"> 
+      <button data-id=${productId} class="btn-card"> 
         <span class="border-circle"><span class="icon icon-bag"></span></span>
       </button>
   </div>
