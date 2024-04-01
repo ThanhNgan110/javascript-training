@@ -66,3 +66,8 @@
   font-size: 14px;
   font-weight: var(--font-weight-semibold);
 }
+
+.btn-delete {
+  border: var(--color-white);
+  background-color: var(--color-white);
+}

@@ -10,7 +10,6 @@ export default class CartController {
 
     // Explicit this binding
     //  this.view.bindDeleteProduct(this.handleDeleteProduct);
- ;
 
     // Display initial products
     this.handleRenderCart();
@@ -23,9 +22,12 @@ export default class CartController {
       this.model.setCart(products);
     }
     this.view.renderCart(products);
-
+    
+    this.view.bindDeleteProduct(this.handleDeleteProductFromCart);
+    // this.view.bindPlusQuantity();
   };
 
- 
-  
+  handleDeleteProductFromCart = async (product_id) => {
+   const product =  await this.service.deleteProductFromCart(product_id)
+  };
 }
