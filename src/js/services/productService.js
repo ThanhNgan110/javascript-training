@@ -69,15 +69,15 @@ export default class ProductService {
    * @function findProductById
    * @return {Promise<string>} The data of product by id.
    */
-  findProductById = async (product_id) => {
+  findProductById = async (productId) => {
     try {
       const res = await fetch(`${api.URL_API}/${api.END_POINT_PRODUCT}`);
-      console.log("product_id", product_id);
+      console.log("productId", productId);
       if (res.ok) {
         const products = await res.json();
         let dataProduct = "";
         for (const product of products) {
-          if (product.id === product_id) dataProduct = product;
+          if (product.productId === productId) dataProduct = product;
         }
         console.log(dataProduct);
         return {
@@ -93,48 +93,51 @@ export default class ProductService {
     }
   };
 
-    /**
+  /**
    * Call api for add product from cart.
    *
    * @async
    * @function addProductFromCart
    * @return {Promise<string>} The data of product.
    */
-    addProductFromCart = async (product_id) => {
-      const getProductCart = await cartService.getAllProductsFromCart();
-      console.log(getProductCart.data, "data product");
-      // Check getProductCart is array and get check getProductCart contain data
-      if (Array.isArray(getProductCart.data)) {
-        const existingProduct = getProductCart.data.find((product) => {
-          return product.id === product_id;
-        });
-        if (existingProduct !== undefined) {
-          existingProduct.amount += 1;
-          getProductCart.data.push({ amount: existingProduct.amount });
-          const res = await fetch(
-            `${api.URL_API}/${api.END_POINT_CART}/${product_id}`,
-            {
-              method: "PUT",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(existingProduct),
-            }
-          );
-          if (res.ok) {
-            const data = await res.json();
-            return { data, err: null };
-          }
-        } else {
-          const product = await this.findProductById(product_id);
-          const res = await fetch(`${api.URL_API}/${api.END_POINT_CART}`, {
-            method: "POST",
+  addProductFromCart = async (productId) => {
+    console.log(productId);
+    const getProductCart = await cartService.getAllProductsFromCart();
+    console.log(getProductCart.data, "data product");
+    // Check getProductCart is array and get check getProductCart contain data
+    if (Array.isArray(getProductCart.data)) {
+      const existingProduct = getProductCart.data.find((product) => {
+        return product.productId === productId;
+      });
+      if (existingProduct !== undefined) {
+        existingProduct.amount += 1;
+        console.log(existingProduct.id,'existingProduct');
+        getProductCart.data.push({ amount: existingProduct.amount });
+        const res = await fetch(
+          `${api.URL_API}/${api.END_POINT_CART}/${existingProduct.id}`,
+          {
+            method: "PUT",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(product.data),
-          });
-          if (res.ok) {
-            const data = await res.json();
-            return { data, err: null };
+            body: JSON.stringify(existingProduct),
           }
+        );
+        if (res.ok) {
+          const data = await res.json();
+          return { data, err: null };
+        }
+      } else {
+        const product = await this.findProductById(productId);
+        console.log(product, 'product');
+        const res = await fetch(`${api.URL_API}/${api.END_POINT_CART}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(product.data),
+        });
+        if (res.ok) {
+          const data = await res.json();
+          return { data, err: null };
         }
       }
-    };
+    }
+  };
 }

@@ -1,6 +1,8 @@
 import ProductModel from "../models/productModel";
 import ProductView from "../views/productView";
 import ProductService from "../services/productService";
+import CartService from "../services/cart.service";
+import CartView from "../views/cart.view";
 
 export default class ProductController {
   constructor() {
@@ -38,8 +40,13 @@ export default class ProductController {
     this.view.displayMessage(res.err);
   };
 
-  handleAddProducts = async (product_id) => {
-    const producId = await this.service.addProductFromCart(product_id);
+  handleAddProducts = async (productId) => {
+    this.cartService = new CartService();
+    this.cartView = new CartView();
+    const producId = await this.service.addProductFromCart(productId);
+    const cart = await this.cartService.getAllProductsFromCart();
+    console.log(cart, 'it is cart');
+    this.cartView.renderCart(cart.data);
   };
 
   

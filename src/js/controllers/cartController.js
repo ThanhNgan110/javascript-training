@@ -22,12 +22,14 @@ export default class CartController {
       this.model.setCart(products);
     }
     this.view.renderCart(products);
-    
+
     this.view.bindDeleteProduct(this.handleDeleteProductFromCart);
     // this.view.bindPlusQuantity();
   };
 
-  handleDeleteProductFromCart = async (product_id) => {
-   const product =  await this.service.deleteProductFromCart(product_id)
+  handleDeleteProductFromCart = async (id) => {
+    await this.service.deleteProductFromCart(id);
+    const cart = await this.service.getAllProductsFromCart();
+    this.view.renderCart(cart.data);
   };
 }
