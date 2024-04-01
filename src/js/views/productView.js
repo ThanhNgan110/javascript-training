@@ -34,8 +34,8 @@ export default class ProductView {
   bindAddProducts = (handler) => {
     const btnCards = document.querySelectorAll(".btn-card");
     btnCards.forEach((btnCard) => {
-      const productId = btnCard.dataset.id;
       btnCard.addEventListener("click", () => {
+        let productId = btnCard.dataset.id;
         handler(productId);
       });
     });
