@@ -37,7 +37,7 @@ export const displayCart = (products) => {
 };
 
 export const cartTemplate = (product) => {
-  const { id, name, price, imgURL, amount } = product;
+  const { id, productId, name, price, imgURL, amount } = product;
   return `
   <tr class="col-tbody">
   <td>
