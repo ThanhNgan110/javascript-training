@@ -33,9 +33,7 @@ export const displayCart = (products) => {
   <p class="name-total-border">Shipping:<span>Free</span></p>
   <p class="name-total-border-none total">Total:<span> $84.00</span></p>
   <button class="btn btn-checkout">Proceed to checkout</button>
-</div>
-
-  `
+</div>`;
 };
 
 export const cartTemplate = (product) => {
@@ -51,9 +49,9 @@ export const cartTemplate = (product) => {
   <td>${price}</td>
   <td>
     <div class="input-group quantity">
-      <button class="btn btn-minus "><span class="icon icon-minus"></span></button>
+      <button class ="btn btn-minus data-action ="decrease"><span class="icon icon-minus"></span></button>
       <input type="text" class="input-quantity" name="input-quantity" value=${amount} />
-      <button class="btn btn-plus "><span class="icon icon-plus"></span></button>
+      <button class ="btn btn-plus data-action="increase"><span class="icon icon-plus"></span></button>
     </div>
   </td>
   <td>
@@ -62,7 +60,7 @@ export const cartTemplate = (product) => {
     </p>
   </td>
   <td>
-    <span class="icon icon-close"></span>
+  <button class="btn btn-delete" data-id=${id}><span class="icon icon-close"></span></button>
   </td>
 </tr>
 `;
