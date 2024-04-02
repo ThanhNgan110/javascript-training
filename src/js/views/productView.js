@@ -1,8 +1,5 @@
 import { querySelector } from "../helpers/selector";
-import {
-  displayProduct,
-  displayPagination,
-} from "../templates/ProductTemplate";
+import {displayProduct} from "../templates/ProductTemplate";
 
 export default class ProductView {
   constructor() {
