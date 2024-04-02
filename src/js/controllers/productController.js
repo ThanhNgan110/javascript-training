@@ -11,7 +11,6 @@ export default class ProductController {
     this.service = new ProductService();
 
     // Explicit this binding
-    //  this.view.bindDeleteProduct(this.handleDeleteProduct);
     this.view.bindSearchProducts(this.handleSearchProducts);
     this.view.bindShowModal();
     this.view.bindHiddenModal();
@@ -45,9 +44,6 @@ export default class ProductController {
     this.cartView = new CartView();
     const producId = await this.service.addProductFromCart(productId);
     const cart = await this.cartService.getAllProductsFromCart();
-    console.log(cart, 'it is cart');
     this.cartView.renderCart(cart.data);
   };
-
-  
 }
