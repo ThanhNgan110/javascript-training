@@ -2,4 +2,4 @@
 const querySelector = (selector) => document.querySelector(selector);
 
 
-export { querySelector, getElementById };
+export { querySelector };
