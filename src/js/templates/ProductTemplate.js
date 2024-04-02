@@ -1,4 +1,3 @@
-import { page_limit } from "../constants/config";
 export const displayProduct = (products) => {
   let contentProduct = "";
   if (products.length > 0) {

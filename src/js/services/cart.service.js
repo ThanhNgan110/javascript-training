@@ -27,26 +27,21 @@ export default class CartService {
   };
 
   /**
-   * Call api for get product id from cart.
+   * Call api for delete product from cart.
    *
    * @async
-   * @function getProductIdFromCart
-   * @return {Promise<string>} The product by id.
+   * @function deleteProductFromCart
+   * @return {Promise<string>} The data product .
    */
-  getProductIdFromCart = async (productId) => {
+  deleteProductFromCart = async (id) => {
     try {
-      const res = await fetch(`${api.URL_API}/${api.END_POINT_CART}`);
+      const res = await fetch(`${api.URL_API}/${api.END_POINT_CART}/${id}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+      });
       if (res.ok) {
-        const products = await res.json();
-        let dataProduct = "";
-        for (const product of products) {
-          dataProduct = product.productId === productId? product : null;
-          break;
-        }
-        return {
-          data: dataProduct,
-          err: null,
-        };
+        const data = await res.json();
+        return { data, err: null };
       }
     } catch (error) {
       return {
@@ -57,19 +52,23 @@ export default class CartService {
   };
 
   /**
-   * Call api for delete product from cart.
+   * Call api for update quantity for product.
    *
    * @async
    * @function deleteProductFromCart
-   * @return {Promise<string>} The data product.
+   * @return {Promise<string>} The data product from cart.
    */
-  deleteProductFromCart = async (id) => {
+  updateQuantityProduct = async (productId, amount) => {
     try {
-      const res = await fetch(
-        `${api.URL_API}/${api.END_POINT_CART}/${id}`,
-        {
-          method: "DELETE",
+      const dataProduct = await this.getAllProductsFromCart();
+      const { data } = dataProduct;
+      const product = data.find((product) => {
+        return product.productId === productId;
+      });
+      const res = await fetch(`${api.URL_API}/${api.END_POINT_CART}/${product.id}`,{
+          method: "PUT",
           headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ amount }),
         }
       );
       if (res.ok) {
@@ -79,8 +78,8 @@ export default class CartService {
     } catch (error) {
       return {
         data: null,
-        err: error.message,
-      };
+        err: error.message
+      }
     }
   };
 }

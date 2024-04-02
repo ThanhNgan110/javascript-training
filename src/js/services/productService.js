@@ -109,7 +109,6 @@ export default class ProductService {
       });
       if (existingProduct !== undefined) {
         existingProduct.amount += 1;
-        console.log(existingProduct.id,'existingProduct');
         getProductCart.data.push({ amount: existingProduct.amount });
         const res = await fetch(
           `${api.URL_API}/${api.END_POINT_CART}/${existingProduct.id}`,
