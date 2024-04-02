@@ -26,7 +26,7 @@ export default class CartController {
     console.log('render');
     this.view.bindDeleteProduct(this.handleDeleteProductFromCart);
     this.view.bindMinusQuantity();
-    // this.view.bindPlusQuantity();
+    this.view.bindPlusQuantity();
   };
 
   handleDeleteProductFromCart = async (id) => {
