@@ -5,49 +5,39 @@ export default class CartView {
     this.wrapperCart = querySelector(".wrapper-cart");
     this.btnMinus = querySelector(".btn-minus");
     this.inputQuantity = querySelector(".input-quantity");
-    // this.btnDelete = querySelector(".btn-delete");
   }
 
   renderCart = (products) => {
     this.wrapperCart.innerHTML = displayCart(products);
   };
 
-  // bindPlusQuantity = () => {
-  //   const btnPlus = querySelector(".btn-plus");
-  //   btnPlus.addEventListener("click", () => {
-  //     const inputQuantity = querySelector(".input-quantity");
-  //     console.log(inputQuantity.value, "value input");
-  //   });
-  // };
+  bindPlusQuantity = () => {
+    console.log("11111111");
+    const btnPlusList = document.querySelectorAll(".btn-plus");
+    console.log(btnPlusList);
+    btnPlusList.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const inputQuantity = querySelector(".input-quantity");
+        inputQuantity.value && inputQuantity.value++;
+        console.log(inputQuantity.value, "value input");
+      });
+    });
+  };
 
-  // bindMinusQuantity = () => {
-  //   const btnMinus = querySelector(".btn-minus");
-  //   btnMinus.addEventListener("click", () => {
-  //     const inputQuantity = querySelector(".input-quantity");
-  //     console.log('test');
-  //     console.log(inputQuantity.value, "value input");
-  //   });
-  // };
-
-  // bindMinusQuantity = () => {
-  //   this.btnMinus.addEventListener("click", () => {});
-  // };
-
-  bindModifyQuantity = (handler) => {
-    const btnPlus = querySelector(".btn-plus");
-    const btnMinus = querySelector("btn-minus");
-
-    //  let actions = 'increase';
-    let actions = dataset.action;
-    switch (actions) {
-      case "increase":
-        break;
-      case "decrease":
-        break;
-
-      default:
-        break;
-    }
+  bindMinusQuantity = () => {
+    console.log("2222");
+    const btnMinusList = document.querySelectorAll(".btn-minus");
+    console.log(btnMinusList);
+    btnMinusList.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const inputQuantity = btn.closest(".input-quantity");
+        console.log(btn);
+        inputQuantity.value <= 1
+          ? (inputQuantity.value = 1)
+          : inputQuantity.value--;
+        console.log(inputQuantity.value, "value input");
+      });
+    });
   };
 
   bindDeleteProduct = (handler) => {
