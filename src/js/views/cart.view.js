@@ -11,32 +11,33 @@ export default class CartView {
     this.wrapperCart.innerHTML = displayCart(products);
   };
 
-  bindPlusQuantity = () => {
-    console.log("11111111");
-    const btnPlusList = document.querySelectorAll(".btn-plus");
-    console.log(btnPlusList);
-    btnPlusList.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const inputQuantity = querySelector(".input-quantity");
-        inputQuantity.value && (inputQuantity.value++);
-        console.log("test");
+  bindPlusQuantity = (handler) => {
+    const inputList = document.querySelectorAll(".input-group.quantity");
+    inputList.forEach((item) => {
+      const plusBtn = item.querySelector(".btn-plus");
+      plusBtn.addEventListener("click", () => {
+        const inputQuantity = item.querySelector(".input-quantity");
+        inputQuantity.value && inputQuantity.value++;
         console.log(inputQuantity.value, "value input");
+        const productId = inputQuantity.getAttribute("data-id");
+        console.log('test');
+        console.log(productId, "id");
+        handler(productId, inputQuantity.value);
       });
     });
   };
 
-  bindMinusQuantity = () => {
-    console.log("2222");
-    const btnMinusList = document.querySelectorAll(".btn-minus");
-    console.log(btnMinusList);
-    btnMinusList.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const inputQuantity = querySelector(".input-quantity");
-        inputQuantity.value <= 1
-          ? (inputQuantity.value = 1)
-          : inputQuantity.value--;
-        console.log("test");
+  bindMinusQuantity = (handler) => {
+    const inputList = document.querySelectorAll(".input-group.quantity");
+    inputList.forEach((item) => {
+      const plusBtn = item.querySelector(".btn-minus");
+      plusBtn.addEventListener("click", () => {
+        const inputQuantity = item.querySelector(".input-quantity");
+        inputQuantity.value <= 1 ? (inputQuantity.value = 1) : inputQuantity.value--;
         console.log(inputQuantity.value, "value input");
+        const productId = inputQuantity.getAttribute("data-id");
+        console.log(productId, "id");
+        handler(productId, inputQuantity.value);
       });
     });
   };
