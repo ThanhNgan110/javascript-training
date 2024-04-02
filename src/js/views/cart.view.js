@@ -18,7 +18,8 @@ export default class CartView {
     btnPlusList.forEach((btn) => {
       btn.addEventListener("click", () => {
         const inputQuantity = querySelector(".input-quantity");
-        inputQuantity.value && inputQuantity.value++;
+        inputQuantity.value && (inputQuantity.value++);
+        console.log("test");
         console.log(inputQuantity.value, "value input");
       });
     });
@@ -30,11 +31,11 @@ export default class CartView {
     console.log(btnMinusList);
     btnMinusList.forEach((btn) => {
       btn.addEventListener("click", () => {
-        const inputQuantity = btn.closest(".input-quantity");
-        console.log(btn);
+        const inputQuantity = querySelector(".input-quantity");
         inputQuantity.value <= 1
           ? (inputQuantity.value = 1)
           : inputQuantity.value--;
+        console.log("test");
         console.log(inputQuantity.value, "value input");
       });
     });
