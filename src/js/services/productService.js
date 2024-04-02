@@ -72,7 +72,6 @@ export default class ProductService {
   findProductById = async (productId) => {
     try {
       const res = await fetch(`${api.URL_API}/${api.END_POINT_PRODUCT}`);
-      console.log("productId", productId);
       if (res.ok) {
         const products = await res.json();
         let dataProduct = "";
@@ -103,7 +102,6 @@ export default class ProductService {
   addProductFromCart = async (productId) => {
     console.log(productId);
     const getProductCart = await cartService.getAllProductsFromCart();
-    console.log(getProductCart.data, "data product");
     // Check getProductCart is array and get check getProductCart contain data
     if (Array.isArray(getProductCart.data)) {
       const existingProduct = getProductCart.data.find((product) => {
@@ -127,7 +125,6 @@ export default class ProductService {
         }
       } else {
         const product = await this.findProductById(productId);
-        console.log(product, 'product');
         const res = await fetch(`${api.URL_API}/${api.END_POINT_CART}`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
