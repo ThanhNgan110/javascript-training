@@ -23,7 +23,9 @@ export default class CartController {
     }
     this.view.renderCart(products);
 
+    console.log('render');
     this.view.bindDeleteProduct(this.handleDeleteProductFromCart);
+    this.view.bindMinusQuantity();
     // this.view.bindPlusQuantity();
   };
 
