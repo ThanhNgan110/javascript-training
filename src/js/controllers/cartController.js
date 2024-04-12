@@ -35,7 +35,7 @@ export default class CartController {
     await this.service.updateQuantityProduct(productId, amount);
 
     // 
-    const cart = await this.service.getAllProductsFromCart();
-    this.view.renderCart(cart.data);
+    // const cart = await this.service.getAllProductsFromCart();
+    // this.view.renderCart(cart.data);
   };
 }
