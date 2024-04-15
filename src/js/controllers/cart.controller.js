@@ -27,12 +27,8 @@ export default class CartController {
   };
 
   handleChangeAmount = async (productId, amount) => {
-    console.log("productId", productId);
-    console.log("amount", amount);
     const data = this.model.getId(productId);
-    console.log(data);
     await this.service.updateCart(data, amount);
-    const cart = await this.service.getAllProductsFromCart();
-    this.view.renderCart(cart);
+    this.handleRenderCart();
   };
 }
