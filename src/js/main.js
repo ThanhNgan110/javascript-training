@@ -1,5 +1,5 @@
 import ProductController from "./controllers/product.controller";
-import CartController from "./controllers/cart.Controller";
+import CartController from "./controllers/cart.controller";
 
 const productController = new ProductController();
 const cartController = new CartController();
