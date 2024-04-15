@@ -1,5 +1,5 @@
 import { querySelector } from "../helpers/selector";
-import {displayProduct} from "../templates/ProductTemplate";
+import { displayProduct } from "../templates/ProductTemplate";
 
 export default class ProductView {
   constructor() {
@@ -20,12 +20,13 @@ export default class ProductView {
   bindSearchProducts = (handler) => {
     this.searchForm.addEventListener("click", (e) => {
       e.preventDefault();
+      console.log(this.inputSearch.value);
       handler(this.inputSearch.value);
     });
   };
 
   displayMessage = (message) => {
-    return (this.messageContent.innerHTML = message);
+    this.messageContent.innerHTML = message;
   };
 
   bindAddProducts = (handler) => {
@@ -39,14 +40,14 @@ export default class ProductView {
   };
 
   bindShowModal = () => {
-    this.btnCloseModal.addEventListener('click', () => {
-      return this.modal.classList.add('hidden');
-    })
-  }
+    this.btnCloseModal.addEventListener("click", () => {
+      return this.modal.classList.add("hidden");
+    });
+  };
 
   bindHiddenModal = () => {
-    this.btnOpenModal.addEventListener('click', () => {
-      return this.modal.classList.remove('hidden');
-    })
-  }
+    this.btnOpenModal.addEventListener("click", () => {
+      return this.modal.classList.remove("hidden");
+    });
+  };
 }

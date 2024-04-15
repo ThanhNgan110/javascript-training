@@ -13,29 +13,22 @@ export default class CartController {
   }
 
   handleRenderCart = async () => {
-    const res = await this.service.getAllProductsFromCart();
-    const products = res.data;
-    if (!res.err && products) {
-      this.model.setCart(products);
-    }
-    this.view.renderCart(products);
-
+    const products = await this.service.getAllProductsFromCart();
+    this.model.setCart(products);
+    this.view.renderCart(this.model.getCart());
     this.view.bindDeleteProduct(this.handleDeleteProductFromCart);
-    this.view.bindMinusQuantity(this.handleChangeAmountProduct);
-    this.view.bindPlusQuantity(this.handleChangeAmountProduct);
+    this.view.bindChangeQuantity(this.handleChangeAmount);
   };
 
   handleDeleteProductFromCart = async (id) => {
     await this.service.deleteProductFromCart(id);
     const cart = await this.service.getAllProductsFromCart();
-    this.view.renderCart(cart.data);
+    this.view.renderCart(cart);
   };
 
-  handleChangeAmountProduct = async (productId, amount) => {
-    await this.service.updateQuantityProduct(productId, amount);
-
-    // 
-    const cart = await this.service.getAllProductsFromCart();
-    this.view.renderCart(cart.data);
+  handleChangeAmount = async (productId, amount) => {
+    const data = this.model.getId(productId);
+    await this.service.updateCart(data, amount);
+    this.handleRenderCart();
   };
 }

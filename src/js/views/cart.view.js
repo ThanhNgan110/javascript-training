@@ -11,43 +11,40 @@ export default class CartView {
     this.wrapperCart.innerHTML = displayCart(products);
   };
 
-  bindPlusQuantity = (handler) => {
+  bindChangeQuantity = (handler) => {
     const inputList = document.querySelectorAll(".input-group.quantity");
     inputList.forEach((item) => {
       const plusBtn = item.querySelector(".btn-plus");
       plusBtn.addEventListener("click", () => {
-        const inputQuantity = item.querySelector(".input-quantity");
-        inputQuantity.value && inputQuantity.value++;
-        console.log(inputQuantity.value, "value input");
-        const productId = inputQuantity.getAttribute("data-id");
-        console.log('test');
-        console.log(productId, "id");
-        handler(productId, inputQuantity.value);
+        this.handleChangeQuantity("plus", handler, item);
+      });
+      const minusBtn = item.querySelector(".btn-minus");
+      minusBtn.addEventListener("click", () => {
+        this.handleChangeQuantity("minus", handler, item);
       });
     });
   };
 
-  bindMinusQuantity = (handler) => {
-    const inputList = document.querySelectorAll(".input-group.quantity");
-    inputList.forEach((item) => {
-      const plusBtn = item.querySelector(".btn-minus");
-      plusBtn.addEventListener("click", () => {
-        const inputQuantity = item.querySelector(".input-quantity");
+  handleChangeQuantity = (options, handler, item) => {
+    const inputQuantity = item.querySelector(".input-quantity");
+    switch (options) {
+      case "plus":
+        inputQuantity.value && inputQuantity.value++;
+        break;
+      case "minus":
         inputQuantity.value <= 1 ? (inputQuantity.value = 1) : inputQuantity.value--;
-        console.log(inputQuantity.value, "value input");
-        const productId = inputQuantity.getAttribute("data-id");
-        console.log(productId, "id");
-        handler(productId, inputQuantity.value);
-      });
-    });
+        break;
+    }
+    const productId = inputQuantity.getAttribute("data-id");
+    handler(productId, inputQuantity.value);
   };
 
   bindDeleteProduct = (handler) => {
     const btnDeletes = document.querySelectorAll(".btn-delete");
     btnDeletes.forEach((btnDelete) => {
       btnDelete.addEventListener("click", () => {
-        const product_id = btnDelete.dataset.id;
-        handler(product_id);
+        const productId = btnDelete.dataset.id;
+        handler(productId);
       });
     });
   };
