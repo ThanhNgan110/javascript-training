@@ -3,6 +3,8 @@ export const displayCart = (products) => {
   if (products.length > 0) {
     products.forEach((item) => {
       contentCart += cartTemplate(item);
+      
+      
     });
   }
   return `
@@ -29,9 +31,9 @@ export const displayCart = (products) => {
   </table>
   <div class="cart-total">
   <p class="name-total">Cart Total</p>
-  <p class="name-total-border"> Subtotal:<span> $84.00</span></p>
+  <p class="name-total-border"> Subtotal:<span>0$</span></p>
   <p class="name-total-border">Shipping:<span>Free</span></p>
-  <p class="name-total-border-none total">Total:<span> $84.00</span></p>
+  <p class="name-total-border-none total">Total:<span>0$</span></p>
   <button class="btn btn-checkout">Proceed to checkout</button>
 </div>`;
 };
