@@ -36,10 +36,7 @@ export default class ProductController {
     const existingProduct = this.cartModel.checkProductIdExisting(productId);
     const product = this.model.getProductById(productId);
     if (existingProduct !== undefined) {
-      await this.cartService.updateCart(
-        existingProduct,
-        existingProduct.amount + 1
-      );
+      await this.cartService.updateCart(existingProduct, existingProduct.amount + 1);
     } else {
       await this.cartService.addProductToCart(product);
     }
@@ -52,7 +49,6 @@ export default class ProductController {
     const products = await this.productService.getAllProducts();
     this.model.setProducts(products);
     const result = this.model.searchProductByName(productName);
-    console.log(result);
     this.view.renderProductGrid(result);
     // this.view.displayMessage(result);
   };
