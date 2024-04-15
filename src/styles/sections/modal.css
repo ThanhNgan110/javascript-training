@@ -128,7 +128,9 @@ table {
   left: 50%;
   transform: translate(-50%, -50%);
   box-shadow: 0 3rem 5rem #0000004d;
+  padding: 20px 0px;
 }
+
 
 
 /* The Close Button */
