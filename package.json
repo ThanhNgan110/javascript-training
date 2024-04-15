@@ -13,6 +13,7 @@
     "posthtml-include": "^2.0.1"
   },
   "dependencies": {
-    "sweetalert": "^2.1.2"
+    "sweetalert": "^2.1.2",
+    "toastify-js": "^1.12.0"
   }
 }
