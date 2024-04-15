@@ -5,6 +5,7 @@ export default class CartView {
     this.wrapperCart = querySelector(".wrapper-cart");
     this.btnMinus = querySelector(".btn-minus");
     this.inputQuantity = querySelector(".input-quantity");
+    
   }
 
   renderCart = (products) => {
@@ -48,4 +49,8 @@ export default class CartView {
       });
     });
   };
+
+  bindUpdateCart = () => {
+    
+  }
 }
