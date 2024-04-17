@@ -164,6 +164,6 @@ table {
   z-index: 5;
 }
 
-/* .hidden {
+.hidden {
   display: none;
-} */
+}
