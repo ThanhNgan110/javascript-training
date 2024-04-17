@@ -12,8 +12,8 @@ export default class CartModel {
     return this.products ? this.products.find((product) => product.productId === productId)  : null;
   }
 
-  getId = (productId) => {
-    return this.products.find(product => product.productId === productId);
+  getProductById = (id) => {
+    return this.products.find(item => item.id === id);
   }
   
   
