@@ -5,7 +5,6 @@ export default class CartView {
     this.wrapperCart = querySelector(".wrapper-cart");
     this.btnMinus = querySelector(".btn-minus");
     this.inputQuantity = querySelector(".input-quantity");
-    
   }
 
   renderCart = (products) => {
@@ -33,7 +32,9 @@ export default class CartView {
         inputQuantity.value && inputQuantity.value++;
         break;
       case "minus":
-        inputQuantity.value <= 1 ? (inputQuantity.value = 1) : inputQuantity.value--;
+        inputQuantity.value <= 1
+          ? (inputQuantity.value = 1)
+          : inputQuantity.value--;
         break;
     }
     const productId = inputQuantity.getAttribute("data-id");
@@ -50,7 +51,13 @@ export default class CartView {
     });
   };
 
-  bindUpdateCart = () => {
-    
-  }
+  bindUpdateCart = (handler) => {
+    const btnUpdate = document.querySelector(".btn-update-cart");
+    btnUpdate.addEventListener("click", () => {
+        const inputQuantities = document.querySelectorAll(".input-quantity");
+        const quantitiesArray = Array.from(inputQuantities).map(input => input.value);
+        handler(quantitiesArray);
+    });
+};
+
 }
