@@ -3,8 +3,6 @@ export const displayCart = (products) => {
   if (products.length > 0) {
     products.forEach((item) => {
       contentCart += cartTemplate(item);
-      
-      
     });
   }
   return `
