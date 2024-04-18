@@ -36,7 +36,7 @@ export default class ProductController {
     const existingProduct = this.cartModel.checkProductIdExisting(productId);
     const product = this.model.getProductById(productId);
     if (existingProduct !== undefined) {
-      await this.cartService.updateCart(existingProduct, existingProduct.amount + 1);
+      await this.cartService.updateCart({...existingProduct, amount: existingProduct.amount + 1});
     } else {
       await this.cartService.addProductToCart(product);
     }
