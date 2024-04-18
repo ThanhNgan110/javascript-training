@@ -11,6 +11,13 @@
   font-size: 14px;
 }
 
+.btn-search:hover {
+  background-color: var(--color-white);
+  color: var(--color-green);
+  border: 1px solid;
+  border-color: var(--color-green);
+}
+
 .btn-filter {
   display: flex;
   align-items: center;
@@ -40,6 +47,10 @@
   cursor: pointer;
 }
 
+.btn-card:hover {
+  background-color: var(--color-green);
+}
+
 .btn-minus, .btn-plus {
   width: 34px;
   height: 34px;
@@ -58,6 +69,14 @@
   color: var(--color-white);
 }
 
+.btn-checkout:hover {
+  background-color: var(--color-white);
+  color: var(--color-green);
+  transform: scale(1.1);
+  border: 1px solid;
+  border-color: var(--color-green);
+}
+
 .btn-return, .btn-update-cart {
   background-color: var(--color-concrete);
   padding: 14px 32px;
@@ -68,7 +87,18 @@
   font-weight: var(--font-weight-semibold);
 }
 
+.btn-return:hover, .btn-update-cart:hover {
+  background-color: var(--color-white);
+  color: var(--color-green);
+  border: 1px solid;
+  border-color: var(--color-green);
+}
+
 .btn-delete {
   border: var(--color-white);
   background-color: var(--color-white);
+}
+
+.btn-delete:hover {
+  transform: scale(1.1);
 }
