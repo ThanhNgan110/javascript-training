@@ -11,21 +11,21 @@ export default class CartView {
     this.wrapperCart.innerHTML = displayCart(products);
   };
 
-  bindChangeQuantity = (handler) => {
+  bindChangeQuantity = () => {
     const inputList = document.querySelectorAll(".input-group.quantity");
     inputList.forEach((item) => {
       const plusBtn = item.querySelector(".btn-plus");
       plusBtn.addEventListener("click", () => {
-        this.handleChangeQuantity("plus", handler, item);
+        this.handleChangeQuantity("plus", item);
       });
       const minusBtn = item.querySelector(".btn-minus");
       minusBtn.addEventListener("click", () => {
-        this.handleChangeQuantity("minus", handler, item);
+        this.handleChangeQuantity("minus", item);
       });
     });
   };
 
-  handleChangeQuantity = (options, handler, item) => {
+  handleChangeQuantity = (options, item) => {
     const inputQuantity = item.querySelector(".input-quantity");
     switch (options) {
       case "plus":
@@ -37,8 +37,6 @@ export default class CartView {
           : inputQuantity.value--;
         break;
     }
-    const productId = inputQuantity.getAttribute("data-id");
-    handler(productId, inputQuantity.value);
   };
 
   bindDeleteProduct = (handler) => {
@@ -54,10 +52,9 @@ export default class CartView {
   bindUpdateCart = (handler) => {
     const btnUpdate = document.querySelector(".btn-update-cart");
     btnUpdate.addEventListener("click", () => {
-        const inputQuantities = document.querySelectorAll(".input-quantity");
-        const quantitiesArray = Array.from(inputQuantities).map(input => input.value);
-        handler(quantitiesArray);
+      const inputQuantity = document.querySelectorAll(".input-quantity");
+      const quantityArr = Array.from(inputQuantity).map((input) => parseInt(input.value));
+      handler(quantityArr);
     });
-};
-
+  };
 }
