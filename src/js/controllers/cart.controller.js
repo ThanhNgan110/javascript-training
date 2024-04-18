@@ -27,16 +27,13 @@ export default class CartController {
     this.view.renderCart(cart);
   };
 
-  handleUpdateCart = async (quantities) => {
+  handleUpdateCart = async (quantitys) => {
     const products = this.model.getCart();
     const promises = [];
     for (let i = 0; i < products.length; i++) {
-
       const data = this.model.getProductById(products[i].id);
-      console.log(data, "data");
-      const quantity = quantities[i]; 
-      console.log(quantity, "quanlity");
-      const promise = this.service.updateCart(data, quantity);
+      const quantity = quantitys[i]; 
+      const promise = this.service.updateCart({...data, amount:quantity});
       promises.push(promise);
     }
     await Promise.all(promises);
