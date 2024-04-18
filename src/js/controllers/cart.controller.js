@@ -1,3 +1,5 @@
+import { showSuccess, showError } from "../utils/toastify";
+import { ALERT_MESSAGE } from "../constants/message";
 import CartModel from "../models/cart.model";
 import CartView from "../views/cart.view";
 import CartService from "../services/cart.service";
@@ -23,6 +25,7 @@ export default class CartController {
 
   handleDeleteProductFromCart = async (id) => {
     await this.service.deleteProductFromCart(id);
+    showSuccess({text:ALERT_MESSAGE.DELETE_PRODUCT_SUCCESS_MSG});
     const cart = await this.service.getAllProductsFromCart();
     this.view.renderCart(cart);
   };
