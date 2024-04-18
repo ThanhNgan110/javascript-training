@@ -13,8 +13,8 @@ export default class CartService {
    await this.apiService.post(product);
   };
 
-  updateCart = async(product, amount) => {
-    await this.apiService.put(product, {amount:amount});
+  updateCart = async(data) => {
+    await this.apiService.put(data);
   }
 
   deleteProductFromCart = async (id) => {

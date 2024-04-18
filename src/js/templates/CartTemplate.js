@@ -1,12 +1,14 @@
 export const displayCart = (products) => {
   let contentCart = "";
+  let subtotal = 0, total = 0;
   if (products.length > 0) {
     products.forEach((item) => {
+      subtotal = parseFloat(item.amount * item.price);
+      total += subtotal;
       contentCart += cartTemplate(item);
-      
-      
     });
   }
+  total = total.toFixed(2)
   return `
   <table class="table">
     <thead>
@@ -31,9 +33,9 @@ export const displayCart = (products) => {
   </table>
   <div class="cart-total">
   <p class="name-total">Cart Total</p>
-  <p class="name-total-border"> Subtotal:<span>0$</span></p>
+  <p class="name-total-border"> Subtotal:<span>${total}$</span></p>
   <p class="name-total-border">Shipping:<span>Free</span></p>
-  <p class="name-total-border-none total">Total:<span>0$</span></p>
+  <p class="name-total-border-none total">Total:<span>${total}$</span></p>
   <button class="btn btn-checkout">Proceed to checkout</button>
 </div>`;
 };
@@ -53,7 +55,7 @@ export const cartTemplate = (product) => {
   <td>
     <div class="input-group quantity">
       <button class="btn btn-minus" data-id=${productId}><span class="icon icon-minus"></span></button>
-      <input type="text" class="input-quantity" data-id=${productId} name="input-quantity" value=${amount}  />
+      <input type="text" class="input-quantity" data-id=${productId} name="input-quantity" value=${amount} readonly/>
       <button class="btn btn-plus" data-id=${productId}><span class="icon icon-plus"></span></button>
     </div>
   </td>

@@ -18,6 +18,7 @@ export default class CartController {
     this.view.renderCart(this.model.getCart());
     this.view.bindDeleteProduct(this.handleDeleteProductFromCart);
     this.view.bindChangeQuantity();
+    this.view.bindUpdateCart(this.handleUpdateCart);
   };
 
   handleDeleteProductFromCart = async (id) => {
@@ -26,10 +27,18 @@ export default class CartController {
     this.view.renderCart(cart);
   };
 
-  // handleChangeAmount = async (productId, amount) => {
-  //   const data = this.model.getId(productId);
+  handleUpdateCart = async (quantitys) => {
+    const products = this.model.getCart();
+    const promises = [];
+    for (let i = 0; i < products.length; i++) {
+      const data = this.model.getProductById(products[i].id);
+      const quantity = quantitys[i]; 
+      const promise = this.service.updateCart({...data, amount:quantity});
+      promises.push(promise);
+    }
+    await Promise.all(promises);
+    this.handleRenderCart();
+  };
+  
 
-  //   await this.service.updateCart(data, amount);
-  //   this.handleRenderCart();
-  // };
 }
