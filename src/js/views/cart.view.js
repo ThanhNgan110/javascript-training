@@ -10,8 +10,8 @@ export default class CartView {
   renderCart = (products) => {
     this.wrapperCart.innerHTML = displayCart(products);
     this.bindChangeQuantity();
-    this.bindUpdateCart();
-    this.bindDeleteProduct();
+    // this.bindUpdateCart();
+    // this.bindDeleteProduct();
   };
 
   bindChangeQuantity = () => {
