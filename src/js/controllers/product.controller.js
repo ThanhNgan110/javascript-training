@@ -1,5 +1,6 @@
-import { showSuccess, showError } from "../utils/toastify";
+import { showSuccess} from "../utils/toastify";
 import { ALERT_MESSAGE } from "../constants/message";
+import { displayLoading, hideLoading } from "../utils/loading";
 
 import ProductModel from "../models/product.model";
 import CartModel from "../models/cart.model";
@@ -27,10 +28,12 @@ export default class ProductController {
   }
 
   async handleRenderProductsGrid() {
+    displayLoading();
     const res = await this.productService.getAllProducts();
     this.model.setProducts(res);
     this.view.renderProductGrid(this.model.getProducts());
     this.view.bindAddProducts(this.handleAddProducts);
+    hideLoading();
   }
 
   handleAddProducts = async (productId) => {
@@ -39,11 +42,15 @@ export default class ProductController {
     const existingProduct = this.cartModel.checkProductIdExisting(productId);
     const product = this.model.getProductById(productId);
     if (existingProduct !== undefined) {
+      displayLoading();
       await this.cartService.updateCart({...existingProduct, amount: existingProduct.amount + 1});
-      showSuccess({text:ALERT_MESSAGE.ADD_PRODUCT_SUCCESS_MSG});
+      hideLoading();
+      showSuccess({ text: ALERT_MESSAGE.ADD_PRODUCT_SUCCESS_MSG });
     } else {
+      displayLoading();
       await this.cartService.addProductToCart(product);
-      showSuccess({text:ALERT_MESSAGE.ADD_PRODUCT_SUCCESS_MSG});
+      showSuccess({ text: ALERT_MESSAGE.ADD_PRODUCT_SUCCESS_MSG });
+      hideLoading();
     }
     const cart = await this.cartService.getAllProductsFromCart();
     this.cartModel.setCart(cart);
@@ -54,11 +61,11 @@ export default class ProductController {
     const products = await this.productService.getAllProducts();
     this.model.setProducts(products);
     const result = this.model.searchProductByName(productName);
-    if(result === null) {
-      this.view.displayMessage(ALERT_MESSAGE.SEARCH_PRODUCT_LIST_EMPTY_HEADING)
+    if (result === null) {
+      this.view.displayMessage(ALERT_MESSAGE.SEARCH_PRODUCT_LIST_EMPTY_HEADING);
+    } else {
+      this.view.displayMessage("");
     }
-    // console.log(result);
-    this.view.renderProductGrid(result);
-    // this.view.displayMessage(result);
+    await this.view.renderProductGrid(result);
   };
 }

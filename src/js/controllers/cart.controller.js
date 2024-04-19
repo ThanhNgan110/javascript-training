@@ -1,5 +1,6 @@
 import { showSuccess, showError } from "../utils/toastify";
 import { ALERT_MESSAGE } from "../constants/message";
+import { displayLoading, hideLoading } from "../utils/loading";
 import CartModel from "../models/cart.model";
 import CartView from "../views/cart.view";
 import CartService from "../services/cart.service";
@@ -24,11 +25,14 @@ export default class CartController {
   };
 
   handleDeleteProductFromCart = async (id) => {
-    const  {isError} = await this.service.deleteProductFromCart(id);
+    displayLoading();
+    const { isError } = await this.service.deleteProductFromCart(id);
     if (!isError) {
+      hideLoading();
       showSuccess({ text: ALERT_MESSAGE.DELETE_PRODUCT_SUCCESS_MSG });
       this.handleRenderCart();
     } else {
+      hideLoading();
       showError({ text: ALERT_MESSAGE.DELETE_PRODUCT_FAILED_MSG });
     }
   };
@@ -43,11 +47,13 @@ export default class CartController {
         const promise = this.service.updateCart({ ...data, amount: quantity });
         promises.push(promise);
       }
+      displayLoading();
       await Promise.all(promises);
+      hideLoading();
       showSuccess({ text: ALERT_MESSAGE.UPDATE_CART_SUCCESS_MSG });
       this.handleRenderCart();
     } catch (error) {
-      showError({text:ALERT_MESSAGE.UPDATE_CART_FAILED_MSG});
+      showError({ text: ALERT_MESSAGE.UPDATE_CART_FAILED_MSG });
     }
   };
 }
