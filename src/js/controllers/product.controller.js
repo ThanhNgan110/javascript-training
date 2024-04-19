@@ -1,3 +1,6 @@
+import { showSuccess, showError } from "../utils/toastify";
+import { ALERT_MESSAGE } from "../constants/message";
+
 import ProductModel from "../models/product.model";
 import CartModel from "../models/cart.model";
 import ProductView from "../views/product.view";
@@ -37,8 +40,10 @@ export default class ProductController {
     const product = this.model.getProductById(productId);
     if (existingProduct !== undefined) {
       await this.cartService.updateCart({...existingProduct, amount: existingProduct.amount + 1});
+      showSuccess({text:ALERT_MESSAGE.ADD_PRODUCT_SUCCESS_MSG});
     } else {
       await this.cartService.addProductToCart(product);
+      showSuccess({text:ALERT_MESSAGE.ADD_PRODUCT_SUCCESS_MSG});
     }
     const cart = await this.cartService.getAllProductsFromCart();
     this.cartModel.setCart(cart);

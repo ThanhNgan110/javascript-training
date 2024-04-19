@@ -96,6 +96,11 @@
   justify-content: center;
 }
 
+.border-circle:hover {
+  background-color: var(--color-green);
+  transform: scale(1.1);
+}
+
 .rounded {
   background-color: var(--color-white);
   padding: 20px 20px;

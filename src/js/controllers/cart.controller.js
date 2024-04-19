@@ -1,3 +1,5 @@
+import { showSuccess, showError } from "../utils/toastify";
+import { ALERT_MESSAGE } from "../constants/message";
 import CartModel from "../models/cart.model";
 import CartView from "../views/cart.view";
 import CartService from "../services/cart.service";
@@ -22,23 +24,30 @@ export default class CartController {
   };
 
   handleDeleteProductFromCart = async (id) => {
-    await this.service.deleteProductFromCart(id);
-    const cart = await this.service.getAllProductsFromCart();
-    this.view.renderCart(cart);
+    const  {isError} = await this.service.deleteProductFromCart(id);
+    if (!isError) {
+      showSuccess({ text: ALERT_MESSAGE.DELETE_PRODUCT_SUCCESS_MSG });
+      this.handleRenderCart();
+    } else {
+      showError({ text: ALERT_MESSAGE.DELETE_PRODUCT_FAILED_MSG });
+    }
   };
 
   handleUpdateCart = async (quantitys) => {
-    const products = this.model.getCart();
-    const promises = [];
-    for (let i = 0; i < products.length; i++) {
-      const data = this.model.getProductById(products[i].id);
-      const quantity = quantitys[i]; 
-      const promise = this.service.updateCart({...data, amount:quantity});
-      promises.push(promise);
+    try {
+      const products = this.model.getCart();
+      const promises = [];
+      for (let i = 0; i < products.length; i++) {
+        const data = this.model.getProductById(products[i].id);
+        const quantity = quantitys[i];
+        const promise = this.service.updateCart({ ...data, amount: quantity });
+        promises.push(promise);
+      }
+      await Promise.all(promises);
+      showSuccess({ text: ALERT_MESSAGE.UPDATE_CART_SUCCESS_MSG });
+      this.handleRenderCart();
+    } catch (error) {
+      showError({text:ALERT_MESSAGE.UPDATE_CART_FAILED_MSG});
     }
-    await Promise.all(promises);
-    this.handleRenderCart();
   };
-  
-
 }

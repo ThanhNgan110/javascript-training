@@ -28,14 +28,14 @@ export default class CartView {
   handleChangeQuantity = (options, item) => {
     const inputQuantity = item.querySelector(".input-quantity");
     switch (options) {
-      case "plus":
+      case "plus": {
         inputQuantity.value && inputQuantity.value++;
         break;
-      case "minus":
-        inputQuantity.value <= 1
-          ? (inputQuantity.value = 1)
-          : inputQuantity.value--;
+      }
+      case "minus": {
+        inputQuantity.value <= 1 ? (inputQuantity.value = 1) : inputQuantity.value--;
         break;
+      }
     }
   };
 
@@ -53,7 +53,9 @@ export default class CartView {
     const btnUpdate = document.querySelector(".btn-update-cart");
     btnUpdate.addEventListener("click", () => {
       const inputQuantity = document.querySelectorAll(".input-quantity");
-      const quantityArr = Array.from(inputQuantity).map((input) => parseInt(input.value));
+      const quantityArr = Array.from(inputQuantity).map((input) =>
+        parseInt(input.value)
+      );
       handler(quantityArr);
     });
   };
