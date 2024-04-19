@@ -5,7 +5,7 @@ const ALERT_MESSAGE = {
   DELETE_PRODUCT_FAILED_MSG: 'Deleted product failded',
   UPDATE_CART_SUCCESS_MSG: 'Updated cart successfully',
   UPDATE_CART_FAILED_MSG: 'Updated cart failed',
-  CART_EMPTY_HEADING: 'Your cart empty',
+  CART_EMPTY_HEADING: 'Your cart is currently empty!',
   SEARCH_PRODUCT_LIST_EMPTY_HEADING: "No find product inside list"
 };
 

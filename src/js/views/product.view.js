@@ -1,6 +1,5 @@
 import { querySelector } from "../helpers/selector";
 import { displayProduct } from "../templates/ProductTemplate";
-
 export default class ProductView {
   constructor() {
     this.cardBlock = querySelector(".card-block");
@@ -49,4 +48,5 @@ export default class ProductView {
       return this.modal.classList.remove("hidden");
     });
   };
+
 }
