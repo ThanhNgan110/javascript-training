@@ -54,6 +54,10 @@ export default class ProductController {
     const products = await this.productService.getAllProducts();
     this.model.setProducts(products);
     const result = this.model.searchProductByName(productName);
+    if(result === null) {
+      this.view.displayMessage(ALERT_MESSAGE.SEARCH_PRODUCT_LIST_EMPTY_HEADING)
+    }
+    // console.log(result);
     this.view.renderProductGrid(result);
     // this.view.displayMessage(result);
   };
