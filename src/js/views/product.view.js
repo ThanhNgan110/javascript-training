@@ -20,7 +20,6 @@ export default class ProductView {
   bindSearchProducts = (handler) => {
     this.searchForm.addEventListener("click", (e) => {
       e.preventDefault();
-      console.log(this.inputSearch.value);
       handler(this.inputSearch.value);
     });
   };

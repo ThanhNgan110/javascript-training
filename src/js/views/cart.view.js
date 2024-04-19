@@ -9,6 +9,9 @@ export default class CartView {
 
   renderCart = (products) => {
     this.wrapperCart.innerHTML = displayCart(products);
+    this.bindChangeQuantity();
+    this.bindUpdateCart();
+    this.bindDeleteProduct();
   };
 
   bindChangeQuantity = () => {
@@ -44,6 +47,7 @@ export default class CartView {
     btnDeletes.forEach((btnDelete) => {
       btnDelete.addEventListener("click", () => {
         const productId = btnDelete.dataset.id;
+        console.log(productId, "productId");
         handler(productId);
       });
     });
