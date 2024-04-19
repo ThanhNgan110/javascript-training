@@ -24,7 +24,7 @@ export default class CartController {
   };
 
   handleDeleteProductFromCart = async (id) => {
-    const { isError } = await this.service.deleteProductFromCart(id);
+    const  {isError} = await this.service.deleteProductFromCart(id);
     if (!isError) {
       showSuccess({ text: ALERT_MESSAGE.DELETE_PRODUCT_SUCCESS_MSG });
       this.handleRenderCart();
