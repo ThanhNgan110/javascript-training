@@ -14,11 +14,11 @@ export default class CartService {
   };
 
   updateCart = async(data) => {
-    await this.apiService.put(data);
+   return await this.apiService.put(data);
   }
 
   deleteProductFromCart = async (id) => {
-    await this.apiService.delete(id);
+   return await this.apiService.delete(id);
   }
 
   
