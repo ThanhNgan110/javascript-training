@@ -47,10 +47,6 @@
   cursor: pointer;
 }
 
-.btn-card:hover {
-  background-color: var(--color-green);
-}
-
 .btn-minus, .btn-plus {
   width: 34px;
   height: 34px;
