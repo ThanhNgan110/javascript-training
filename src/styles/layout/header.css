@@ -82,6 +82,8 @@
 .block-cart {
   position: relative;
   margin-right: 12px;
+  display: flex;
+  align-items: center;
 }
 
 .block-total-cart {

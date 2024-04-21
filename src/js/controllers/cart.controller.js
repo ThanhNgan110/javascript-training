@@ -39,12 +39,12 @@ export default class CartController {
 
   handleUpdateCart = async (quantitys) => {
     try {
-      const products = this.model.getCart();
+      const products = await this.service.getAllProductsFromCart();
       const promises = [];
       for (let i = 0; i < products.length; i++) {
-        const data = this.model.getProductById(products[i].id);
+        let product = products[i];
         const quantity = quantitys[i];
-        const promise = this.service.updateCart({ ...data, amount: quantity });
+        const promise = this.service.updateCart({ ...product, amount: quantity });
         promises.push(promise);
       }
       displayLoading();

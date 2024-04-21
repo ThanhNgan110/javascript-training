@@ -1,4 +1,4 @@
-import { showSuccess} from "../utils/toastify";
+import { showSuccess } from "../utils/toastify";
 import { ALERT_MESSAGE } from "../constants/message";
 import { displayLoading, hideLoading } from "../utils/loading";
 
@@ -8,6 +8,7 @@ import ProductView from "../views/product.view";
 import CartView from "../views/cart.view";
 import ProductService from "../services/product.service";
 import CartService from "../services/cart.service";
+import CartController from "../controllers/cart.controller";
 
 export default class ProductController {
   constructor() {
@@ -17,6 +18,7 @@ export default class ProductController {
     this.cartView = new CartView();
     this.productService = new ProductService();
     this.cartService = new CartService();
+    this.cartController = new CartController();
 
     // Explicit this binding
     this.view.bindSearchProducts(this.handleSearchProducts);
@@ -43,7 +45,10 @@ export default class ProductController {
     const product = this.model.getProductById(productId);
     if (existingProduct !== undefined) {
       displayLoading();
-      await this.cartService.updateCart({...existingProduct, amount: existingProduct.amount + 1});
+      await this.cartService.updateCart({
+        ...existingProduct,
+        amount: existingProduct.amount + 1,
+      });
       hideLoading();
       showSuccess({ text: ALERT_MESSAGE.ADD_PRODUCT_SUCCESS_MSG });
     } else {
@@ -55,6 +60,9 @@ export default class ProductController {
     const cart = await this.cartService.getAllProductsFromCart();
     this.cartModel.setCart(cart);
     this.cartView.renderCart(this.cartModel.getCart());
+    this.cartView.bindChangeQuantity();
+    this.cartView.bindDeleteProduct(this.cartController.handleDeleteProductFromCart);
+    this.cartView.bindUpdateCart(this.cartController.handleUpdateCart);
   };
 
   handleSearchProducts = async (productName) => {
@@ -69,3 +77,4 @@ export default class ProductController {
     await this.view.renderProductGrid(result);
   };
 }
+

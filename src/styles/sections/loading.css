@@ -6,9 +6,11 @@
   height: 100px;
   margin: auto;
   animation: 1s linear infinite spin;
-  position: absolute;
-  top: 20%;
-  left: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   z-index: 9999;
 }
 
@@ -25,3 +27,5 @@
     transform: rotate(360deg);
   }
 }
+
+

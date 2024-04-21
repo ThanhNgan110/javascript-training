@@ -1,14 +1,27 @@
 import { ALERT_MESSAGE } from "../constants/message";
 import emptyCart from "../../assets/images/cart/empty-cart.png";
+
+export const cartSum = (products) => {
+  let total = 0;
+  if (products) {
+    products.forEach((item) => {
+      total += parseFloat(item.amount * item.price);
+    });
+  }
+  return {
+    product: products,
+    total: total.toFixed(2),
+  };
+};
+
 export const displayCart = (products) => {
-  let contentCart = "", subtotal = 0, total = 0;
-  let isEmpty = products.length === 0;
+  const { product, total } = cartSum(products);
+  let isEmpty = product.length === 0;
+  let contentCart = "";
   if (!isEmpty) {
     products.forEach((item) => {
-      subtotal += parseFloat(item.amount * item.price);
       contentCart += cartTemplate(item);
     });
-    total = subtotal.toFixed(2);
   } else {
     contentCart = `<div><img src=${emptyCart}/><p class="text-center">${ALERT_MESSAGE.CART_EMPTY_HEADING}</p></div>`;
   }
@@ -75,3 +88,16 @@ export const cartTemplate = (product) => {
     </tr>
   `;
 };
+
+export const cartNumberBadge = (products) => {
+  const {product, total} = cartSum(products);
+  return `
+  <span class="icon icon-medium icon-cart"></span>
+  <span class="icon icon-circle">${product.length}</span>
+  <div class="block-total-cart">
+    <p class="name-cart">Shopping cart</p>
+    <p class="total-price">$${total}</p>
+  </div>
+  `
+};
+

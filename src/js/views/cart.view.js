@@ -1,17 +1,18 @@
 import { querySelector } from "../helpers/selector";
-import { displayCart } from "../templates/CartTemplate";
+import { displayCart, cartNumberBadge, cartSum } from "../templates/CartTemplate";
+
 export default class CartView {
   constructor() {
     this.wrapperCart = querySelector(".wrapper-cart");
     this.btnMinus = querySelector(".btn-minus");
     this.inputQuantity = querySelector(".input-quantity");
+    this.blockCart = querySelector(".block-cart");
   }
 
   renderCart = (products) => {
+    cartSum(products);
     this.wrapperCart.innerHTML = displayCart(products);
-    this.bindChangeQuantity();
-    // this.bindUpdateCart();
-    // this.bindDeleteProduct();
+    this.blockCart.innerHTML = cartNumberBadge(products);
   };
 
   bindChangeQuantity = () => {
@@ -36,7 +37,9 @@ export default class CartView {
         break;
       }
       case "minus": {
-        inputQuantity.value <= 1 ? (inputQuantity.value = 1) : inputQuantity.value--;
+        inputQuantity.value <= 1
+          ? (inputQuantity.value = 1)
+          : inputQuantity.value--;
         break;
       }
     }
@@ -47,7 +50,6 @@ export default class CartView {
     btnDeletes.forEach((btnDelete) => {
       btnDelete.addEventListener("click", () => {
         const productId = btnDelete.dataset.id;
-        console.log(productId, "productId");
         handler(productId);
       });
     });
@@ -55,12 +57,16 @@ export default class CartView {
 
   bindUpdateCart = (handler) => {
     const btnUpdate = document.querySelector(".btn-update-cart");
-    btnUpdate.addEventListener("click", () => {
-      const inputQuantity = document.querySelectorAll(".input-quantity");
-      const quantityArr = Array.from(inputQuantity).map((input) =>
-        parseInt(input.value)
-      );
-      handler(quantityArr);
-    });
+    if (btnUpdate) {
+      btnUpdate.addEventListener("click", () => {
+        const inputQuantity = document.querySelectorAll(".input-quantity");
+        const quantityArr = Array.from(inputQuantity).map((input) =>
+          parseInt(input.value)
+        );
+        handler(quantityArr);
+      });
+    }
   };
+
 }
+
