@@ -74,9 +74,9 @@
   border-radius: 11px;
   padding: 4px;
   position: absolute;
-  bottom: 23px;
-  left: 14px;
   font-size: 10px;
+  bottom: 22px;
+  left: 20px;
 }
 
 .icon-filter {
@@ -152,4 +152,3 @@
   height: 4px;
   background-image: url("/src/assets/images/icons/icon-next.svg");
 }
-
