@@ -1,5 +1,5 @@
 import { querySelector } from "../helpers/selector";
-import { displayCart, cartNumberBadge, cartSum } from "../templates/CartTemplate";
+import {displayCart, cartNumberBadge,cartSum} from "../templates/CartTemplate";
 
 export default class CartView {
   constructor() {
@@ -37,36 +37,59 @@ export default class CartView {
         break;
       }
       case "minus": {
-        inputQuantity.value <= 1
-          ? (inputQuantity.value = 1)
-          : inputQuantity.value--;
+        inputQuantity.value <= 1 ? (inputQuantity.value = 1) : inputQuantity.value--;
         break;
       }
     }
   };
 
+  // bindDeleteProduct = (handler) => {
+  //   const btnDeletes = document.querySelectorAll(".btn-delete");
+  //   btnDeletes.forEach((btnDelete) => {
+  //     btnDelete.addEventListener("click", () => {
+  //       const productId = btnDelete.dataset.id; 
+  //       handler(productId);
+  //     });
+  //   });
+  // };
+
   bindDeleteProduct = (handler) => {
     const btnDeletes = document.querySelectorAll(".btn-delete");
+    // let productIds = [];
     btnDeletes.forEach((btnDelete) => {
       btnDelete.addEventListener("click", () => {
-        const productId = btnDelete.dataset.id;
+        const productId = btnDelete.dataset.id; 
+        // productIds.push(productId);
+        // console.log(productId);
+        // btnDelete.classList.add("marked-deleted");
+        // console.log(productId, "productId");
+        this.bindHidProduct(productId);
         handler(productId);
       });
     });
   };
 
+  bindHidProduct = (productId) => {
+    const productRows = document.querySelectorAll(".col-tbody");
+    console.log(productRows, "productRows");
+    productRows.forEach((productRow) => {
+      console.log(productRow.getAttribute("data-id"));
+      console.log(productId);
+      if (productRow.getAttribute("data-id") === productId) {
+        productRow.classList.add("marked-deleted");
+      }
+    });
+  }
+  
   bindUpdateCart = (handler) => {
     const btnUpdate = document.querySelector(".btn-update-cart");
     if (btnUpdate) {
       btnUpdate.addEventListener("click", () => {
         const inputQuantity = document.querySelectorAll(".input-quantity");
         const quantityArr = Array.from(inputQuantity).map((input) =>
-          parseInt(input.value)
-        );
+          parseInt(input.value));
         handler(quantityArr);
       });
     }
   };
-
 }
-
