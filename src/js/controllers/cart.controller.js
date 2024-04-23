@@ -38,7 +38,6 @@ export default class CartController {
   // };
 
   handleDeleteProductFromCart = (id) => {
-    console.log(id, "id");
     this.view.bindHidProduct(id);
   };
 
