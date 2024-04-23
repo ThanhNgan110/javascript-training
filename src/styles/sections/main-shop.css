@@ -147,4 +147,8 @@
   padding: 20px;
 }
 
+.marked-deleted {
+  display: none !important;
+}
+
 
