@@ -64,7 +64,7 @@ export const cartTemplate = (product) => {
   const { id, productId, name, price, imgURL, amount } = product;
   const subtotal = price * amount;
   return `
-    <tr class="col-tbody">
+    <tr class="col-tbody" data-id=${id} >
       <td>
         <div class="product-item">
           <img style="width:100px" src="${imgURL}" alt="${name}" />
@@ -83,7 +83,7 @@ export const cartTemplate = (product) => {
         <p class="product-subtotal">${subtotal.toFixed(2)}$</p>
       </td>
       <td>
-        <button class="btn btn-delete" data-id=${id}><span class="icon icon-close"></span></button>
+        <button class="btn btn-delete" data-id=${id} ><span class="icon icon-close"></span></button>
       </td>
     </tr>
   `;
