@@ -1,5 +1,5 @@
 import { querySelector } from "../helpers/selector";
-import {displayCart, cartNumberBadge,cartSum} from "../templates/CartTemplate";
+import { displayCart, cartNumberBadge,cartSum } from "../templates/CartTemplate";
 
 export default class CartView {
   constructor() {
@@ -47,48 +47,45 @@ export default class CartView {
   //   const btnDeletes = document.querySelectorAll(".btn-delete");
   //   btnDeletes.forEach((btnDelete) => {
   //     btnDelete.addEventListener("click", () => {
-  //       const productId = btnDelete.dataset.id; 
+  //       const productId = btnDelete.dataset.id;
   //       handler(productId);
   //     });
   //   });
   // };
 
-  bindDeleteProduct = (handler) => {
+  bindDeleteProduct = () => {
     const btnDeletes = document.querySelectorAll(".btn-delete");
-    // let productIds = [];
     btnDeletes.forEach((btnDelete) => {
       btnDelete.addEventListener("click", () => {
-        const productId = btnDelete.dataset.id; 
-        // productIds.push(productId);
-        // console.log(productId);
-        // btnDelete.classList.add("marked-deleted");
-        // console.log(productId, "productId");
-        this.bindHidProduct(productId);
-        handler(productId);
+        const productId = btnDelete.dataset.id;
+        this.bindHiddenProduct(productId);
+
       });
     });
   };
 
-  bindHidProduct = (productId) => {
+  bindHiddenProduct = (productId) => {
     const productRows = document.querySelectorAll(".col-tbody");
-    console.log(productRows, "productRows");
     productRows.forEach((productRow) => {
-      console.log(productRow.getAttribute("data-id"));
-      console.log(productId);
       if (productRow.getAttribute("data-id") === productId) {
         productRow.classList.add("marked-deleted");
+        // marked deleted item
+        productRow.setAttribute("marked-deleted", "true");
       }
     });
-  }
-  
+  };
+
   bindUpdateCart = (handler) => {
     const btnUpdate = document.querySelector(".btn-update-cart");
     if (btnUpdate) {
       btnUpdate.addEventListener("click", () => {
-        const inputQuantity = document.querySelectorAll(".input-quantity");
-        const quantityArr = Array.from(inputQuantity).map((input) =>
-          parseInt(input.value));
-        handler(quantityArr);
+        // get all item deleted marked
+        const productRows = document.querySelectorAll(".col-tbody[marked-deleted=true]");
+        const deletedIds = Array.from(productRows).map((productRow) => productRow.getAttribute("data-id"));
+        // get value input quantity
+        const inputQuantity = document.querySelectorAll(".col-tbody:not([marked-deleted=true]) .input-quantity");
+        const quantityArr = Array.from(inputQuantity).map((input) => parseInt(input.value));
+        handler(quantityArr, deletedIds);
       });
     }
   };
