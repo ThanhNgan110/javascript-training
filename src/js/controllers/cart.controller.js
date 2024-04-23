@@ -19,36 +19,42 @@ export default class CartController {
     const products = await this.service.getAllProductsFromCart();
     this.model.setCart(products);
     this.view.renderCart(this.model.getCart());
-    this.view.bindDeleteProduct(this.handleDeleteProductFromCart);
+    this.view.bindDeleteProduct(this.handleHiddenProduct);
     this.view.bindChangeQuantity();
     this.view.bindUpdateCart(this.handleUpdateCart);
   };
 
-  // handleDeleteProductFromCart = async (id) => {
-  //   displayLoading();
-  //   const { isError } = await this.service.deleteProductFromCart(id);
-  //   if (!isError) {
-  //     hideLoading();
-  //     showSuccess({ text: ALERT_MESSAGE.DELETE_PRODUCT_SUCCESS_MSG });
-  //     this.handleRenderCart();
-  //   } else {
-  //     hideLoading();
-  //     showError({ text: ALERT_MESSAGE.DELETE_PRODUCT_FAILED_MSG });
-  //   }
-  // };
-
-  handleDeleteProductFromCart = (id) => {
-    this.view.bindHidProduct(id);
+  handleHiddenProduct = (id) => {
+    if(id) {
+      this.view.bindHiddenProduct(id);
+      showSuccess({ text: ALERT_MESSAGE.DELETE_PRODUCT_SUCCESS_MSG });
+    }
+      showError({ text: ALERT_MESSAGE.DELETE_PRODUCT_FAILED_MSG });  
   };
 
-  handleUpdateCart = async (quantitys) => {
+  handleDeleteProduct = async (deletedIds) => {
     try {
-      const products = this.model.getCart();
-      const promises = [];
+      for (let i = 0; i < deletedIds.length; i++) {
+        const id = deletedIds[i];
+        const promise = this.service.deleteProductFromCart(id);
+        promises.push(promise);
+      }
+      displayLoading();
+      await Promise.all(promises);
+      hideLoading();
+      this.handleRenderCart();
+    } catch (error) {
+    }
+  }
+
+  handleUpdateProduct = async (quantitys) => {
+    try {
+      const products = await this.service.getAllProductsFromCart();
+      let promises = [];
       for (let i = 0; i < products.length; i++) {
         let product = products[i];
         const quantity = quantitys[i];
-        const promise = this.service.updateCart({...product,amount: quantity});
+        promise = this.service.updateCart({...product,amount: quantity});
         promises.push(promise);
       }
       displayLoading();
@@ -59,5 +65,10 @@ export default class CartController {
     } catch (error) {
       showError({ text: ALERT_MESSAGE.UPDATE_CART_FAILED_MSG });
     }
-  };
+  }
+
+  handleUpdateCart = async (quantitys, deletedIds) => {
+    this.handleDeleteProduct(deletedIds);
+    this.handleUpdateProduct(quantitys);
+  }
 }
