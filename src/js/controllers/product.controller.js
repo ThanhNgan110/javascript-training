@@ -63,7 +63,7 @@ export default class ProductController {
     this.cartView.bindChangeQuantity();
     this.cartView.bindDeleteProduct(this.cartController.handleDeleteProductFromCart);
     this.cartView.bindUpdateCart(this.cartController.handleUpdateCart);
-  };
+  }
 
   handleSearchProducts = async (productName) => {
     const products = await this.productService.getAllProducts();
@@ -75,6 +75,6 @@ export default class ProductController {
       this.view.displayMessage("");
     }
     await this.view.renderProductGrid(result);
-  };
+  }
 }
 
