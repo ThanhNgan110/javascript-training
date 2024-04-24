@@ -85,12 +85,12 @@ export default class CartView {
   }
 
   bindShowModal = (product) => {
-    this.btnOpenModal.addEventListener("click", () => {
-      console.log(product);
-      this.modal.style.display = 'block';
-      this.renderCart(product);
-
-    });
+    if(product) {
+      this.btnOpenModal.addEventListener("click", () => {
+        this.modal.style.display = 'block';
+        this.renderCart(product);
+      });
+    }
   }
 
   bindHiddenModal = () => {
