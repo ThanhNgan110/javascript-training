@@ -21,5 +21,4 @@ export default class CartService {
    return await this.apiService.delete(id);
   }
 
-  
 }

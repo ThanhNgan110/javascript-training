@@ -48,5 +48,4 @@ export default class ProductView {
       return this.modal.classList.remove("hidden");
     });
   };
-
 }

@@ -35,8 +35,7 @@ export default class ApiService {
 
   async put(payload) {
     try {
-      const res = await fetch(
-        `${this.baseURL}/${this.endPoint}/${payload.id}`,
+      const res = await fetch(`${this.baseURL}/${this.endPoint}/${payload.id}`,
         {
           method: "PUT",
           headers: { "content-type": "application/json" },

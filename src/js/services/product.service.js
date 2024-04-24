@@ -9,6 +9,4 @@ export default class ProductService {
     return await this.apiService.get();
   };
 
-  
-
 }

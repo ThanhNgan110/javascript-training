@@ -8,7 +8,7 @@ export const displayProduct = (products) => {
     contentProduct = "";
   }
   return contentProduct;
-};
+}
 
 export const productTemplate = (product) => {
   const { productId, imgURL, name, price } = product;
@@ -26,6 +26,6 @@ export const productTemplate = (product) => {
   </div>
   </article>
   `;
-};
+}
 
 

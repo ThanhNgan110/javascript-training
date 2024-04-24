@@ -11,8 +11,8 @@ export const cartSum = (products) => {
   return {
     product: products,
     total: total.toFixed(2),
-  };
-};
+  }
+}
 
 export const displayCart = (products) => {
   const { product, total } = cartSum(products);
@@ -57,8 +57,8 @@ ${contentCart}
 <p class="name-total-border-none total">Total:<span>${total}$</span></p>
 <button class="btn btn-checkout">Proceed to checkout</button>
 </div>`
-  } `;
-};
+  }`;
+}
 
 export const cartTemplate = (product) => {
   const { id, productId, name, price, imgURL, amount } = product;
@@ -87,7 +87,7 @@ export const cartTemplate = (product) => {
       </td>
     </tr>
   `;
-};
+}
 
 export const cartNumberBadge = (products) => {
   const {product, total} = cartSum(products);
@@ -97,7 +97,6 @@ export const cartNumberBadge = (products) => {
   <div class="block-total-cart">
     <p class="name-cart">Shopping cart</p>
     <p class="total-price">$${total}</p>
-  </div>
-  `
-};
+  </div>`
+}
 

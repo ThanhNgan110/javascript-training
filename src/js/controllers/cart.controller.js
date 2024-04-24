@@ -22,7 +22,7 @@ export default class CartController {
     this.view.bindDeleteProduct(this.handleHiddenProduct);
     this.view.bindChangeQuantity();
     this.view.bindUpdateCart(this.handleUpdateCart);
-  };
+  }
 
   handleHiddenProduct = (id) => {
     if(id) {
@@ -30,37 +30,37 @@ export default class CartController {
       showSuccess({ text: ALERT_MESSAGE.DELETE_PRODUCT_SUCCESS_MSG });
     }
       showError({ text: ALERT_MESSAGE.DELETE_PRODUCT_FAILED_MSG });  
-  };
+  }
 
   handleDeleteProduct = async (deletedIds) => {
     try {
+      const promises = [];
       for (let i = 0; i < deletedIds.length; i++) {
         const id = deletedIds[i];
         const promise = this.service.deleteProductFromCart(id);
         promises.push(promise);
       }
-      displayLoading();
       await Promise.all(promises);
-      hideLoading();
       this.handleRenderCart();
     } catch (error) {
+      console.error(error);
     }
   }
 
   handleUpdateProduct = async (quantitys) => {
     try {
       const products = await this.service.getAllProductsFromCart();
-      let promises = [];
+      console.log(products);
+      const promises = [];
       for (let i = 0; i < products.length; i++) {
         let product = products[i];
         const quantity = quantitys[i];
-        promise = this.service.updateCart({...product,amount: quantity});
+        const promise = this.service.updateCart({ ...product, amount: quantity });
         promises.push(promise);
       }
       displayLoading();
       await Promise.all(promises);
       hideLoading();
-      showSuccess({ text: ALERT_MESSAGE.UPDATE_CART_SUCCESS_MSG });
       this.handleRenderCart();
     } catch (error) {
       showError({ text: ALERT_MESSAGE.UPDATE_CART_FAILED_MSG });
@@ -68,7 +68,12 @@ export default class CartController {
   }
 
   handleUpdateCart = async (quantitys, deletedIds) => {
-    this.handleDeleteProduct(deletedIds);
-    this.handleUpdateProduct(quantitys);
+    try {
+      await this.handleDeleteProduct(deletedIds);
+      await this.handleUpdateProduct(quantitys);
+    } catch (error) {
+      console.error(error);
+    }
   }
+  
 }

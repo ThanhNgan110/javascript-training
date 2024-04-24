@@ -14,10 +14,8 @@ export default class ProductModel {
 
   searchProductByName = (productName) => {
     const result = this.products.filter((product) =>
-      product.name.toLowerCase().includes(productName.toLowerCase())
-    );
+    product.name.toLowerCase().includes(productName.toLowerCase()));
     return result.length > 0 ? result : null;
   }
   
-
 }
