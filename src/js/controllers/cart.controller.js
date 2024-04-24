@@ -21,7 +21,7 @@ export default class CartController {
     const products = await this.service.getAllProductsFromCart();
     this.model.setCart(products);
     this.view.bindShowModal(this.model.getCart());
-    // this.view.bindShowModal(this.handleShowModal);
+    this.view.bindShowModal(this.handleShowModal);
     this.view.renderCart(this.model.getCart());
     this.view.bindDeleteProduct(this.handleHiddenProduct);
     this.view.bindChangeQuantity();
@@ -45,7 +45,6 @@ export default class CartController {
         promises.push(promise);
       }
       await Promise.all(promises);
-      // this.handleRenderCart();
     } catch (error) {
       console.error(error);
     }
@@ -78,5 +77,8 @@ export default class CartController {
       console.error(error);
     }
   }
-
+  
+  handleShowModal = () => {
+    this.view.bindUpdateCart(this.handleUpdateCart);
+  }
 }
