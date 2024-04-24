@@ -12,12 +12,16 @@ export default class CartController {
     this.service = new CartService();
 
     // Display initial products
+    // this.view.bindShowModal();
+    this.view.bindHiddenModal();
     this.handleRenderCart();
   }
 
   handleRenderCart = async () => {
     const products = await this.service.getAllProductsFromCart();
     this.model.setCart(products);
+    this.view.bindShowModal(this.model.getCart());
+    // this.view.bindShowModal(this.handleShowModal);
     this.view.renderCart(this.model.getCart());
     this.view.bindDeleteProduct(this.handleHiddenProduct);
     this.view.bindChangeQuantity();
@@ -50,7 +54,6 @@ export default class CartController {
   handleUpdateProduct = async (quantitys) => {
     try {
       const products = await this.service.getAllProductsFromCart();
-      console.log(products);
       const promises = [];
       for (let i = 0; i < products.length; i++) {
         let product = products[i];
@@ -75,5 +78,5 @@ export default class CartController {
       console.error(error);
     }
   }
-  
+
 }
