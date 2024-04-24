@@ -129,6 +129,7 @@ table {
   transform: translate(-50%, -50%);
   box-shadow: 0 3rem 5rem #0000004d;
   padding: 20px 0px;
+  display: none;
 }
 
 /* The Close Button */
@@ -160,8 +161,4 @@ table {
   background-color: rgb(0 0 0 / 1%);
   backdrop-filter: blur(3px);
   z-index: 5;
-}
-
-.hidden {
-  display: none;
 }
