@@ -41,7 +41,7 @@ export default class CartController {
         promises.push(promise);
       }
       await Promise.all(promises);
-      this.handleRenderCart();
+      // this.handleRenderCart();
     } catch (error) {
       console.error(error);
     }
