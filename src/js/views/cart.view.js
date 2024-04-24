@@ -1,5 +1,5 @@
 import { querySelector } from "../helpers/selector";
-import { displayCart, cartNumberBadge,cartSum } from "../templates/CartTemplate";
+import { displayCart, cartNumberBadge, cartSum } from "../templates/CartTemplate";
 
 export default class CartView {
   constructor() {
@@ -7,12 +7,17 @@ export default class CartView {
     this.btnMinus = querySelector(".btn-minus");
     this.inputQuantity = querySelector(".input-quantity");
     this.blockCart = querySelector(".block-cart");
+    this.btnCloseModal = querySelector(".close-modal");
+    this.btnOpenModal = querySelector(".show-modal");
+    this.modal = querySelector(".modal");
   }
 
   renderCart = (products) => {
     cartSum(products);
     this.wrapperCart.innerHTML = displayCart(products);
     this.blockCart.innerHTML = cartNumberBadge(products);
+    this.bindDeleteProduct();
+    this.bindChangeQuantity();
   }
 
   bindChangeQuantity = () => {
@@ -77,5 +82,20 @@ export default class CartView {
         handler(quantityArr, deletedIds);
       });
     }
+  }
+
+  bindShowModal = (product) => {
+    this.btnOpenModal.addEventListener("click", () => {
+      console.log(product);
+      this.modal.style.display = 'block';
+      this.renderCart(product);
+
+    });
+  }
+
+  bindHiddenModal = () => {
+    this.btnCloseModal.addEventListener("click", () => {
+      this.modal.style.display = 'none';
+    });
   }
 }
