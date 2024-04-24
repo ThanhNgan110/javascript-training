@@ -16,11 +16,4 @@ export default class CartModel {
     return this.products.find(item => item.id === id);
   }
 
-  // deleteProductById = (id) => {
-  //   const result = this.products.filter((item) => item.id !== id);
-  //   console.log(result, "result");
-  //   return result;
-  // }
-  
-  
 }
