@@ -21,11 +21,11 @@ export default class ProductView {
       e.preventDefault();
       handler(this.inputSearch.value);
     });
-  };
+  }
 
   displayMessage = (message) => {
     this.messageContent.innerHTML = message;
-  };
+  }
 
   bindAddProducts = (handler) => {
     const btnCards = document.querySelectorAll(".btn-card");
@@ -35,17 +35,6 @@ export default class ProductView {
         handler(productId);
       });
     });
-  };
+  }
 
-  bindShowModal = () => {
-    this.btnCloseModal.addEventListener("click", () => {
-      return this.modal.classList.add("hidden");
-    });
-  };
-
-  bindHiddenModal = () => {
-    this.btnOpenModal.addEventListener("click", () => {
-      return this.modal.classList.remove("hidden");
-    });
-  };
 }
