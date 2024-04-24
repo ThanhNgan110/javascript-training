@@ -22,8 +22,8 @@ export default class ProductController {
 
     // Explicit this binding
     this.view.bindSearchProducts(this.handleSearchProducts);
-    this.view.bindShowModal();
-    this.view.bindHiddenModal();
+    // this.view.bindShowModal();
+    // this.view.bindHiddenModal();
 
     // Display initial products
     this.handleRenderProductsGrid();
