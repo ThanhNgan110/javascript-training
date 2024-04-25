@@ -45,10 +45,7 @@ export default class ProductController {
     const product = this.model.getProductById(productId);
     if (existingProduct !== undefined) {
       displayLoading();
-      await this.cartService.updateCart({
-        ...existingProduct,
-        amount: existingProduct.amount + 1,
-      });
+      await this.cartService.updateCart({...existingProduct,amount: existingProduct.amount + 1});
       hideLoading();
       showSuccess({ text: ALERT_MESSAGE.ADD_PRODUCT_SUCCESS_MSG });
     } else {
