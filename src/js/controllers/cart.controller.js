@@ -20,7 +20,7 @@ export default class CartController {
   handleRenderCart = async () => {
     const products = await this.service.getAllProductsFromCart();
     this.model.setCart(products);
-    this.view.bindShowModal(this.model.getCart());
+    // this.view.bindShowModal(this.model.getCart());
     this.view.bindShowModal(this.handleShowModal);
     this.view.renderCart(this.model.getCart());
     this.view.bindDeleteProduct(this.handleHiddenProduct);
@@ -29,11 +29,12 @@ export default class CartController {
   }
 
   handleHiddenProduct = (id) => {
-    if(id) {
+    if (id) {
       this.view.bindHiddenProduct(id);
       showSuccess({ text: ALERT_MESSAGE.DELETE_PRODUCT_SUCCESS_MSG });
+      this.handleShowModal();
     }
-      showError({ text: ALERT_MESSAGE.DELETE_PRODUCT_FAILED_MSG });  
+    showError({ text: ALERT_MESSAGE.DELETE_PRODUCT_FAILED_MSG });
   }
 
   handleDeleteProduct = async (deletedIds) => {
@@ -57,7 +58,7 @@ export default class CartController {
       for (let i = 0; i < products.length; i++) {
         let product = products[i];
         const quantity = quantitys[i];
-        const promise = this.service.updateCart({ ...product, amount: quantity });
+        const promise = this.service.updateCart({...product, amount: quantity});
         promises.push(promise);
       }
       displayLoading();
@@ -77,8 +78,8 @@ export default class CartController {
       console.error(error);
     }
   }
-  
-  handleShowModal = () => {
-    this.view.bindUpdateCart(this.handleUpdateCart);
+
+  handleShowModal = async () => {
+    await this.handleRenderCart();
   }
 }
