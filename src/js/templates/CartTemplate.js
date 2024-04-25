@@ -16,48 +16,56 @@ export const cartSum = (products) => {
 
 export const displayCart = (products) => {
   const { product, total } = cartSum(products);
-  let isEmpty = product.length === 0;
+  const isEmpty = product.length === 0;
   let contentCart = "";
+
   if (!isEmpty) {
-    products.forEach((item) => {
+    product.forEach((item) => {
       contentCart += cartTemplate(item);
     });
   } else {
-    contentCart = `<div><img src=${emptyCart}/><p class="text-center">${ALERT_MESSAGE.CART_EMPTY_HEADING}</p></div>`;
+    contentCart = `
+      <div>
+        <img src="${emptyCart}" alt="Empty Cart" />
+        <p class="text-center">${ALERT_MESSAGE.CART_EMPTY_HEADING}</p>
+      </div>
+    `;
   }
+
   return `
-  ${
-    isEmpty
-      ? `${contentCart}`
-      : `<table class="table">
-  <thead>
-    <tr class="col-header">
-      <th class="col-product">PRODUCT</th>
-      <th>PRICE</th>
-      <th>QUANTITY</th>
-      <th>SUBTOTAL</th>
-    </tr>
-  </thead>
-  <tbody>
-${contentCart}
-  <tr class="col-btn">
-  <td>
-    <div class="btn-group">
-      <button class="btn btn-return">Return to shop</button>
-      <button class="btn btn-update-cart">Update Cart</button>
-    </div>
-  </td>
-</tr>
-</tbody>
-</table>
-<div class="cart-total">
-<p class="name-total">Cart Total</p>
-<p class="name-total-border"> Subtotal:<span>${total}$</span></p>
-<p class="name-total-border">Shipping:<span>Free</span></p>
-<p class="name-total-border-none total">Total:<span>${total}$</span></p>
-<button class="btn btn-checkout">Proceed to checkout</button>
-</div>`
-  }`;
+    ${isEmpty ? contentCart :
+    `<table class="table">
+      <thead>
+        <tr class="col-header">
+          <th class="col-product">PRODUCT</th>
+          <th>PRICE</th>
+          <th>QUANTITY</th>
+          <th>SUBTOTAL</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        ${contentCart}
+      </tbody>
+      <tfoot>
+        <tr class="col-btn">
+          <td colspan="5">
+            <div class="btn-group">
+              <button class="btn btn-return">Return to shop</button>
+              <button class="btn btn-update-cart">Update Cart</button>
+            </div>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+    <div class="cart-total">
+      <p class="name-total">Cart Total</p>
+      <p class="name-total-border">Subtotal:<span>${total}$</span></p>
+      <p class="name-total-border">Shipping:<span>Free</span></p>
+      <p class="name-total-border-none total">Total:<span>${total}$</span></p>
+      <button class="btn btn-checkout">Proceed to checkout</button>
+    </div>`
+    }`;
 }
 
 export const cartTemplate = (product) => {
