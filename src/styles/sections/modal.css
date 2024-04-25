@@ -123,13 +123,14 @@ table {
   z-index: 10;
   border-radius: 5px;
   width: 95%;
-  position: absolute;
-  top: 13%;
+  position: fixed;
+  top: 57%;
   left: 50%;
   transform: translate(-50%, -50%);
   box-shadow: 0 3rem 5rem #0000004d;
   padding: 20px 0px;
   display: none;
+  
 }
 
 /* The Close Button */
