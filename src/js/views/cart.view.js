@@ -83,7 +83,6 @@ export default class CartView {
   }
 
   bindShowModal = (product, handler) => {
-    console.log(product, "product");
     this.btnOpenModal.addEventListener("click", () => {
     this.modal.style.display = 'block';
     this.renderCart(product);
