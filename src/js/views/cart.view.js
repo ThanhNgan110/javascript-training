@@ -16,8 +16,6 @@ export default class CartView {
     cartSum(products);
     this.wrapperCart.innerHTML = displayCart(products);
     this.blockCart.innerHTML = cartNumberBadge(products);
-    this.bindDeleteProduct();
-    this.bindChangeQuantity();
   }
 
   bindChangeQuantity = () => {
@@ -84,13 +82,10 @@ export default class CartView {
     }
   }
 
-  bindShowModal = (product) => {
-    if(product) {
-      this.btnOpenModal.addEventListener("click", () => {
-        this.modal.style.display = 'block';
-        this.renderCart(product);
-      });
-    }
+  bindShowModal = () => {
+    this.btnOpenModal.addEventListener("click", () => {
+    this.modal.style.display = 'block';
+    });
   }
 
   bindHiddenModal = () => {
