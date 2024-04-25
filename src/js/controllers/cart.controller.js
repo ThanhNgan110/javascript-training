@@ -20,8 +20,8 @@ export default class CartController {
   handleRenderCart = async () => {
     const products = await this.service.getAllProductsFromCart();
     this.model.setCart(products);
-    // this.view.bindShowModal(this.model.getCart());
-    this.view.bindShowModal(this.handleShowModal);
+    this.view.bindShowModal(this.model.getCart(), this.handleUpdateCart);
+    // this.view.bindShowModal(this.handleShowModal);
     this.view.renderCart(this.model.getCart());
     this.view.bindDeleteProduct(this.handleHiddenProduct);
     this.view.bindChangeQuantity();
@@ -64,6 +64,7 @@ export default class CartController {
       displayLoading();
       await Promise.all(promises);
       hideLoading();
+      showSuccess({ text: ALERT_MESSAGE.UPDATE_CART_SUCCESS_MSG });
       this.handleRenderCart();
     } catch (error) {
       showError({ text: ALERT_MESSAGE.UPDATE_CART_FAILED_MSG });
@@ -78,8 +79,5 @@ export default class CartController {
       console.error(error);
     }
   }
-
-  handleShowModal = async () => {
-    await this.handleRenderCart();
-  }
+  
 }
