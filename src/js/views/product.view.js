@@ -23,6 +23,10 @@ export default class ProductView {
     });
   };
 
+  displayMessage = (message) => {
+    this.messageContent.innerHTML = message;
+  };
+
   bindAddProducts = (handler) => {
     const btnCards = document.querySelectorAll(".btn-card");
     btnCards.forEach((btnCard) => {
