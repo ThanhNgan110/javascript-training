@@ -2,31 +2,35 @@ import { showSuccess, showError } from "../utils/toastify";
 import { ALERT_MESSAGE } from "../constants/message";
 import { displayLoading, hideLoading } from "../utils/loading";
 import CartModel from "../models/cart.model";
+import ProductModel from "../models/product.model";
 import CartView from "../views/cart.view";
+import ProductView from "../views/product.view";
 import CartService from "../services/cart.service";
+import ProductService from "../services/product.service";
 
 export default class CartController {
   constructor() {
-    this.model = new CartModel();
+    this.cartModel = new CartModel();
+    this.productModel = new ProductModel();
     this.view = new CartView();
+    this.productView = new ProductView();
     this.service = new CartService();
+    this.productService = new ProductService();
 
     // Display initial products
-    // this.view.bindShowModal();
     this.view.bindHiddenModal();
     this.handleRenderCart();
   }
 
   handleRenderCart = async () => {
     const products = await this.service.getAllProductsFromCart();
-    this.model.setCart(products);
-    this.view.bindShowModal(this.model.getCart(), this.handleUpdateCart);
-    // this.view.bindShowModal(this.handleShowModal);
-    this.view.renderCart(this.model.getCart());
+    this.cartModel.setCart(products);
+    this.view.bindShowModal(this.cartModel.getCart(), this.handleUpdateCart);
+    this.view.renderCart(this.cartModel.getCart());
     this.view.bindDeleteProduct(this.handleHiddenProduct);
     this.view.bindChangeQuantity();
     this.view.bindUpdateCart(this.handleUpdateCart);
-  }
+  };
 
   handleHiddenProduct = (id) => {
     if (id) {
@@ -35,7 +39,7 @@ export default class CartController {
       this.handleShowModal();
     }
     showError({ text: ALERT_MESSAGE.DELETE_PRODUCT_FAILED_MSG });
-  }
+  };
 
   handleDeleteProduct = async (deletedIds) => {
     try {
@@ -49,7 +53,7 @@ export default class CartController {
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   handleUpdateProduct = async (quantitys) => {
     try {
@@ -58,7 +62,10 @@ export default class CartController {
       for (let i = 0; i < products.length; i++) {
         let product = products[i];
         const quantity = quantitys[i];
-        const promise = this.service.updateCart({...product, amount: quantity});
+        const promise = this.service.updateCart({
+          ...product,
+          amount: quantity,
+        });
         promises.push(promise);
       }
       displayLoading();
@@ -69,7 +76,7 @@ export default class CartController {
     } catch (error) {
       showError({ text: ALERT_MESSAGE.UPDATE_CART_FAILED_MSG });
     }
-  }
+  };
 
   handleUpdateCart = async (quantitys, deletedIds) => {
     try {
@@ -78,6 +85,30 @@ export default class CartController {
     } catch (error) {
       console.error(error);
     }
-  }
-  
+  };
+
+  handleAddProduct = async (productId) => {
+    const products = await this.service.getAllProductsFromCart();
+    this.cartModel.setCart(products);
+    // check product existing inside cart
+    const existingProduct = this.cartModel.checkProductIdExisting(productId);
+    const getProduct = await this.productService.getAllProducts();
+    this.productModel.setProducts(getProduct);
+    const product = this.productModel.getProductById(productId);
+    if (existingProduct !== undefined) {
+      displayLoading();
+      await this.service.updateCart({
+        ...existingProduct,
+        amount: existingProduct.amount + 1,
+      });
+      hideLoading();
+      showSuccess({ text: ALERT_MESSAGE.ADD_PRODUCT_SUCCESS_MSG });
+    } else {
+      displayLoading();
+      await this.service.addProductToCart(product);
+      showSuccess({ text: ALERT_MESSAGE.ADD_PRODUCT_SUCCESS_MSG });
+      hideLoading();
+    }
+    await this.handleRenderCart();
+  };
 }
