@@ -33,12 +33,9 @@ export default class CartController {
   };
 
   handleHiddenProduct = (id) => {
-    if (id) {
-      this.view.bindHiddenProduct(id);
-      showSuccess({ text: ALERT_MESSAGE.DELETE_PRODUCT_SUCCESS_MSG });
-      this.handleShowModal();
-    }
-    showError({ text: ALERT_MESSAGE.DELETE_PRODUCT_FAILED_MSG });
+    this.view.bindHiddenProduct(id);
+    showSuccess({ text: ALERT_MESSAGE.DELETE_PRODUCT_SUCCESS_MSG });
+    this.handleShowModal();
   };
 
   handleDeleteProduct = async (deletedIds) => {
