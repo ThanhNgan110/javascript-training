@@ -21,11 +21,7 @@ export default class ProductView {
       e.preventDefault();
       handler(this.inputSearch.value);
     });
-  }
-
-  displayMessage = (message) => {
-    this.messageContent.innerHTML = message;
-  }
+  };
 
   bindAddProducts = (handler) => {
     const btnCards = document.querySelectorAll(".btn-card");
@@ -35,6 +31,5 @@ export default class ProductView {
         handler(productId);
       });
     });
-  }
-
+  };
 }
