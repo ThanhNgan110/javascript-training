@@ -8,5 +8,4 @@ export default class ProductService {
   getAllProducts = async () => {
     return await this.apiService.get();
   };
-
 }

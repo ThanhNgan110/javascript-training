@@ -9,11 +9,12 @@ export default class CartModel {
   };
 
   checkProductIdExisting(productId) {
-    return this.products ? this.products.find((product) => product.productId === productId)  : null;
-  }
+    return this.products
+      ? this.products.find((product) => product.productId === productId)
+      : null;
+  };
 
   getProductById = (id) => {
-    return this.products.find(item => item.id === id);
-  }
-
+    return this.products.find((item) => item.id === id);
+  };
 }

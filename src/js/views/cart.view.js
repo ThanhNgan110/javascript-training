@@ -16,7 +16,7 @@ export default class CartView {
     cartSum(products);
     this.wrapperCart.innerHTML = displayCart(products);
     this.blockCart.innerHTML = cartNumberBadge(products);
-  }
+  };
 
   bindChangeQuantity = () => {
     const inputList = document.querySelectorAll(".input-group.quantity");
@@ -30,7 +30,7 @@ export default class CartView {
         this.handleChangeQuantity("minus", item);
       });
     });
-  }
+  };
 
   handleChangeQuantity = (options, item) => {
     const inputQuantity = item.querySelector(".input-quantity");
@@ -44,7 +44,7 @@ export default class CartView {
         break;
       }
     }
-  }
+  };
 
   bindDeleteProduct = () => {
     const btnDeletes = document.querySelectorAll(".btn-delete");
@@ -54,7 +54,7 @@ export default class CartView {
         this.bindHiddenProduct(productId);
       });
     });
-  }
+  };
 
   bindHiddenProduct = (productId) => {
     const productRows = document.querySelectorAll(".col-tbody");
@@ -65,7 +65,7 @@ export default class CartView {
         productRow.setAttribute("marked-deleted", "true");
       }
     });
-  }
+  };
 
   bindUpdateCart = (handler) => {
     const btnUpdate = document.querySelector(".btn-update-cart");
@@ -80,7 +80,7 @@ export default class CartView {
         handler(quantityArr, deletedIds);
       });
     }
-  }
+  };
 
   bindShowModal = (product, handler) => {
     this.btnOpenModal.addEventListener("click", () => {
@@ -91,11 +91,11 @@ export default class CartView {
     this.bindDeleteProduct();
     this.bindUpdateCart(handler);
     });
-  }
+  };
 
   bindHiddenModal = () => {
     this.btnCloseModal.addEventListener("click", () => {
       this.modal.style.display = 'none';
     });
-  }
+  };
 }

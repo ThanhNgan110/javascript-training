@@ -7,7 +7,7 @@ export default class CartService {
 
   getAllProductsFromCart = async () => {
    return await this.apiService.get();
-  }
+  };
 
   addProductToCart = async (product) => {
    await this.apiService.post(product);
@@ -15,10 +15,9 @@ export default class CartService {
 
   updateCart = async(data) => {
    return await this.apiService.put(data);
-  }
+  };
 
   deleteProductFromCart = async (id) => {
    return await this.apiService.delete(id);
-  }
-
+  };
 }

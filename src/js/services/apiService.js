@@ -16,7 +16,7 @@ export default class ApiService {
     } catch (error) {
       throw new Error(`Get data fail ${error.message}`);
     }
-  }
+  };
 
   async post(data) {
     try {
@@ -31,7 +31,7 @@ export default class ApiService {
     } catch (error) {
       throw new Error(`Post data fail ${error.message}`);
     }
-  }
+  };
 
   async put(payload) {
     try {
@@ -48,7 +48,7 @@ export default class ApiService {
     } catch (error) {
       throw new Error(`Put data fail ${error.message}`);
     }
-  }
+  };
 
   async delete(payload) {
     try {
@@ -65,5 +65,5 @@ export default class ApiService {
           isError:true
         }
     }
-  }
+  };
 }

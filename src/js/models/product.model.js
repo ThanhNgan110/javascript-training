@@ -10,12 +10,11 @@ export default class ProductModel {
 
   getProductById(productId) {
     return this.products.find(product => product.productId === productId);
-  }
+  };
 
   searchProductByName = (productName) => {
     const result = this.products.filter((product) =>
     product.name.toLowerCase().includes(productName.toLowerCase()));
     return result.length > 0 ? result : null;
-  }
-  
+  };
 }

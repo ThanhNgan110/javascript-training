@@ -11,14 +11,13 @@ export const cartSum = (products) => {
   return {
     product: products,
     total: total.toFixed(2),
-  }
-}
+  };
+};
 
 export const displayCart = (products) => {
   const { product, total } = cartSum(products);
   const isEmpty = product.length === 0;
   let contentCart = "";
-
   if (!isEmpty) {
     product.forEach((item) => {
       contentCart += cartTemplate(item);
@@ -31,10 +30,11 @@ export const displayCart = (products) => {
       </div>
     `;
   }
-
   return `
-    ${isEmpty ? contentCart :
-    `<table class="table">
+    ${
+      isEmpty
+        ? contentCart
+        : `<table class="table">
       <thead>
         <tr class="col-header">
           <th class="col-product">PRODUCT</th>
@@ -66,7 +66,7 @@ export const displayCart = (products) => {
       <button class="btn btn-checkout">Proceed to checkout</button>
     </div>`
     }`;
-}
+};
 
 export const cartTemplate = (product) => {
   const { id, productId, name, price, imgURL, amount } = product;
@@ -95,16 +95,15 @@ export const cartTemplate = (product) => {
       </td>
     </tr>
   `;
-}
+};
 
 export const cartNumberBadge = (products) => {
-  const {product, total} = cartSum(products);
+  const { product, total } = cartSum(products);
   return `
   <span class="icon icon-medium icon-cart"></span>
   <span class="icon icon-circle">${product.length}</span>
   <div class="block-total-cart">
     <p class="name-cart">Shopping cart</p>
     <p class="total-price">$${total}</p>
-  </div>`
-}
-
+  </div>`;
+};
