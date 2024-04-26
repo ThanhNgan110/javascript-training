@@ -1,5 +1,7 @@
 import { querySelector } from "../helpers/selector";
 import { displayCart, cartNumberBadge, cartSum } from "../templates/CartTemplate";
+import { showSuccess} from "../utils/toastify";
+import { ALERT_MESSAGE } from "../constants/message";
 
 export default class CartView {
   constructor() {
@@ -63,6 +65,8 @@ export default class CartView {
         productRow.classList.add("marked-deleted");
         // marked deleted item
         productRow.setAttribute("marked-deleted", "true");
+        showSuccess({ text: ALERT_MESSAGE.DELETE_PRODUCT_SUCCESS_MSG });
+
       }
     });
   };
