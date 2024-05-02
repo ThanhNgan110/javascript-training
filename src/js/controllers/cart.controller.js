@@ -26,17 +26,15 @@ export default class CartController {
   }
 
   handleRenderCart = async () => {
-    // const products = await this.service.getAllProductsFromCart();
     const products = await this.cartItemService.getAllProductsFromCart();
     console.log(products, "products");
-    // this.cartModel.setCart(products);
-    this.cartItemModel.setCart(products);
-    this.view.bindShowModal(this.cartModel.getCart(), this.handleUpdateCart);
-    this.view.renderCart(this.cartModel.getCart());
+    this.cartItemModel.setCartItem(products);
+    this.view.bindShowModal(this.cartItemModel.getCartItem(), this.handleUpdateCart);
+    this.view.renderCart(this.cartItemModel.getCartItem());
     this.view.bindDeleteProduct(this.handleHiddenProduct);
     this.view.bindChangeQuantity();
     this.view.bindUpdateCart(this.handleUpdateCart);
-    this.view.bindHiddenModal ();
+    this.view.bindHiddenModal();
   };
 
   handleHiddenProduct = (id) => {
@@ -49,7 +47,7 @@ export default class CartController {
     try {
       const promises = [];
       for (const id of deletedIds) {
-        const promise = this.service.deleteProductFromCart(id);
+        const promise = this.cartItemService.deleteProductFromCart(id);
         promises.push(promise);
       }
       await Promise.all(promises);
@@ -61,18 +59,15 @@ export default class CartController {
   handleUpdateProduct = async (quantitys) => {
     try {
       displayLoading();
-      const products = await this.service.getAllProductsFromCart();
+      const products = this.cartItemModel.getCartItem();
+      console.log(products);
       const promises = [];
       for (let i = 0; i < products.length; i++) {
         let product = products[i];
         const quantity = quantitys[i];
-        const promise = this.service.updateCart({
-          ...product,
-          amount: quantity,
-        });
+        const promise = this.cartItemService.updateCart({...product, amount: quantity});
         promises.push(promise);
       }
-      
       await Promise.all(promises);
       hideLoading();
       showSuccess({ text: ALERT_MESSAGE.UPDATE_CART_SUCCESS_MSG });
@@ -94,29 +89,25 @@ export default class CartController {
   handleAddProduct = async (productId) => {
     toggleOverlay(true);
     displayLoading();
-    const products = await this.service.getAllProductsFromCart();
-    this.cartModel.setCart(products);
+    const products = this.cartItemModel.getCartItem();
+    this.cartItemModel.setCartItem(products);
     // check product existing inside cart
-    const existingProduct = this.cartModel.checkProductIdExisting(productId);
+    const existingProduct = this.cartItemModel.checkProductIdExisting(productId);
+    console.log(existingProduct);
     const getProduct = await this.productService.getAllProducts();
     this.productModel.setProducts(getProduct);
     const product = this.productModel.getProductById(productId);
-
     if (existingProduct !== undefined) {
-      await this.service.updateCart({
-        ...existingProduct,
-        amount: existingProduct.amount + 1,
-      });
+      await this.cartItemService.updateCart({...existingProduct, amount: existingProduct.amount + 1});
       hideLoading();
       toggleOverlay(false);
       showSuccess({ text: ALERT_MESSAGE.ADD_PRODUCT_SUCCESS_MSG });
     } else {
       displayLoading();
-      await this.service.addProductToCart(product);
+      await this.cartItemService.addProductToCart(product);
       showSuccess({ text: ALERT_MESSAGE.ADD_PRODUCT_SUCCESS_MSG });
       hideLoading();
     }
-
     await this.handleRenderCart();
   };
 }
