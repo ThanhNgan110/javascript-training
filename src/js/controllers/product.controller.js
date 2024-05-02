@@ -1,5 +1,5 @@
 import { ALERT_MESSAGE } from "../constants/message";
-import { displayLoading, hideLoading } from "../utils/loading";
+import { displayLoading, hideLoading, toggleOverlay} from "../utils/loading";
 
 import ProductModel from "../models/product.model";
 import ProductView from "../views/product.view";
@@ -18,6 +18,7 @@ export default class ProductController {
   }
 
   async handleRenderProductsGrid() {
+    toggleOverlay(false);
     displayLoading();
     const res = await this.productService.getAllProducts();
     this.model.setProducts(res);
