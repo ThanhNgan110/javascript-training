@@ -1,5 +1,5 @@
 {
-  "product": [
+  "products": [
     {
       "name": "Big Potatos",
       "price": 14.99,
@@ -121,18 +121,16 @@
       "id": "72b7"
     }
   ],
-  "cart": [
+  "carts": [
     {
-      "id": "bde1",
-      "productId": "6",
-      "name": "Green Apple",
-      "price": 14.99,
-      "amount": 9,
-      "imgURL": "https://github.com/ThanhNgan110/javascript-training/assets/94752353/88231d19-64de-495d-b98c-cc879e8bcaec"
-    },
+      "id": "1"
+    }
+  ],
+  "cartItems": [
     {
       "id": "96bd",
       "productId": "3",
+      "cartId": "1",
       "name": "Ladies Finger",
       "price": 14.99,
       "amount": 6,
@@ -141,6 +139,7 @@
     {
       "id": "3eaa",
       "productId": "14",
+      "cartId": "1",
       "name": "Red Tomato",
       "price": 14.99,
       "amount": 2,
