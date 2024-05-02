@@ -68,9 +68,6 @@
 .btn-checkout:hover {
   background-color: var(--color-white);
   color: var(--color-green);
-  transform: scale(1.1);
-  border: 1px solid;
-  border-color: var(--color-green);
 }
 
 .btn-return, .btn-update-cart {
