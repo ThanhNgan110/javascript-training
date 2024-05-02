@@ -1,10 +1,10 @@
-import CartEntity from "./entity/cart.entity";
+import CartItemEntity from "./entity/cartItem.entity";
 export default class CartItemModel {
-  setCart = (products) => {
-    this.products = products.map((item) => new CartEntity(item));
+  setCartItem = (products) => {
+    this.products = products.map((item) => new CartItemEntity(item));
   };
 
-  getCart = () => {
+  getCartItem = () => {
     return this.products;
   };
 
