@@ -1,6 +1,6 @@
 import { showSuccess, showError } from "../utils/toastify";
 import { ALERT_MESSAGE } from "../constants/message";
-import { displayLoading, hideLoading } from "../utils/loading";
+import { displayLoading, hideLoading, toggleOverlay } from "../utils/loading";
 import CartModel from "../models/cart.model";
 import ProductModel from "../models/product.model";
 import CartView from "../views/cart.view";
@@ -18,7 +18,6 @@ export default class CartController {
     this.productService = new ProductService();
 
     // Display initial products
-    this.view.bindHiddenModal();
     this.handleRenderCart();
   }
 
@@ -30,6 +29,7 @@ export default class CartController {
     this.view.bindDeleteProduct(this.handleHiddenProduct);
     this.view.bindChangeQuantity();
     this.view.bindUpdateCart(this.handleUpdateCart);
+    this.view.bindHiddenModal ();
   };
 
   handleHiddenProduct = (id) => {
@@ -41,8 +41,7 @@ export default class CartController {
   handleDeleteProduct = async (deletedIds) => {
     try {
       const promises = [];
-      for (let i = 0; i < deletedIds.length; i++) {
-        const id = deletedIds[i];
+      for (const id of deletedIds) {
         const promise = this.service.deleteProductFromCart(id);
         promises.push(promise);
       }
@@ -54,6 +53,7 @@ export default class CartController {
 
   handleUpdateProduct = async (quantitys) => {
     try {
+      displayLoading();
       const products = await this.service.getAllProductsFromCart();
       const promises = [];
       for (let i = 0; i < products.length; i++) {
@@ -65,7 +65,7 @@ export default class CartController {
         });
         promises.push(promise);
       }
-      displayLoading();
+      
       await Promise.all(promises);
       hideLoading();
       showSuccess({ text: ALERT_MESSAGE.UPDATE_CART_SUCCESS_MSG });
@@ -85,6 +85,8 @@ export default class CartController {
   };
 
   handleAddProduct = async (productId) => {
+    toggleOverlay(true);
+    displayLoading();
     const products = await this.service.getAllProductsFromCart();
     this.cartModel.setCart(products);
     // check product existing inside cart
@@ -92,13 +94,14 @@ export default class CartController {
     const getProduct = await this.productService.getAllProducts();
     this.productModel.setProducts(getProduct);
     const product = this.productModel.getProductById(productId);
+
     if (existingProduct !== undefined) {
-      displayLoading();
       await this.service.updateCart({
         ...existingProduct,
         amount: existingProduct.amount + 1,
       });
       hideLoading();
+      toggleOverlay(false);
       showSuccess({ text: ALERT_MESSAGE.ADD_PRODUCT_SUCCESS_MSG });
     } else {
       displayLoading();
@@ -106,6 +109,7 @@ export default class CartController {
       showSuccess({ text: ALERT_MESSAGE.ADD_PRODUCT_SUCCESS_MSG });
       hideLoading();
     }
+
     await this.handleRenderCart();
   };
 }
