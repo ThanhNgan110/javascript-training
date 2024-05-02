@@ -2,28 +2,35 @@ import { showSuccess, showError } from "../utils/toastify";
 import { ALERT_MESSAGE } from "../constants/message";
 import { displayLoading, hideLoading, toggleOverlay } from "../utils/loading";
 import CartModel from "../models/cart.model";
+import CartItemModel from "../models/cartItem.model";
 import ProductModel from "../models/product.model";
 import CartView from "../views/cart.view";
 import ProductView from "../views/product.view";
 import CartService from "../services/cart.service";
+import CartItemService from "../services/cartItem.service";
 import ProductService from "../services/product.service";
 
 export default class CartController {
   constructor() {
     this.cartModel = new CartModel();
+    this.cartItemModel = new CartItemModel();
     this.productModel = new ProductModel();
     this.view = new CartView();
     this.productView = new ProductView();
     this.service = new CartService();
     this.productService = new ProductService();
+    this.cartItemService = new CartItemService();
 
     // Display initial products
     this.handleRenderCart();
   }
 
   handleRenderCart = async () => {
-    const products = await this.service.getAllProductsFromCart();
-    this.cartModel.setCart(products);
+    // const products = await this.service.getAllProductsFromCart();
+    const products = await this.cartItemService.getAllProductsFromCart();
+    console.log(products, "products");
+    // this.cartModel.setCart(products);
+    this.cartItemModel.setCart(products);
     this.view.bindShowModal(this.cartModel.getCart(), this.handleUpdateCart);
     this.view.renderCart(this.cartModel.getCart());
     this.view.bindDeleteProduct(this.handleHiddenProduct);
