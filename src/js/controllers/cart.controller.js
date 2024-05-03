@@ -29,7 +29,10 @@ export default class CartController {
     const products = await this.cartItemService.getAllProductsFromCart();
     console.log(products, "products");
     this.cartItemModel.setCartItem(products);
-    this.view.bindShowModal(this.cartItemModel.getCartItem(), this.handleUpdateCart);
+    this.view.bindShowModal(
+      this.cartItemModel.getCartItem(),
+      this.handleUpdateCart
+    );
     this.view.renderCart(this.cartItemModel.getCartItem());
     this.view.bindDeleteProduct(this.handleHiddenProduct);
     this.view.bindChangeQuantity();
@@ -46,8 +49,10 @@ export default class CartController {
   handleDeleteProduct = async (deletedIds) => {
     try {
       const promises = [];
-      for (const id of deletedIds) {
-        const promise = this.cartItemService.deleteProductFromCart(id);
+      for (let i = 0; i < deletedIds.length; i++) {
+        const promise = this.cartItemService.deleteProductFromCart(
+          deletedIds[i]
+        );
         promises.push(promise);
       }
       await Promise.all(promises);
@@ -56,16 +61,15 @@ export default class CartController {
     }
   };
 
-  handleUpdateProduct = async (quantitys) => {
+  handleUpdateProduct = async (updateItems) => {
     try {
       displayLoading();
-      const products = this.cartItemModel.getCartItem();
-      console.log(products);
       const promises = [];
-      for (let i = 0; i < products.length; i++) {
-        let product = products[i];
-        const quantity = quantitys[i];
-        const promise = this.cartItemService.updateCart({...product, amount: quantity});
+      for (let i = 0; i < updateItems.length; i++) {
+        const promise = this.cartItemService.updateCart({
+          id: updateItems[i].id,
+          amount: updateItems[i].quantity,
+        });
         promises.push(promise);
       }
       await Promise.all(promises);
@@ -79,8 +83,8 @@ export default class CartController {
 
   handleUpdateCart = async (quantitys, deletedIds) => {
     try {
-      await this.handleDeleteProduct(deletedIds);
       await this.handleUpdateProduct(quantitys);
+      await this.handleDeleteProduct(deletedIds);
     } catch (error) {
       console.error(error);
     }
@@ -92,13 +96,17 @@ export default class CartController {
     const products = this.cartItemModel.getCartItem();
     this.cartItemModel.setCartItem(products);
     // check product existing inside cart
-    const existingProduct = this.cartItemModel.checkProductIdExisting(productId);
+    const existingProduct =
+      this.cartItemModel.checkProductIdExisting(productId);
     console.log(existingProduct);
     const getProduct = await this.productService.getAllProducts();
     this.productModel.setProducts(getProduct);
     const product = this.productModel.getProductById(productId);
     if (existingProduct !== undefined) {
-      await this.cartItemService.updateCart({...existingProduct, amount: existingProduct.amount + 1});
+      await this.cartItemService.updateCart({
+        ...existingProduct,
+        amount: existingProduct.amount + 1,
+      });
       hideLoading();
       toggleOverlay(false);
       showSuccess({ text: ALERT_MESSAGE.ADD_PRODUCT_SUCCESS_MSG });
