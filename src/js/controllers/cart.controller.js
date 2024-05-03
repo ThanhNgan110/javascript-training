@@ -1,38 +1,24 @@
 import { showSuccess, showError } from "../utils/toastify";
 import { ALERT_MESSAGE } from "../constants/message";
 import { displayLoading, hideLoading, toggleOverlay } from "../utils/loading";
-import CartModel from "../models/cart.model";
-import CartItemModel from "../models/cartItem.model";
-import ProductModel from "../models/product.model";
-import CartView from "../views/cart.view";
-import ProductView from "../views/product.view";
-import CartService from "../services/cart.service";
-import CartItemService from "../services/cartItem.service";
-import ProductService from "../services/product.service";
 
 export default class CartController {
-  constructor() {
-    this.cartModel = new CartModel();
-    this.cartItemModel = new CartItemModel();
-    this.productModel = new ProductModel();
-    this.view = new CartView();
-    this.productView = new ProductView();
-    this.service = new CartService();
-    this.productService = new ProductService();
-    this.cartItemService = new CartItemService();
+  constructor(cartModel,cartItemModel,productModel, cartView, productView, cartService, cartItemService) {
+    this.cartModel = cartModel;
+    this.cartItemModel = cartItemModel;
+    this.productModel = productModel;
+    this.cartView = cartView;
+    this.productView = productView;
+    this.cartService = cartService;
+    this.cartItemService = cartItemService;
 
-    // Display initial products
     this.handleRenderCart();
   }
 
   handleRenderCart = async () => {
     const products = await this.cartItemService.getAllProductsFromCart();
-    console.log(products, "products");
     this.cartItemModel.setCartItem(products);
-    this.view.bindShowModal(
-      this.cartItemModel.getCartItem(),
-      this.handleUpdateCart
-    );
+    this.view.bindShowModal(this.cartItemModel.getCartItem(),this.handleUpdateCart);
     this.view.renderCart(this.cartItemModel.getCartItem());
     this.view.bindDeleteProduct(this.handleHiddenProduct);
     this.view.bindChangeQuantity();
@@ -50,9 +36,7 @@ export default class CartController {
     try {
       const promises = [];
       for (let i = 0; i < deletedIds.length; i++) {
-        const promise = this.cartItemService.deleteProductFromCart(
-          deletedIds[i]
-        );
+        const promise = this.cartItemService.deleteProductFromCart(deletedIds[i]);
         promises.push(promise);
       }
       await Promise.all(promises);
@@ -83,8 +67,7 @@ export default class CartController {
 
   handleUpdateCart = async (quantitys, deletedIds) => {
     try {
-      await this.handleUpdateProduct(quantitys);
-      await this.handleDeleteProduct(deletedIds);
+      await Promise.all([this.handleUpdateProduct(quantitys), this.handleDeleteProduct(deletedIds)]);
     } catch (error) {
       console.error(error);
     }
@@ -96,8 +79,7 @@ export default class CartController {
     const products = this.cartItemModel.getCartItem();
     this.cartItemModel.setCartItem(products);
     // check product existing inside cart
-    const existingProduct =
-      this.cartItemModel.checkProductIdExisting(productId);
+    const existingProduct = this.cartItemModel.checkProductIdExisting(productId);
     console.log(existingProduct);
     const getProduct = await this.productService.getAllProducts();
     this.productModel.setProducts(getProduct);
