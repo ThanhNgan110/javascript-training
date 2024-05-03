@@ -8,8 +8,8 @@ export default class ProductModel {
     return this.products;
   };
 
-  getProductById(productId) {
-    return this.products.find(product => product.productId === productId);
+  getProductById(id) {
+    return this.products.find(product => product.id === id);
   };
 
   searchProductByName = (productName) => {
