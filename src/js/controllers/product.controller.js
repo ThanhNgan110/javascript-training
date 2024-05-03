@@ -1,17 +1,12 @@
 import { ALERT_MESSAGE } from "../constants/message";
 import { displayLoading, hideLoading, toggleOverlay} from "../utils/loading";
 
-import ProductModel from "../models/product.model";
-import ProductView from "../views/product.view";
-import ProductService from "../services/product.service";
-import CartController from "../controllers/cart.controller";
-
 export default class ProductController {
-  constructor() {
-    this.model = new ProductModel();
-    this.view = new ProductView();
-    this.productService = new ProductService();
-    this.cartController = new CartController();
+  constructor(model, view, productService, cartController) {
+    this.model = model;
+    this.view = view;
+    this.productService = productService;
+    this.cartController = cartController;
 
     this.view.bindSearchProducts(this.handleSearchProducts);
     this.handleRenderProductsGrid();
