@@ -85,6 +85,7 @@
   color: var(--color-green);
   border: 1px solid;
   border-color: var(--color-green);
+  padding: 13px 31px;
 }
 
 .btn-delete {
