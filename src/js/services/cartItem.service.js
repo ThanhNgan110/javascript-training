@@ -6,18 +6,18 @@ export default class CartItemService {
   }
 
   getAllProductsFromCart = async () => {
-   return await this.apiService.get();
+    return await this.apiService.get();
   };
 
   addProductToCart = async (product) => {
-   await this.apiService.post(product);
+    await this.apiService.post(product);
   };
 
-  updateCart = async(data) => {
-   return await this.apiService.put(data);
+  updateCart = async (data) => {
+    return await this.apiService.patch(data);
   };
 
   deleteProductFromCart = async (id) => {
-   return await this.apiService.delete(id);
+    return await this.apiService.delete(id);
   };
 }
