@@ -41,7 +41,7 @@
 }
 
 .wrapper-products {
-  padding: 32px 0;
+  padding: 32px 62px;
 }
 
 .block-product {
@@ -51,13 +51,13 @@
 
 .card-block {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  place-items: center;
+  grid-template-columns: repeat(5, 1fr);
   gap: 24px;
 }
 
 .container-product {
   display: flex;
-  padding: 0 181px;
   margin-right: 24px;
   margin-top: 24px;
   gap: 24px;
