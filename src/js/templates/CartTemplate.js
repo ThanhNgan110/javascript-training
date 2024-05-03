@@ -73,7 +73,7 @@ export const cartTemplate = (product) => {
       <td>
         <div class="input-group quantity">
           <button class="btn btn-minus" data-id=${productId}><span class="icon icon-minus"></span></button>
-          <input type="text" class="input-quantity" data-id=${productId} name="input-quantity" value=${amount} readonly/>
+          <input type="text" class="input-quantity" data-id=${id} name="input-quantity" value=${amount} readonly/>
           <button class="btn btn-plus" data-id=${productId}><span class="icon icon-plus"></span></button>
         </div>
       </td>
