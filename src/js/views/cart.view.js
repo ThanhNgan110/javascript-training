@@ -13,10 +13,8 @@ export default class CartView {
     this.btnMinus = querySelector(".btn-minus");
     this.inputQuantity = querySelector(".input-quantity");
     this.blockCart = querySelector(".block-cart");
-    // this.btnCloseModal = querySelector(".close-modal");
     this.btnOpenModal = querySelector(".show-modal");
     this.modal = querySelector(".modal");
-    // this.overlay = querySelector(".overlay");
   }
 
   renderCart = (products) => {
