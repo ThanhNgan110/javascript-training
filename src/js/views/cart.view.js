@@ -92,10 +92,14 @@ export default class CartView {
         const inputQuantity = document.querySelectorAll(
           ".col-tbody:not([marked-deleted=true]) .input-quantity"
         );
-        const quantityArr = Array.from(inputQuantity).map((input) =>
-          parseInt(input.value)
+        const updateItems = [];
+        inputQuantity.forEach((input) =>
+          updateItems.push({
+            id: input.dataset.id,
+            quantity: parseInt(input.value),
+          })
         );
-        handler(quantityArr, deletedIds);
+        handler(updateItems, deletedIds);
       });
     }
   };
