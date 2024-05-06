@@ -32,7 +32,6 @@ export const displayCart = (products) => {
           <th>PRICE</th>
           <th>QUANTITY</th>
           <th>SUBTOTAL</th>
-          <th></th>
         </tr>
       </thead>
       <tbody>
