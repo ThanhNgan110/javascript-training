@@ -1,25 +1,30 @@
 import { showSuccess, showError } from "../utils/toastify";
 import { ALERT_MESSAGE } from "../constants/message";
-import { displayLoading, hideLoading, toggleOverlay } from "../utils/loading";
+import { displayLoading, hideLoading } from "../utils/loading";
+import CartModel from "../models/cart.model";
+import ProductModel from "../models/product.model";
+import CartView from "../views/cart.view";
+import ProductView from "../views/product.view";
+import ProductService from "../services/product.service";
+import CartItemService from "../services/cartItem.service";
 
 export default class CartController {
-  constructor(cartModel,cartItemModel,productModel, cartView, productView, cartService, cartItemService) {
-    this.cartModel = cartModel;
-    this.cartItemModel = cartItemModel;
-    this.productModel = productModel;
-    this.cartView = cartView;
-    this.productView = productView;
-    this.cartService = cartService;
-    this.cartItemService = cartItemService;
+  constructor() {
+    this.cartModel = new CartModel();  
+    this.productModel = new ProductModel();
+    this.view = new CartView();
+    this.productView = new ProductView();
+    this.productService = new ProductService();
+    this.cartItemService = new CartItemService();
 
     this.handleRenderCart();
   }
 
   handleRenderCart = async () => {
     const products = await this.cartItemService.getAllProductsFromCart();
-    this.cartItemModel.setCartItem(products);
-    this.view.bindShowModal(this.cartItemModel.getCartItem(),this.handleUpdateCart);
-    this.view.renderCart(this.cartItemModel.getCartItem());
+    this.cartModel.setCart(products);
+    this.view.bindShowModal(this.cartModel.getCart(),this.handleUpdateCart);
+    this.view.renderCart(this.cartModel.getCart());
     this.view.bindDeleteProduct(this.handleHiddenProduct);
     this.view.bindChangeQuantity();
     this.view.bindUpdateCart(this.handleUpdateCart);
@@ -66,32 +71,23 @@ export default class CartController {
   };
 
   handleUpdateCart = async (quantitys, deletedIds) => {
-    try {
       await Promise.all([this.handleUpdateProduct(quantitys), this.handleDeleteProduct(deletedIds)]);
-    } catch (error) {
-      console.error(error);
-    }
   };
 
   handleAddProduct = async (productId) => {
-    toggleOverlay(true);
     displayLoading();
-    const products = this.cartItemModel.getCartItem();
-    this.cartItemModel.setCartItem(products);
+    const products = this.cartModel.getCart();
+    this.cartModel.setCart(products);
     // check product existing inside cart
-    const existingProduct = this.cartItemModel.checkProductIdExisting(productId);
-    console.log(existingProduct);
+    const existingProduct = this.cartModel.checkProductIdExisting(productId);
+    // get product by product id
     const getProduct = await this.productService.getAllProducts();
     this.productModel.setProducts(getProduct);
     const product = this.productModel.getProductById(productId);
     if (existingProduct !== undefined) {
-      await this.cartItemService.updateCart({
-        ...existingProduct,
-        amount: existingProduct.amount + 1,
-      });
+      await this.cartItemService.updateCart({...existingProduct,amount: existingProduct.amount + 1});
       hideLoading();
-      toggleOverlay(false);
-      showSuccess({ text: ALERT_MESSAGE.ADD_PRODUCT_SUCCESS_MSG });
+      showSuccess({ text: ALERT_MESSAGE.ADD_PRODUCT_SUCCESS_MSG })
     } else {
       displayLoading();
       await this.cartItemService.addProductToCart(product);
