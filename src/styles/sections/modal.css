@@ -51,27 +51,23 @@ table {
 
 .col-tbody {
   align-items: center;
-  gap: 27px;
+ justify-content: space-between;
   padding: 12px 20px;
   display: flex;
 }
 
 .col-header {
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   display: flex;
   border-bottom: 1px solid #E6E6E6;
-  padding: 16px 0;
+  padding: 16px 130px;
 }
 
 .col-header th {
   color: var(--color-gray);
   font-size: 14px;
   font-weight: var(--font-weight-medium);
-}
-
-.col-header .col-product {
-  padding-right: 84px;
 }
 
 .name-total {
