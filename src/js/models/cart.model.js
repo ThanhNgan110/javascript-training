@@ -7,4 +7,14 @@ export default class CartModel {
   getCart = () => {
     return this.products;
   };
+
+  checkProductIdExisting(productId) {
+    return this.products
+      ? this.products.find((product) => product.productId === productId)
+      : null;
+  };
+
+  getProductById = (id) => {
+    return this.products.find((item) => item.id === id);
+  };
 }
