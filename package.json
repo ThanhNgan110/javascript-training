@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "This is practice about javascript",
   "scripts": {
-    "start": "npx parcel src/index.html",
-    "build": "parcel build ./src/*.html --no-cache --no-source-maps --dist-dir dist"
+    "build": "parcel build ./src/*.html --no-cache --no-source-maps --dist-dir dist",
+    "dev": "rm -rf dist-dev .parcel-cache && parcel --dist-dir dist-dev src/index.html"
   },
   "author": "thanhngan",
   "license": "ISC",
