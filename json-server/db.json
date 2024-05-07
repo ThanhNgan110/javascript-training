@@ -113,18 +113,11 @@
   ],
   "cartItems": [
     {
-      "id": "09dc",
-      "name": "Ladies Finger",
+      "id": "e09f",
+      "name": "Green Capsicum",
       "price": 14.99,
-      "amount": 7,
-      "imgURL": "https://github.com/ThanhNgan110/javascript-training/assets/94752353/e9c4b503-5515-4996-9d04-c1efe74a99b4"
-    },
-    {
-      "id": "db45",
-      "name": "Eggplant",
-      "price": 14.99,
-      "amount": 9,
-      "imgURL": "https://github.com/ThanhNgan110/javascript-training/assets/94752353/698ed29d-34f8-4e4d-b852-4883fc58f118"
+      "amount": 13,
+      "imgURL": "https://github.com/ThanhNgan110/javascript-training/assets/94752353/dd268d2b-a265-410e-8389-1e9dafda1ba9"
     }
   ]
 }
