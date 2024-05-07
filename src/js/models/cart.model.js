@@ -8,9 +8,9 @@ export default class CartModel {
     return this.products;
   };
 
-  checkProductIdExisting(productId) {
+  checkProductIdExisting(id) {
     return this.products
-      ? this.products.find((product) => product.productId === productId)
+      ? this.products.find((product) => product.id === id)
       : null;
   };
 
