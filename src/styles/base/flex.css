@@ -7,6 +7,11 @@
   flex-direction: column;
 }
 
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
 .align-items-center {
   align-items: center;
 }
@@ -15,7 +20,7 @@
   justify-content: center;
 }
 
-.justify-content-start {
+.justify-content-between {
   justify-content: space-between !important;
 }
 
