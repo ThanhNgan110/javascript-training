@@ -1,0 +1,20 @@
+.form-control {
+  border-radius: 6px;
+  border: 1px solid var(--color-mercury);
+  font-size: 16px;
+  margin-top: 8px;
+  outline: none;
+}
+
+.form-control-sm {
+  padding: 14px 16px;
+}
+
+.input-default {
+  width: 100%;
+}
+
+.form-row {
+  gap: 16px;
+  margin-bottom: 16px;
+}
