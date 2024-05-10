@@ -80,7 +80,7 @@ export const cartTemplate = (product) => {
         <p class="product-subtotal">${subtotal}$</p>
       </td>
       <td>
-        <button class="btn btn-delete" data-id=${id} ><span class="icon icon-close"></span></button>
+        <button class="btn btn-delete" data-id=${id}><span class="icon icon-close"></span></button>
       </td>
     </tr>
   `;
