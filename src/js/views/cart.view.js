@@ -4,6 +4,7 @@ import {
   cartNumberBadge,
   cartSum,
 } from "../templates/CartTemplate";
+import { formCheckout } from "../templates/CheckoutTemplate";
 import { showSuccess } from "../utils/toastify";
 import { ALERT_MESSAGE } from "../constants/message";
 
@@ -15,6 +16,7 @@ export default class CartView {
     this.blockCart = querySelector(".block-cart");
     this.btnOpenModal = querySelector(".show-modal");
     this.modal = querySelector(".modal");
+    this.formCheckout = querySelector(".wrapper-checkout");
   }
 
   renderCart = (products) => {
@@ -22,6 +24,10 @@ export default class CartView {
     this.wrapperCart.innerHTML = displayCart(products);
     this.blockCart.innerHTML = cartNumberBadge(products);
   };
+
+  renderFormCheckout = () => {
+    this.formCheckout.innerHTML = formCheckout();
+  }
 
   bindChangeQuantity = () => {
     const inputList = document.querySelectorAll(".input-group.quantity");
@@ -111,6 +117,7 @@ export default class CartView {
       this.bindDeleteProduct();
       this.bindUpdateCart(handler);
       this.bindHiddenModal();
+      this.bindCloseCart();
     });
   };
 
@@ -120,4 +127,19 @@ export default class CartView {
       this.modal.style.display = "none";
     });
   };
+
+  bindCloseCart = () => {
+    const closeCart = querySelector('.btn-checkout');
+    closeCart.addEventListener("click", ()=> {
+      this.modal.style.display = "none";
+      this.bindShowFormCheckout();
+    });
+  };
+
+  bindShowFormCheckout = () => {
+    const modalCheckout = querySelector('.modal-checkout');
+    modalCheckout.style.display = 'block';
+    this.renderFormCheckout();
+  };
+
 }
