@@ -12,6 +12,7 @@
 }
 
 .btn-search:hover {
+  padding: 13px 23px;
   background-color: var(--color-white);
   color: var(--color-green);
   border: 1px solid;
@@ -66,8 +67,10 @@
 }
 
 .btn-checkout:hover {
+  padding: 15px 139px;
   background-color: var(--color-white);
   color: var(--color-green);
+  border: 1px solid var(--color-green);
 }
 
 .btn-return, .btn-update-cart {
