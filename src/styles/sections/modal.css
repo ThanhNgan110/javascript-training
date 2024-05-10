@@ -127,7 +127,6 @@ table {
   box-shadow: 0 3rem 5rem #0000004d;
   padding: 20px 0px;
   display: none;
-
 }
 
 /* The Close Button */
@@ -171,10 +170,28 @@ table {
 }
 
 /* Modal form checkout */
+.form-checkout {
+  width: 872px;
+}
+
+.modal-checkout {
+  background-color: var(--color-white);
+  z-index: 10;
+  border-radius: 5px;
+  padding: 10px 12px;
+  display: none;
+  position: fixed;
+  top: 52%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 3rem 5rem #0000004d;
+}
 
 .wrapper-checkout {
-  display: flex;
   align-items: flex-start;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
 }
 
 .title-checkout {
