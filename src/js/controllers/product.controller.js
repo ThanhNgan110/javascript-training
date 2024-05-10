@@ -5,7 +5,6 @@ import ProductModel from "../models/product.model";
 import CartModel from "../models/cart.model";
 import ProductView from "../views/product.view";
 import CartView from "../views/cart.view";
-import CheckoutView from "../views/checkout.view";
 import ProductService from "../services/product.service";
 import CartItemService from "../services/cartItem.service";
 
@@ -15,7 +14,6 @@ export default class ProductController {
     this.cartModel = new CartModel();
     this.productView = new ProductView();
     this.cartView = new CartView();
-    this.checkoutView = new CheckoutView();
     this.productService = new ProductService();
     this.cartItemService = new CartItemService();
 
