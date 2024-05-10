@@ -5,6 +5,7 @@ import ProductModel from "../models/product.model";
 import CartModel from "../models/cart.model";
 import ProductView from "../views/product.view";
 import CartView from "../views/cart.view";
+import CheckoutView from "../views/checkout.view";
 import ProductService from "../services/product.service";
 import CartItemService from "../services/cartItem.service";
 
@@ -14,6 +15,7 @@ export default class ProductController {
     this.cartModel = new CartModel();
     this.productView = new ProductView();
     this.cartView = new CartView();
+    this.checkoutView = new CheckoutView();
     this.productService = new ProductService();
     this.cartItemService = new CartItemService();
 
@@ -22,12 +24,7 @@ export default class ProductController {
     this.handleRenderCart();
   }
 
-  async handleRenderCart() {
-    const products = await this.cartItemService.getAllProductsFromCart();
-    this.cartView.renderCart(products);
-    this.cartModel.setCart(products);
-    this.cartView.bindShowModal(products);
-  }
+
 
   handleRenderCart = async () => {
     const products = await this.cartItemService.getAllProductsFromCart();
@@ -38,6 +35,7 @@ export default class ProductController {
     this.cartView.bindChangeQuantity();
     this.cartView.bindUpdateCart(this.handleUpdateCart);
     this.cartView.bindHiddenModal();
+    this.cartView.bindCloseCart();
   };
 
   async handleRenderProductsGrid() {
@@ -64,13 +62,11 @@ export default class ProductController {
 
   handleAddProduct = async (productId) => {
     displayLoading();
-    // const products = await this.cartItemService.getAllProductsFromCart();
     const products = this.cartModel.getCart();
     this.cartModel.setCart(products);
     // check product existing inside cart
     let existingProduct = this.cartModel.checkProductIdExisting(productId);
     // get product by product id
-    // const getProduct = await this.productService.getAllProducts();
     const getProduct = this.productModel.getProducts();
     this.productModel.setProducts(getProduct);
     const product = this.productModel.getProductById(productId);
@@ -90,7 +86,6 @@ export default class ProductController {
   handleHiddenProduct = (id) => {
     this.view.bindHiddenProduct(id);
     showSuccess({ text: ALERT_MESSAGE.DELETE_PRODUCT_SUCCESS_MSG });
-    this.handleShowModal();
   };
 
   handleDeleteProduct = async (deletedIds) => {
