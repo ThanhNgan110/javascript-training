@@ -179,55 +179,57 @@
       <form action="">
         <div class="flex-row form-row">
           <div class="flex-col">
-            <label for="fname">First name</label>
+            <label for="fname name-label">First name</label>
             <input class="form-control form-control-sm" type="text" name="first name" placeholder="Your first name">
           </div>
           <div class="flex-col">
-            <label for="lname">Last name</label>
+            <label for="lname name-label">Last name</label>
             <input class="form-control form-control-sm" type="text" name="last name" placeholder="Your last name">
           </div>
           <div class="flex-col">
-            <label for="lname">Company name</label>
+            <label for="lname name-label">Company name</label>
             <input class="form-control form-control-sm" type="text" name="company name" placeholder="Company name">
           </div>
         </div>
         <div class="form-row">
-          <label for="lname">Street Address</label>
+          <label for="lname name-label">Street Address</label>
           <input class="form-control form-control-sm input-default" type="text" name="address" placeholder="Email">
         </div>
         <div class="flex-row form-row">
           <div class="flex-col">
-            <label for="lcountry">Country / Region</label>
+            <label for="lcountry name-label">Country / Region</label>
             <input class="form-control form-control-sm" type="text" name="country" placeholder="Select">
           </div>
           <div class="flex-col">
-            <label for="lstates">States</label>
+            <label for="lstates name-label">States</label>
             <input class="form-control form-control-sm" type="text" name="states" placeholder="Selects">
           </div>
           <div class="flex-col">
-            <label for="lcode">Zip Code</label>
+            <label for="lcode name-label">Zip Code</label>
             <input class="form-control form-control-sm" type="text" name="zip code" placeholder="Zip Code">
           </div>
         </div>
         <div class="flex-row form-row">
           <div class="flex-col">
-            <label for="lemail">Email</label>
+            <label for="lemail name-label">Email</label>
             <input class="form-control form-control-sm" type="email" name="email" placeholder="Email Address">
           </div>
           <div class="flex-col">
-            <label for="lphone">Phone</label>
+            <label for="lphone name-label">Phone</label>
             <input class="form-control form-control-sm" type="text" name="phone number" placeholder="Phone number">
           </div>
         </div>
         <div class="form-check-input">
           <input type="checkbox" placeholder="Email Address">
-          <label>Ship to a different address</label>
+          <label class="name-label">Ship to a different address</label>
         </div>
         <div class="block-info-checkout">
-          Additional Information
-          <p class="title-checkout">Order Notes (Optional)</p>
-          <textarea class="form-control" name="note" ows="10" cols="60"
-            placeholder="Notes about your order, e.g. special notes for delivery"></textarea>
+          <p class="title-info">Additional Information</p>
+          <div>
+            <p class="name-label">Order Notes (Optional)</p>
+            <textarea class="form-control form-control-lg" name="note" rows="2" cols="60"
+              placeholder="Notes about your order, e.g. special notes for delivery"></textarea>
+          </div>
         </div>
       </form>
     </div>
