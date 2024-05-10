@@ -57,13 +57,14 @@
 }
 
 .btn-checkout {
-  padding: 16px 140px;
   background-color: var(--color-green);
-  border-radius: 43px;
   border: var(--color-white);
   font-size: 16px;
   font-weight: var(--font-weight-semibold);
   color: var(--color-white);
+  border-radius: 43px;
+  padding: 16px 140px;
+  white-space: nowrap;
 }
 
 .btn-checkout:hover {
