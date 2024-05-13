@@ -7,6 +7,7 @@ import {
 import { orderSummery } from "../templates/CheckoutTemplate";
 import { showSuccess } from "../utils/toastify";
 import { ALERT_MESSAGE } from "../constants/message";
+import { validateForm } from "../helpers/validateForm";
 
 export default class CartView {
   constructor() {
@@ -17,7 +18,6 @@ export default class CartView {
     this.btnOpenModal = querySelector(".show-modal");
     this.modal = querySelector(".modal");
     this.formCheckout = querySelector(".wrapper-checkout");
-    this.isSubmitForm = false;
   }
 
   renderCart = (products) => {
@@ -28,7 +28,6 @@ export default class CartView {
 
   renderFormCheckout = (products) => {
     this.formCheckout.innerHTML = orderSummery(products);
-    this.bindSubmitForm();
   };
 
   bindChangeQuantity = () => {
@@ -142,33 +141,27 @@ export default class CartView {
     const modalCheckout = querySelector(".modal-checkout");
     modalCheckout.style.display = "block";
     this.renderFormCheckout(products);
-    this.isSubmitForm = true;
     this.bindSubmitForm();
-    // this.isFormSubmit = false;
-    // if (!this.isSubmitEventAttached) {
-    //   this.bindSubmitForm();
-    //   this.isSubmitEventAttached = true;
-    // }
   };
 
   bindSubmitForm = () => {
-    if (this.isSubmitForm) {
-      console.log(typeof this.isSubmitForm);
-      const form = document.getElementById("form-checkout");
-      console.log(form, "form");
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        console.log("Form submitted");
+    const btnOrder = querySelector(".btn-order");
+    if (btnOrder) {
+      btnOrder.addEventListener("click", () => {
+        const form = document.getElementById("form-checkout");
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          if (form) {
+            let formData = {};
+            for (let input of form.elements) {
+              formData[input.name] = input.value;
+            }
+            console.log(formData);
+            validateForm(formData);
+            form.submit();
+          }
+        });
       });
     }
   };
-
-  // bindSubmitForm = () => {
-  //   const formSubmit = querySelector(".btn-checkout");
-  //   console.log(formSubmit);
-  //   formSubmit.addEventListener("submit", (e) => {
-  //     e.preventDefault();
-  //     console.log("hiii");
-  //   });
-  // };
 }
