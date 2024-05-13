@@ -113,11 +113,18 @@
   ],
   "cartItems": [
     {
-      "id": "e09f",
-      "name": "Green Capsicum",
+      "id": "db45",
+      "name": "Eggplant",
       "price": 14.99,
-      "amount": 13,
-      "imgURL": "https://github.com/ThanhNgan110/javascript-training/assets/94752353/dd268d2b-a265-410e-8389-1e9dafda1ba9"
+      "amount": 5,
+      "imgURL": "https://github.com/ThanhNgan110/javascript-training/assets/94752353/698ed29d-34f8-4e4d-b852-4883fc58f118"
+    },
+    {
+      "id": "73d1",
+      "name": "Fresh Cauliflower",
+      "price": 14.99,
+      "amount": 9,
+      "imgURL": "https://github.com/ThanhNgan110/javascript-training/assets/94752353/6b64de59-632c-4b0e-b01e-804de9b37dc6"
     }
   ]
 }
