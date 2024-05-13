@@ -16,7 +16,7 @@ export const orderSummery = (products) => {
   <p class="name-total-border">Subtotal:<span>$${total}</span></p>
   <p class="name-total-border">Shipping:<span>Free</span></p>
   <p class="name-total-border-none total">Total:<span>$${total}</span></p>
-  <button type="submit" class="btn btn-checkout">Place Order</button>
+  <button type="submit" form="form-checkout" class="btn btn-order">Place Order</button>
   </div>
   `;
 };
@@ -41,23 +41,23 @@ export const formCheckoutTemplate = () => {
       <div class="flex-row form-row">
         <div class="flex-col">
           <label for="fname name-label">First name</label>
-          <input class="form-control form-control-sm" type="text" name="first name" placeholder="Your first name">
+          <input class="form-control form-control-sm" type="text" name="first name" id="first name" placeholder="Your first name">
           <p class="mess-error">No empty</p>
         </div>
         <div class="flex-col">
           <label for="lname name-label">Last name</label>
-          <input class="form-control form-control-sm" type="text" name="last name" placeholder="Your last name">
+          <input class="form-control form-control-sm" type="text" name="last name" id="last name" placeholder="Your last name">
           <p class="mess-error"></p>
         </div>
         <div class="flex-col">
           <label for="lname name-label">Company name</label>
-          <input class="form-control form-control-sm" type="text" name="company name" placeholder="Company name">
+          <input class="form-control form-control-sm" type="text" name="company name" id="company name" placeholder="Company name">
           <p class="mess-error"></p>
         </div>
       </div>
       <div class="form-row">
         <label for="lname name-label">Street Address</label>
-        <input class="form-control form-control-sm input-default" type="text" name="address" placeholder="Email">
+        <input class="form-control form-control-sm input-default" type="text" name="address" id="address" placeholder="Email">
         <p class="mess-error"></p>
       </div>
       <div class="flex-row form-row">
