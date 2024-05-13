@@ -42,7 +42,8 @@ export {
   validateString,
   validateEmpty,
   validateEmail,
-  validateForm
+  validateForm,
+  validateInterger
 };
 
 
