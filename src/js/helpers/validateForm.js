@@ -24,10 +24,11 @@ const validateEmail = ({key, value}) => {
  */
 function validateForm(validationSchema) {
   formError = {};
-
   for (const key in validationSchema) {
-    const { field, value, validators } = validationSchema[key];
-    validateEmpty({ key: field, value });
+    // const { field, value, validators } = validationSchema[key];
+    const {key, value} = validationSchema[key];
+    // validateEmpty({ key: field, value });
+    validateEmpty({key: key, value});
     for (const validator of validators) {
       if (formError[field] !== '') {
         break;
