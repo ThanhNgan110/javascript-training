@@ -22,8 +22,6 @@ export default class ProductController {
     this.handleRenderCart();
   }
 
-
-
   handleRenderCart = async () => {
     const products = await this.cartItemService.getAllProductsFromCart();
     this.cartModel.setCart(products);
@@ -33,7 +31,7 @@ export default class ProductController {
     this.cartView.bindChangeQuantity();
     this.cartView.bindUpdateCart(this.handleUpdateCart);
     this.cartView.bindHiddenModal();
-    this.cartView.bindCloseCart();
+    this.cartView.bindCloseCart(this.cartModel.getCart());
   };
 
   async handleRenderProductsGrid() {
