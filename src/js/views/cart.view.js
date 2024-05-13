@@ -4,7 +4,7 @@ import {
   cartNumberBadge,
   cartSum,
 } from "../templates/CartTemplate";
-import { formCheckout } from "../templates/CheckoutTemplate";
+import { orderSummery } from "../templates/CheckoutTemplate";
 import { showSuccess } from "../utils/toastify";
 import { ALERT_MESSAGE } from "../constants/message";
 
@@ -25,9 +25,9 @@ export default class CartView {
     this.blockCart.innerHTML = cartNumberBadge(products);
   };
 
-  renderFormCheckout = () => {
-    this.formCheckout.innerHTML = formCheckout();
-  }
+  renderFormCheckout = (products) => {
+    this.formCheckout.innerHTML = orderSummery(products);
+  };
 
   bindChangeQuantity = () => {
     const inputList = document.querySelectorAll(".input-group.quantity");
@@ -108,16 +108,16 @@ export default class CartView {
     }
   };
 
-  bindShowModal = (product, handler) => {
+  bindShowModal = (products, handler) => {
     this.btnOpenModal.addEventListener("click", () => {
       this.modal.style.display = "block";
-      this.renderCart(product);
+      this.renderCart(products);
       // attach event
       this.bindChangeQuantity();
       this.bindDeleteProduct();
       this.bindUpdateCart(handler);
       this.bindHiddenModal();
-      this.bindCloseCart();
+      this.bindCloseCart(products);
     });
   };
 
@@ -128,18 +128,17 @@ export default class CartView {
     });
   };
 
-  bindCloseCart = () => {
-    const closeCart = querySelector('.btn-checkout');
-    closeCart.addEventListener("click", ()=> {
+  bindCloseCart = (products) => {
+    const closeCart = querySelector(".btn-checkout");
+    closeCart.addEventListener("click", () => {
       this.modal.style.display = "none";
-      this.bindShowFormCheckout();
+      this.bindShowFormCheckout(products);
     });
   };
 
-  bindShowFormCheckout = () => {
-    const modalCheckout = querySelector('.modal-checkout');
-    modalCheckout.style.display = 'block';
-    this.renderFormCheckout();
+  bindShowFormCheckout = (products) => {
+    const modalCheckout = querySelector(".modal-checkout");
+    modalCheckout.style.display = "block";
+    this.renderFormCheckout(products);
   };
-
 }
