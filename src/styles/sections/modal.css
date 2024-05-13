@@ -226,3 +226,14 @@ table {
   line-height: 21px;
   color: var(--color-gray);
 }
+
+.mess-error {
+  display: none;
+  font-size: 10px;
+  color: var(--color-text-danger);
+  margin: 10px 0;
+}
+
+.mess-error.error {
+  display: block;
+}
