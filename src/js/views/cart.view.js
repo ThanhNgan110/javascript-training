@@ -151,15 +151,29 @@ export default class CartView {
         const form = document.getElementById("form-checkout");
         form.addEventListener("submit", (e) => {
           e.preventDefault();
-          if (form) {
-            let formData = {};
-            for (let input of form.elements) {
-              formData[input.name] = input.value;
-            }
-            console.log(formData);
-            validateForm(formData);
-            form.submit();
+          let formData = {};
+          for (let input of form.elements) {
+            formData[input.name] = input.value;
           }
+          const formMess = validateForm(formData);
+          if (Object.keys(formMess).length === 0) {
+            // xử lý hợp lệ
+          } else {
+            for (const [key, value] of Object.entries(formMess)) {
+              const inputElement = form.querySelector(`[name="${key}"]`);
+              // get content of the next sibling in list item
+              if (inputElement) {
+                const errorElement = inputElement.nextElementSibling;
+                if (errorElement && errorElement.classList.contains("mess-error")) {
+                  // errorElement.classList.add('error');
+                  errorElement.textContent = value;
+                }
+              }
+            }
+            btnOrder.disabled = true;
+            // btnOrder.setAttribute("disabled", "");
+          }
+          form.submit();
         });
       });
     }
