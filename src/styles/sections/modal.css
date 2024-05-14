@@ -194,14 +194,8 @@ table {
   gap: 15px;
 }
 
-.title-checkout {
-  margin-bottom: 20px;
-  font-size: 24px;
-  line-height: 36px;
-}
-
-.title-info {
-  margin-bottom: 20px;
+.title-checkout, .title-info {
+  margin-bottom: 10px;
   font-size: 24px;
   line-height: 36px;
 }
@@ -228,10 +222,10 @@ table {
 }
 
 .mess-error {
-  display: none;
-  font-size: 10px;
   color: var(--color-text-danger);
-  margin: 10px 0;
+  margin: 5px;
+  font-size: 14px;
+  display: none;
 }
 
 .mess-error.error {
