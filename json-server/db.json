@@ -116,15 +116,62 @@
       "id": "db45",
       "name": "Eggplant",
       "price": 14.99,
-      "amount": 5,
+      "amount": 7,
       "imgURL": "https://github.com/ThanhNgan110/javascript-training/assets/94752353/698ed29d-34f8-4e4d-b852-4883fc58f118"
     },
     {
       "id": "73d1",
       "name": "Fresh Cauliflower",
       "price": 14.99,
-      "amount": 9,
+      "amount": 12,
       "imgURL": "https://github.com/ThanhNgan110/javascript-training/assets/94752353/6b64de59-632c-4b0e-b01e-804de9b37dc6"
+    }
+  ],
+  "country": [
+    {
+      "id": "1",
+      "name": "United States"
+    },
+    {
+      "id": "2",
+      "name": "Vietnam"
+    }
+  ],
+  "states": [
+    {
+      "id": "1",
+      "countryId": "1",
+      "name": "California"
+    },
+    {
+      "id": "2",
+      "countryId": "1",
+      "name": "New York"
+    },
+    {
+      "id": "3",
+      "countryId": "2",
+      "name": "Hanoi"
+    },
+    {
+      "id": "4",
+      "countryId": "2",
+      "name": "Ho Chi Minh City"
+    },
+    {
+      "id": "5",
+      "countryId": "2",
+      "name": "Da Nang"
+    },
+    {
+      "id": "6",
+      "countryId": "2",
+      "name": "Hai Phong"
+    },
+    {
+      "id": "7",
+      "countryId": "2",
+      "name": "Can Tho"
     }
   ]
 }
