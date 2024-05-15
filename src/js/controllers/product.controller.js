@@ -21,7 +21,6 @@ export default class ProductController {
     this.countryService = new CountryService();
     this.statesService = new StatesService();
     
-
     this.productView.bindSearchProducts(this.handleSearchProducts);
     this.handleRenderProductsGrid();
     this.handleRenderCart();
@@ -31,12 +30,13 @@ export default class ProductController {
     const products = await this.cartItemService.getAllProductsFromCart();
     this.cartModel.setCart(products);
     this.cartView.renderCart(this.cartModel.getCart());
-    this.cartView.bindShowModal(this.cartModel.getCart(), this.handleUpdateCart);
+    const countries = await this.countryService.getCountry();
+    this.cartView.bindShowModal(this.cartModel.getCart(), this.handleUpdateCart, countries);
     this.cartView.bindDeleteProduct(this.handleHiddenProduct);
     this.cartView.bindChangeQuantity();
     this.cartView.bindUpdateCart(this.handleUpdateCart);
     this.cartView.bindHiddenModal();
-    this.cartView.bindCloseCart(this.cartModel.getCart());
+    this.cartView.bindCheckoutCart(this.cartModel.getCart(), countries);
   };
 
   async handleRenderProductsGrid() {
