@@ -16,10 +16,9 @@ export default class CartView {
     this.inputQuantity = querySelector(".input-quantity");
     this.blockCart = querySelector(".block-cart");
     this.btnOpenModal = querySelector(".show-modal");
-    // this.modal = querySelector(".modal");
+
     this.modalCart = document.getElementById("modal-cart");
     this.modalCheckout = document.getElementById("modal-checkout");
-    // this.modalCheckout = querySelector("modal-checkout");
     this.formCheckout = querySelector(".wrapper-checkout");
   }
 
