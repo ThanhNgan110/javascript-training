@@ -141,7 +141,20 @@ export default class CartView {
     const modalCheckout = querySelector(".modal-checkout");
     modalCheckout.style.display = "block";
     this.renderFormCheckout(products);
+    // this.bindLoadDataCountry(countries);
+    // console.log("dt", countries);
     this.bindSubmitForm();
+  };
+
+  bindLoadDataCountry = (data) => {
+    console.log(data);
+    data.forEach((country) => {
+      const option = document.createElement("option");
+      option.value = country.id;
+      option.text = country.name;
+      const countrySelect = document.getElementById("country");
+      countrySelect.appendChild(option);
+    });
   };
 
   bindSubmitForm = () => {
@@ -164,7 +177,10 @@ export default class CartView {
               // get content of the next sibling in list item
               if (inputElement) {
                 const errorElement = inputElement.nextElementSibling;
-                if (errorElement && errorElement.classList.contains("mess-error")) {
+                if (
+                  errorElement &&
+                  errorElement.classList.contains("mess-error")
+                ) {
                   // errorElement.classList.add('error');
                   errorElement.textContent = value;
                 }
