@@ -170,6 +170,11 @@ table {
 }
 
 /* Modal form checkout */
+.form-row {
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
 .form-checkout {
   width: 872px;
 }
