@@ -7,6 +7,8 @@ import ProductView from "../views/product.view";
 import CartView from "../views/cart.view";
 import ProductService from "../services/product.service";
 import CartItemService from "../services/cartItem.service";
+import CountryService from "../services/country.service";
+import StatesService from "../services/states.service";
 
 export default class ProductController {
   constructor() {
@@ -16,6 +18,9 @@ export default class ProductController {
     this.cartView = new CartView();
     this.productService = new ProductService();
     this.cartItemService = new CartItemService();
+    this.countryService = new CountryService();
+    this.statesService = new StatesService();
+    
 
     this.productView.bindSearchProducts(this.handleSearchProducts);
     this.handleRenderProductsGrid();
