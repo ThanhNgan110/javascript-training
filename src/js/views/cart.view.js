@@ -16,7 +16,10 @@ export default class CartView {
     this.inputQuantity = querySelector(".input-quantity");
     this.blockCart = querySelector(".block-cart");
     this.btnOpenModal = querySelector(".show-modal");
-    this.modal = querySelector(".modal");
+    // this.modal = querySelector(".modal");
+    this.modalCart = document.getElementById("modal-cart");
+    this.modalCheckout = document.getElementById("modal-checkout");
+    // this.modalCheckout = querySelector("modal-checkout");
     this.formCheckout = querySelector(".wrapper-checkout");
   }
 
@@ -109,39 +112,40 @@ export default class CartView {
     }
   };
 
-  bindShowModal = (products, handler) => {
+  bindShowModal = (products, handler, countries) => {
     this.btnOpenModal.addEventListener("click", () => {
-      this.modal.style.display = "block";
+      this.modalCart.style.display = "block";
       this.renderCart(products);
       // attach event
       this.bindChangeQuantity();
       this.bindDeleteProduct();
       this.bindUpdateCart(handler);
       this.bindHiddenModal();
-      this.bindCloseCart(products);
+      this.bindCheckoutCart(products, countries);
     });
   };
 
   bindHiddenModal = () => {
     const closeModal = document.querySelector(".btn-return");
     closeModal.addEventListener("click", () => {
-      this.modal.style.display = "none";
+      this.modalCart.style.display = "none";
     });
   };
 
-  bindCloseCart = (products) => {
+  bindCheckoutCart = (products, countries) => {
+    console.log(countries, "countries");
     const closeCart = querySelector(".btn-checkout");
     closeCart.addEventListener("click", () => {
-      this.modal.style.display = "none";
-      this.bindShowFormCheckout(products);
+      this.modalCart.style.display = "none";
+      this.bindShowFormCheckout(products, countries);
     });
   };
 
-  bindShowFormCheckout = (products) => {
-    const modalCheckout = querySelector(".modal-checkout");
-    modalCheckout.style.display = "block";
+  bindShowFormCheckout = (products, countries) => {
+    // const modalCheckout = querySelector(".modal-checkout");
+    this.modalCheckout.style.display = "block";
     this.renderFormCheckout(products);
-    // this.bindLoadDataCountry(countries);
+    this.bindLoadDataCountry(countries);
     // console.log("dt", countries);
     this.bindSubmitForm();
   };
@@ -156,6 +160,10 @@ export default class CartView {
       countrySelect.appendChild(option);
     });
   };
+  
+  bindShowDataStates = () => {
+
+  }
 
   bindSubmitForm = () => {
     const btnOrder = querySelector(".btn-order");
@@ -181,7 +189,6 @@ export default class CartView {
                   errorElement &&
                   errorElement.classList.contains("mess-error")
                 ) {
-                  // errorElement.classList.add('error');
                   errorElement.textContent = value;
                 }
               }
