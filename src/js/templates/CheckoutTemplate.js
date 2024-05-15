@@ -63,11 +63,21 @@ export const formCheckoutTemplate = () => {
       <div class="flex-row form-row">
         <div class="flex-col">
           <label for="lcountry name-label">Country / Region</label>
-          <input class="form-control form-control-sm" type="text" name="country" placeholder="Select">
+          <select class="form-control form-control-sm" name="country" id="country">
+          <option value="volvo">Volvo</option>
+          <option value="saab">Saab</option>
+          <option value="mercedes">Mercedes</option>
+          <option value="audi">Audi</option>
+          </select>
         </div>
         <div class="flex-col">
           <label for="lstates name-label">States</label>
-          <input class="form-control form-control-sm" type="text" name="states" placeholder="Selects">
+          <select class="form-control form-control-sm" name="states" id="states">
+          <option value="volvo">Volvo</option>
+          <option value="saab">Saab</option>
+          <option value="mercedes">Mercedes</option>
+          <option value="audi">Audi</option>
+          </select>
         </div>
         <div class="flex-col">
           <label for="lcode name-label">Zip Code</label>
