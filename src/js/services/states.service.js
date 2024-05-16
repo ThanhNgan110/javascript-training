@@ -5,7 +5,7 @@ export default class StatesService {
     this.apiService = new ApiService(API.URL_API, API.END_POINT_STATES);
   }
 
-  getCart = async () => {
+  getStates = async () => {
     return await this.apiService.get();
-  }
+  };
 }
