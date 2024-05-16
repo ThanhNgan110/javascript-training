@@ -28,7 +28,6 @@ function validateForm(validationSchema) {
       validateEmail({ key, value });
     }
   });
-  console.log(formError, "formError");
   return formError;
 }
 
