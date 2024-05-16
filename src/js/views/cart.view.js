@@ -77,7 +77,6 @@ export default class CartView {
     productRows.forEach((productRow) => {
       if (productRow.getAttribute("data-id") === productId) {
         productRow.classList.add("marked-deleted");
-        // marked deleted item
         productRow.setAttribute("marked-deleted", "true");
         showSuccess({ text: ALERT_MESSAGE.DELETE_PRODUCT_SUCCESS_MSG });
       }
@@ -111,7 +110,7 @@ export default class CartView {
     }
   };
 
-  bindShowModal = (products, handler, countries) => {
+  bindShowModal = (products, handler, handleCheckout) => {
     this.btnOpenModal.addEventListener("click", () => {
       this.modalCart.style.display = "block";
       this.renderCart(products);
@@ -120,7 +119,7 @@ export default class CartView {
       this.bindDeleteProduct();
       this.bindUpdateCart(handler);
       this.bindHiddenModal();
-      this.bindCheckoutCart(products, countries);
+      this.bindCheckoutCart(handleCheckout);
     });
   };
 
@@ -131,26 +130,16 @@ export default class CartView {
     });
   };
 
-  bindCheckoutCart = (products, countries) => {
-    console.log(countries, "countries");
+  bindCheckoutCart = (handler) => {
     const closeCart = querySelector(".btn-checkout");
     closeCart.addEventListener("click", () => {
       this.modalCart.style.display = "none";
-      this.bindShowFormCheckout(products, countries);
+      this.modalCheckout.style.display = "block";
+      handler();
     });
   };
 
-  bindShowFormCheckout = (products, countries) => {
-    // const modalCheckout = querySelector(".modal-checkout");
-    this.modalCheckout.style.display = "block";
-    this.renderFormCheckout(products);
-    this.bindLoadDataCountry(countries);
-    // console.log("dt", countries);
-    this.bindSubmitForm();
-  };
-
   bindLoadDataCountry = (data) => {
-    console.log(data);
     data.forEach((country) => {
       const option = document.createElement("option");
       option.value = country.id;
@@ -159,45 +148,51 @@ export default class CartView {
       countrySelect.appendChild(option);
     });
   };
-  
-  bindShowDataStates = () => {
 
-  }
+  bindEventChangeCountry = (handler) => {
+    const countrySelect = document.getElementById("country");
+    const selectedCountryId = countrySelect.value;
+    countrySelect.addEventListener("change", () => {
+      handler(selectedCountryId);
+    });
+  };
+
+  handleShowStates = (states) => {
+    states.forEach((item) => {
+      const option = document.createElement("option");
+      option.value = item.id;
+      option.text = item.name;
+      const statesSelect = document.getElementById("states");
+      statesSelect.appendChild(option);
+    })
+  };
 
   bindSubmitForm = () => {
-    const btnOrder = querySelector(".btn-order");
-    if (btnOrder) {
-      btnOrder.addEventListener("click", () => {
-        const form = document.getElementById("form-checkout");
-        form.addEventListener("submit", (e) => {
-          e.preventDefault();
-          let formData = {};
-          for (let input of form.elements) {
-            formData[input.name] = input.value;
-          }
-          const formMess = validateForm(formData);
-          if (Object.keys(formMess).length === 0) {
-            // xử lý hợp lệ
-          } else {
-            for (const [key, value] of Object.entries(formMess)) {
-              const inputElement = form.querySelector(`[name="${key}"]`);
-              // get content of the next sibling in list item
-              if (inputElement) {
-                const errorElement = inputElement.nextElementSibling;
-                if (
-                  errorElement &&
-                  errorElement.classList.contains("mess-error")
-                ) {
-                  errorElement.textContent = value;
-                }
-              }
+    const form = document.getElementById("form-checkout");
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      let formData = {};
+      for (let input of form.elements) {
+        formData[input.name] = input.value;
+      }
+      const formMess = validateForm(formData);
+      if (Object.keys(formMess).length === 0) {
+        // xử lý hợp lệ
+      } else {
+        for (const [key, value] of Object.entries(formMess)) {
+          const inputElement = form.querySelector(`[name="${key}"]`);
+          // get content of the next sibling in list item
+          if (inputElement) {
+            const errorElement = inputElement.nextElementSibling;
+            if (errorElement && errorElement.classList.contains("mess-error")) {
+              errorElement.textContent = value;
             }
-            btnOrder.disabled = true;
-            // btnOrder.setAttribute("disabled", "");
           }
-          form.submit();
-        });
-      });
-    }
+        }
+        // btnOrder.disabled = true;
+        // btnOrder.setAttribute("disabled", "");
+      }
+      form.submit();
+    });
   };
 }
