@@ -3,6 +3,7 @@ import { showSuccess, showError } from "../utils/toastify";
 import { displayLoading, hideLoading } from "../utils/loading";
 import ProductModel from "../models/product.model";
 import CartModel from "../models/cart.model";
+import StatesModel from "../models/states.model";
 import ProductView from "../views/product.view";
 import CartView from "../views/cart.view";
 import ProductService from "../services/product.service";
@@ -14,13 +15,14 @@ export default class ProductController {
   constructor() {
     this.productModel = new ProductModel();
     this.cartModel = new CartModel();
+    this.statesModel = new StatesModel();
     this.productView = new ProductView();
     this.cartView = new CartView();
     this.productService = new ProductService();
     this.cartItemService = new CartItemService();
     this.countryService = new CountryService();
     this.statesService = new StatesService();
-    
+
     this.productView.bindSearchProducts(this.handleSearchProducts);
     this.handleRenderProductsGrid();
     this.handleRenderCart();
@@ -30,13 +32,20 @@ export default class ProductController {
     const products = await this.cartItemService.getAllProductsFromCart();
     this.cartModel.setCart(products);
     this.cartView.renderCart(this.cartModel.getCart());
-    const countries = await this.countryService.getCountry();
-    this.cartView.bindShowModal(this.cartModel.getCart(), this.handleUpdateCart, countries);
+    // const countries = await this.countryService.getCountry();
+    // this.cartView.bindShowModal(this.cartModel.getCart(), this.handleUpdateCart, countries);
+    this.cartView.bindShowModal(
+      this.cartModel.getCart(),
+      this.handleUpdateCart,
+      this.handleRenderCheckout
+    );
     this.cartView.bindDeleteProduct(this.handleHiddenProduct);
     this.cartView.bindChangeQuantity();
     this.cartView.bindUpdateCart(this.handleUpdateCart);
     this.cartView.bindHiddenModal();
-    this.cartView.bindCheckoutCart(this.cartModel.getCart(), countries);
+    // this.cartView.bindCheckoutCart(this.cartModel.getCart(), countries);
+    // this.cartView.bindCheckoutCart(this.handleCheckoutCart);
+    this.cartView.bindCheckoutCart(this.handleRenderCheckout.bind(this));
   };
 
   async handleRenderProductsGrid() {
@@ -46,14 +55,16 @@ export default class ProductController {
     this.productView.renderProductGrid(this.productModel.getProducts());
     this.productView.bindAddProducts(this.handleAddProduct);
     hideLoading();
-  };
+  }
 
   handleSearchProducts = async (productName) => {
     const products = await this.productService.getAllProducts();
     this.productModel.setProducts(products);
     const result = this.productModel.searchProductByName(productName);
     if (result === null) {
-      this.productView.displayMessage(ALERT_MESSAGE.SEARCH_PRODUCT_LIST_EMPTY_HEADING);
+      this.productView.displayMessage(
+        ALERT_MESSAGE.SEARCH_PRODUCT_LIST_EMPTY_HEADING
+      );
     } else {
       this.productView.displayMessage("");
     }
@@ -72,15 +83,18 @@ export default class ProductController {
     this.productModel.setProducts(getProduct);
     const product = this.productModel.getProductById(productId);
     if (existingProduct !== undefined) {
-      await this.cartItemService.updateCart({...existingProduct,amount: existingProduct.amount + 1});
+      await this.cartItemService.updateCart({
+        ...existingProduct,
+        amount: existingProduct.amount + 1,
+      });
       hideLoading();
-      showSuccess({ text: ALERT_MESSAGE.ADD_PRODUCT_SUCCESS_MSG })
+      showSuccess({ text: ALERT_MESSAGE.ADD_PRODUCT_SUCCESS_MSG });
     } else {
       displayLoading();
       await this.cartItemService.addProductToCart(product);
       showSuccess({ text: ALERT_MESSAGE.ADD_PRODUCT_SUCCESS_MSG });
       hideLoading();
-    };
+    }
     await this.handleRenderCart();
   };
 
@@ -93,9 +107,7 @@ export default class ProductController {
     try {
       const promises = [];
       for (let i = 0; i < deletedIds.length; i++) {
-        const promise = this.cartItemService.deleteProductFromCart(
-          deletedIds[i]
-        );
+        const promise = this.cartItemService.deleteProductFromCart(deletedIds[i]);
         promises.push(promise);
       }
       await Promise.all(promises);
@@ -129,5 +141,16 @@ export default class ProductController {
       this.handleUpdateProduct(quantitys),
       this.handleDeleteProduct(deletedIds),
     ]);
+  };
+
+
+  handleRenderCheckout = async () => {
+    const countries = await this.countryService.getCountry();
+    const products = this.cartModel.getCart();
+    this.cartView.renderFormCheckout(products);
+    this.cartView.bindLoadDataCountry(countries);
+    // const states = await this.statesService.getStates();
+    this.cartView.bindSubmitForm();
+
   };
 }
