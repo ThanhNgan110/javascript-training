@@ -69,10 +69,6 @@ export const formCheckoutTemplate = () => {
         <div class="flex-col">
           <label for="lstates name-label">States</label>
           <select class="form-control form-control-sm" name="states" id="states">
-          <option value="volvo">Volvo</option>
-          <option value="saab">Saab</option>
-          <option value="mercedes">Mercedes</option>
-          <option value="audi">Audi</option>
           </select>
         </div>
         <div class="flex-col">
