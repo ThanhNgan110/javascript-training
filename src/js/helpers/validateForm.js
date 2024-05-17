@@ -9,23 +9,31 @@ const validateString = ({ key, value }) => {
   formError[key] = typeof value !== "string" ? `${key} must be a string` : "";
 };
 
-const validateInterger = ({ key, value }) => {
-  formError[key] = !REGEX_PATTERNS.isInterger.test(value)
-    ? `${key} must be a string`
-    : "";
-};
-
 const validateEmail = ({ key, value }) => {
-  formError[key] = !REGEX_PATTERNS.isEmail.test(value)
+  formError[key] = !REGEX_PATTERNS.isValidEmail.test(value)
     ? `${key} not match format`
     : "";
 };
 
+const validatePhone = ({ key, value }) => {
+  formError[key] = !REGEX_PATTERNS.isValidPhone.test(value)
+    ? `${key} must be a valid phone number`
+    : "";
+};
+
 function validateForm(validationSchema) {
+  formError = {};
   Object.entries(validationSchema).map(([key, value]) => {
     validateEmpty({ key: key, value: value });
-    if (key === "email") {
-      validateEmail({ key, value });
+
+    if (!formError[key]) {
+      if (key === "Email") {
+        validateEmail({ key, value });
+      }
+      if (key === "Phone Number") {
+        validatePhone({ key, value });
+      }
+      
     }
   });
   return formError;
@@ -37,4 +45,5 @@ export {
   validateEmail,
   validateForm,
   validateInterger,
+  validatePhone,
 };
