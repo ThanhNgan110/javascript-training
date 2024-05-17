@@ -12,14 +12,13 @@ import { validateForm } from "../helpers/validateForm";
 export default class CartView {
   constructor() {
     this.wrapperCart = querySelector(".wrapper-cart");
-    this.btnMinus = querySelector(".btn-minus");
-    this.inputQuantity = querySelector(".input-quantity");
     this.blockCart = querySelector(".block-cart");
     this.btnOpenModal = querySelector(".show-modal");
 
     this.modalCart = document.getElementById("modal-cart");
     this.modalCheckout = document.getElementById("modal-checkout");
     this.formCheckout = querySelector(".wrapper-checkout");
+    this.countrySelect = document.getElementById("country");
   }
 
   renderCart = (products) => {
@@ -139,32 +138,39 @@ export default class CartView {
     });
   };
 
-  bindLoadDataCountry = (data) => {
-    data.forEach((country) => {
-      const option = document.createElement("option");
-      option.value = country.id;
-      option.text = country.name;
-      const countrySelect = document.getElementById("country");
-      countrySelect.appendChild(option);
-    });
+  handleDefaultCountry = (handler, countries) => {
+    const countrySelect = document.getElementById("country");
+    if (!countrySelect.value) {
+      countrySelect.value = countries[0].id;
+    }
+    handler(countrySelect.value);
   };
 
   bindEventChangeCountry = (handler) => {
     const countrySelect = document.getElementById("country");
-    const selectedCountryId = countrySelect.value;
     countrySelect.addEventListener("change", () => {
+      const selectedCountryId = countrySelect.value;
       handler(selectedCountryId);
     });
   };
 
-  handleShowStates = (states) => {
-    states.forEach((item) => {
+  hanldeDataDropdown = (data, selectId) => {
+    const selectElement = document.getElementById(selectId);
+    selectElement.innerHTML = "";
+    data.forEach((item) => {
       const option = document.createElement("option");
       option.value = item.id;
       option.text = item.name;
-      const statesSelect = document.getElementById("states");
-      statesSelect.appendChild(option);
-    })
+      selectElement.appendChild(option);
+    });
+  };
+
+  handleRenderCountry = (countries) => {
+    this.hanldeDataDropdown(countries, "country");
+  };
+
+  handleRenderStates = (states) => {
+    this.hanldeDataDropdown(states, "states");
   };
 
   bindSubmitForm = () => {
@@ -176,9 +182,7 @@ export default class CartView {
         formData[input.name] = input.value;
       }
       const formMess = validateForm(formData);
-      if (Object.keys(formMess).length === 0) {
-        // xử lý hợp lệ
-      } else {
+      if (!(Object.keys(formMess).length === 0)) {
         for (const [key, value] of Object.entries(formMess)) {
           const inputElement = form.querySelector(`[name="${key}"]`);
           // get content of the next sibling in list item
@@ -190,7 +194,6 @@ export default class CartView {
           }
         }
         // btnOrder.disabled = true;
-        // btnOrder.setAttribute("disabled", "");
       }
       form.submit();
     });
