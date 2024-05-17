@@ -32,8 +32,6 @@ export default class ProductController {
     const products = await this.cartItemService.getAllProductsFromCart();
     this.cartModel.setCart(products);
     this.cartView.renderCart(this.cartModel.getCart());
-    // const countries = await this.countryService.getCountry();
-    // this.cartView.bindShowModal(this.cartModel.getCart(), this.handleUpdateCart, countries);
     this.cartView.bindShowModal(
       this.cartModel.getCart(),
       this.handleUpdateCart,
@@ -43,8 +41,6 @@ export default class ProductController {
     this.cartView.bindChangeQuantity();
     this.cartView.bindUpdateCart(this.handleUpdateCart);
     this.cartView.bindHiddenModal();
-    // this.cartView.bindCheckoutCart(this.cartModel.getCart(), countries);
-    // this.cartView.bindCheckoutCart(this.handleCheckoutCart);
     this.cartView.bindCheckoutCart(this.handleRenderCheckout.bind(this));
   };
 
@@ -107,7 +103,9 @@ export default class ProductController {
     try {
       const promises = [];
       for (let i = 0; i < deletedIds.length; i++) {
-        const promise = this.cartItemService.deleteProductFromCart(deletedIds[i]);
+        const promise = this.cartItemService.deleteProductFromCart(
+          deletedIds[i]
+        );
         promises.push(promise);
       }
       await Promise.all(promises);
@@ -143,14 +141,20 @@ export default class ProductController {
     ]);
   };
 
+  hanldeGetStates = async (countryId) => {
+    const states = await this.statesService.getStates();
+    this.statesModel.setStates(states);
+    const listState = this.statesModel.getStatesByCountry(countryId);
+    this.cartView.handleRenderStates(listState);
+  };
 
   handleRenderCheckout = async () => {
     const countries = await this.countryService.getCountry();
     const products = this.cartModel.getCart();
     this.cartView.renderFormCheckout(products);
-    this.cartView.bindLoadDataCountry(countries);
-    // const states = await this.statesService.getStates();
+    this.cartView.handleRenderCountry(countries);
+    this.cartView.handleDefaultCountry(this.hanldeGetStates, countries);
+    this.cartView.bindEventChangeCountry(this.hanldeGetStates);
     this.cartView.bindSubmitForm();
-
   };
 }
