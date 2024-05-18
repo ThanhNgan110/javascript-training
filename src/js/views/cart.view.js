@@ -14,7 +14,6 @@ export default class CartView {
     this.wrapperCart = querySelector(".wrapper-cart");
     this.blockCart = querySelector(".block-cart");
     this.btnOpenModal = querySelector(".show-modal");
-
     this.modalCart = document.getElementById("modal-cart");
     this.modalCheckout = document.getElementById("modal-checkout");
     this.formCheckout = querySelector(".wrapper-checkout");
@@ -179,13 +178,16 @@ export default class CartView {
       e.preventDefault();
       let formData = {};
       for (let input of form.elements) {
-        formData[input.name] = input.value;
+        let value = input.value;
+        if (input.type === "number") {
+          value = Number(value);
+        }
+        formData[input.name] = value;
       }
       const formMess = validateForm(formData);
       if (!(Object.keys(formMess).length === 0)) {
         for (const [key, value] of Object.entries(formMess)) {
           const inputElement = form.querySelector(`[name="${key}"]`);
-          // get content of the next sibling in list item
           if (inputElement) {
             const errorElement = inputElement.nextElementSibling;
             if (errorElement && errorElement.classList.contains("mess-error")) {
@@ -197,5 +199,5 @@ export default class CartView {
       }
       form.submit();
     });
-  };
+  };  
 }
