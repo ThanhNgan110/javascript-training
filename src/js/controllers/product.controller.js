@@ -40,7 +40,7 @@ export default class ProductController {
     this.cartView.bindDeleteProduct(this.handleHiddenProduct);
     this.cartView.bindChangeQuantity();
     this.cartView.bindUpdateCart(this.handleUpdateCart);
-    this.cartView.bindHiddenModal();
+    this.cartView.bindCloseModalCart();
     this.cartView.bindCheckoutCart(this.handleRenderCheckout.bind(this));
   };
 
