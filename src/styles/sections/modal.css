@@ -236,3 +236,8 @@ table {
 .mess-error.error {
   display: block;
 }
+
+.btn-order:disabled {
+  cursor: not-allowed;
+  opacity: .7;
+}
