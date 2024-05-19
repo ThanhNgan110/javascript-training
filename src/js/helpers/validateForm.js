@@ -16,13 +16,13 @@ const validateString = ({ key, value }) => {
 };
 
 const validateEmail = ({ key, value }) => {
-  formError[key] = !REGEX_PATTERNS.isValidEmail.test(value)
+  formError[key] = !(REGEX_PATTERNS.isValidEmail.test(value))
     ? `${key} not match format`
     : "";
 };
 
 const validatePhone = ({ key, value }) => {
-  formError[key] = !REGEX_PATTERNS.isValidPhone.test(value)
+  formError[key] = !(REGEX_PATTERNS.isValidPhone.test(value))
     ? `${key} must be a valid phone number`
     : "";
 };
