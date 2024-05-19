@@ -67,7 +67,7 @@
   white-space: nowrap;
 }
 
-.btn-checkout:hover, .btn-order:hover {
+.btn-checkout:hover {
   padding: 15px 139px;
   background-color: var(--color-white);
   color: var(--color-green);
