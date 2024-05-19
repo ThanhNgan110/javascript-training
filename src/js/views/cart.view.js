@@ -116,15 +116,24 @@ export default class CartView {
       this.bindChangeQuantity();
       this.bindDeleteProduct();
       this.bindUpdateCart(handler);
-      this.bindHiddenModal();
+      this.bindCloseModalCart();
       this.bindCheckoutCart(handleCheckout);
+      this.bindCloseModalOnClickOutside();
     });
   };
 
-  bindHiddenModal = () => {
+  bindCloseModalCart = () => {
     const closeModal = document.querySelector(".btn-return");
     closeModal.addEventListener("click", () => {
       this.modalCart.style.display = "none";
+    });
+  };
+
+  bindCloseModalOnClickOutside = () => {
+    window.addEventListener("click", (event) => {
+      if (event.target === this.modalCheckout) {
+        this.modalCheckout.style.display = "none";
+      }
     });
   };
 
@@ -142,6 +151,7 @@ export default class CartView {
     if (!countrySelect.value) {
       countrySelect.value = countries[0].id;
     }
+
     handler(countrySelect.value);
   };
 
@@ -172,32 +182,53 @@ export default class CartView {
     this.hanldeDataDropdown(states, "states");
   };
 
+  handleDisplayMessageError = (inputElement, message) => {
+    if (inputElement) {
+      const errorElement = inputElement.nextElementSibling;
+      if (errorElement && errorElement.classList.contains("mess-error")) {
+        errorElement.textContent = message;
+      }
+    }
+  };
+
+  checkFormValid = (formErrorMess) => {
+    for (const message of Object.values(formErrorMess)) {
+      if (message !== "") {
+        return false;
+      }
+    }
+    
+    return true;
+  };
+
+  updateFormUi = (isFormValid, formErrorMess) => {
+    const form = document.getElementById("form-checkout");
+    const btnOrder = document.getElementById("btn-order");
+    for (const [fieldName, message] of Object.entries(formErrorMess)) {
+      const inputElement = form.querySelector(`[name="${fieldName}"]`);
+      this.handleDisplayMessageError(inputElement, message);
+    }
+
+    btnOrder.disabled = !isFormValid;
+  };
+
   bindSubmitForm = () => {
     const form = document.getElementById("form-checkout");
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      let formData = {};
-      for (let input of form.elements) {
-        let value = input.value;
-        if (input.type === "number") {
-          value = Number(value);
-        }
-        formData[input.name] = value;
-      }
-      const formMess = validateForm(formData);
-      if (!(Object.keys(formMess).length === 0)) {
-        for (const [key, value] of Object.entries(formMess)) {
-          const inputElement = form.querySelector(`[name="${key}"]`);
-          if (inputElement) {
-            const errorElement = inputElement.nextElementSibling;
-            if (errorElement && errorElement.classList.contains("mess-error")) {
-              errorElement.textContent = value;
-            }
+    let formData = {},
+      formErrorMess = {};
+
+    for (let input of form.elements) {
+      input.addEventListener("change", () => {
+          const value = input.value;
+          if (input.type === "number") {
+            value = Number(value);
           }
-        }
-        // btnOrder.disabled = true;
-      }
-      form.submit();
-    });
-  };  
+
+          formData[input.name] = value;
+          formErrorMess = validateForm(formData);
+
+        this.updateFormUi(this.checkFormValid(formErrorMess), formErrorMess);
+      });
+    }
+  };
 }
