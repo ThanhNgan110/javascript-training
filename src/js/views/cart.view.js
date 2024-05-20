@@ -213,7 +213,7 @@ export default class CartView {
   };
 
   bindSubmitForm = () => {
-    const form = document.getElementById("form-checkout");
+    let form = document.getElementById("form-checkout");
     let formData = {},
       formErrorMess = {};
 
