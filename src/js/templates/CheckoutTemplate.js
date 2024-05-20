@@ -10,6 +10,7 @@ export const orderSummery = (products) => {
   });
   return `
   ${formCheckoutTemplate()}
+  <div class="flex-col">
   <div class="cart-order">
   <p class="name-total">Order Summary</p>
   ${content}
@@ -17,6 +18,8 @@ export const orderSummery = (products) => {
   <p class="name-total-border">Shipping:<span>Free</span></p>
   <p class="name-total-border-none total">Total:<span>$${total}</span></p>
   <button id="btn-order" type="submit" form="form-checkout" class="btn btn-order" disabled>Place Order</button>
+  </div>
+  <button id="btn-close-checkout" class="btn btn-return">Return to shop</button>
   </div>
   `;
 };
@@ -88,10 +91,6 @@ export const formCheckoutTemplate = () => {
           <input class="form-control form-control-sm" type="text" name="Phone Number" placeholder="Phone number">
           <p class="mess-error error"></p>
         </div>
-      </div>
-      <div class="form-check-input">
-        <input type="checkbox" placeholder="Email Address">
-        <label class="name-label">Ship to a different address</label>
       </div>
       <div class="block-info-checkout">
         <p class="title-info">Additional Information</p>

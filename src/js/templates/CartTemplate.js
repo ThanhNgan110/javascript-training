@@ -41,7 +41,7 @@ export const displayCart = (products) => {
         <tr class="col-btn">
           <td colspan="5">
             <div class="btn-group">
-              <button class="btn btn-return">Return to shop</button>
+              <button id="btn-close-cart" class="btn btn-return">Return to shop</button>
               <button class="btn btn-update-cart">Update Cart</button>
             </div>
           </td>
