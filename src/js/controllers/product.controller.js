@@ -57,6 +57,7 @@ export default class ProductController {
     const products = await this.productService.getAllProducts();
     this.productModel.setProducts(products);
     const result = this.productModel.searchProductByName(productName);
+
     if (result === null) {
       this.productView.displayMessage(
         ALERT_MESSAGE.SEARCH_PRODUCT_LIST_EMPTY_HEADING
@@ -64,39 +65,41 @@ export default class ProductController {
     } else {
       this.productView.displayMessage("");
     }
-    await this.productView.renderProductGrid(result);
+
+    this.productView.renderProductGrid(result);
     this.productView.bindAddProducts(this.handleAddProduct);
   };
 
   handleAddProduct = async (productId) => {
-    displayLoading();
-    const products = this.cartModel.getCart();
-    this.cartModel.setCart(products);
-    // check product existing inside cart
-    let existingProduct = this.cartModel.checkProductIdExisting(productId);
-    // get product by product id
-    const getProduct = this.productModel.getProducts();
-    this.productModel.setProducts(getProduct);
-    const product = this.productModel.getProductById(productId);
-    if (existingProduct !== undefined) {
-      await this.cartItemService.updateCart({
-        ...existingProduct,
-        amount: existingProduct.amount + 1,
-      });
-      hideLoading();
-      showSuccess({ text: ALERT_MESSAGE.ADD_PRODUCT_SUCCESS_MSG });
-    } else {
+    try {
       displayLoading();
-      await this.cartItemService.addProductToCart(product);
-      showSuccess({ text: ALERT_MESSAGE.ADD_PRODUCT_SUCCESS_MSG });
+      const products = this.cartModel.getCart();
+      this.cartModel.setCart(products);
+      let existingProduct = this.cartModel.checkProductIdExisting(productId);
+      const listProduct = this.productModel.getProducts();
+      this.productModel.setProducts(listProduct);
+      const product = this.productModel.getProductById(productId);
+
+      if (!!existingProduct) {
+        await this.cartItemService.updateCart({
+          ...existingProduct,
+          amount: existingProduct.amount + 1
+        });
+      } else {
+        await this.cartItemService.addProductToCart(product);
+      }
+
       hideLoading();
+      showSuccess({ text: ALERT_MESSAGE.ADD_PRODUCT_SUCCESS_MSG });
+      await this.handleRenderCart();
+    } catch (error) {
+      showError({ text: ALERT_MESSAGE.ADD_PRODUCT_FAILED_MSG });
     }
-    await this.handleRenderCart();
   };
 
   handleHiddenProduct = (id) => {
     this.view.bindHiddenProduct(id);
-    showSuccess({ text: ALERT_MESSAGE.DELETE_PRODUCT_SUCCESS_MSG });
+    // showSuccess({ text: ALERT_MESSAGE.DELETE_PRODUCT_SUCCESS_MSG });
   };
 
   handleDeleteProduct = async (deletedIds) => {
