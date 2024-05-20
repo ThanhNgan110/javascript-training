@@ -99,7 +99,6 @@ export default class ProductController {
 
   handleHiddenProduct = (id) => {
     this.view.bindHiddenProduct(id);
-    // showSuccess({ text: ALERT_MESSAGE.DELETE_PRODUCT_SUCCESS_MSG });
   };
 
   handleDeleteProduct = async (deletedIds) => {
