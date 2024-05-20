@@ -152,12 +152,15 @@ export default class ProductController {
   };
 
   handleRenderCheckout = async () => {
+    displayLoading();
     const countries = await this.countryService.getCountry();
     const products = this.cartModel.getCart();
     this.cartView.renderFormCheckout(products);
     this.cartView.handleRenderCountry(countries);
     this.cartView.handleDefaultCountry(this.hanldeGetStates, countries);
     this.cartView.bindEventChangeCountry(this.hanldeGetStates);
+    this.cartView.bindCloseModalCheckout();
     this.cartView.bindSubmitForm();
+    hideLoading();
   };
 }
