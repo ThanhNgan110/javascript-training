@@ -9,4 +9,4 @@ const hideLoading = () => {
   loader.style.display = 'none';
 };
 
-export { displayLoading, hideLoading, toggleOverlay };
+export { displayLoading, hideLoading };
