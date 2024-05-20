@@ -192,7 +192,7 @@ export default class CartView {
         return false;
       }
     }
-    
+
     return true;
   };
 
@@ -207,33 +207,33 @@ export default class CartView {
 
     let allFieldsFilled = true;
     for (let input of form.elements) {
-      if (input.value.trim() === "") {
+      if (input.type !== "submit" && input.type !== "button" && input.value.trim() === "") {
         allFieldsFilled = false;
         break;
       }
     }
 
-    btnOrder.disabled = !allFieldsFilled || this.checkFormValid(formErrorMess);
+    btnOrder.disabled = !allFieldsFilled || !this.checkFormValid(formErrorMess);
   };
 
   bindSubmitForm = () => {
     const form = document.getElementById("form-checkout");
     let formData = {},
-      formErrorMess = {};
+      fieldErrorMess = {};
 
     for (let input of form.elements) {
-      if (input.type !== "submit" && input.type !== "button") {
-        input.addEventListener("input", () => {
+      input.addEventListener("input", () => {
+        if (input.type !== "submit" && input.type !== "button") {
           let value = input.value;
           if (input.type === "number") {
             value = Number(value);
           }
 
           formData[input.name] = value;
-          formErrorMess = validateForm(formData);
-          this.updateFormUi(formErrorMess);
-        });
-      }
+          fieldErrorMess = validateForm({ [input.name]: value });
+          this.updateFormUi(fieldErrorMess);
+        }
+      });
     }
   };
 }
