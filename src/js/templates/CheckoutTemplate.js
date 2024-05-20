@@ -60,7 +60,7 @@ export const formCheckoutTemplate = () => {
       </div>
       <div class="form-row">
         <label for="lname name-label">Street Address</label>
-        <input class="form-control form-control-sm input-default" type="text" name="Address" placeholder="Email">
+        <input class="form-control form-control-sm input-default" type="text" name="Address" placeholder="Address">
         <p class="mess-error error"></p>
       </div>
       <div class="flex-row form-row">
