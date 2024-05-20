@@ -114,23 +114,22 @@ export default class CartView {
       this.bindUpdateCart(handler);
       this.bindCloseModalCart();
       this.bindCheckoutCart(handleCheckout);
-      this.bindCloseModalOnClickOutside();
     });
+  };
+
+  bindCloseModal = (btnReturn, modal) => {
+    const closeModal = document.getElementById(btnReturn);
+    closeModal.addEventListener("click", () => {
+      modal.style.display = "none";
+    });
+  };
+
+  bindCloseModalCheckout = () => {
+    this.bindCloseModal("btn-close-checkout", this.modalCheckout);
   };
 
   bindCloseModalCart = () => {
-    const closeModal = document.querySelector(".btn-return");
-    closeModal.addEventListener("click", () => {
-      this.modalCart.style.display = "none";
-    });
-  };
-
-  bindCloseModalOnClickOutside = () => {
-    window.addEventListener("click", (event) => {
-      if (event.target === this.modalCheckout) {
-        this.modalCheckout.style.display = "none";
-      }
-    });
+    this.bindCloseModal("btn-close-cart", this.modalCart);
   };
 
   bindCheckoutCart = (handler) => {
@@ -193,17 +192,28 @@ export default class CartView {
         return false;
       }
     }
+    
     return true;
   };
 
-  updateFormUi = (isFormValid, formErrorMess) => {
+  updateFormUi = (formErrorMess) => {
     const form = document.getElementById("form-checkout");
     const btnOrder = document.getElementById("btn-order");
+
     for (const [fieldName, message] of Object.entries(formErrorMess)) {
       const inputElement = form.querySelector(`[name="${fieldName}"]`);
       this.handleDisplayMessageError(inputElement, message);
     }
-    btnOrder.disabled = !isFormValid;
+
+    let allFieldsFilled = true;
+    for (let input of form.elements) {
+      if (input.value.trim() === "") {
+        allFieldsFilled = false;
+        break;
+      }
+    }
+
+    btnOrder.disabled = !allFieldsFilled || this.checkFormValid(formErrorMess);
   };
 
   bindSubmitForm = () => {
@@ -212,17 +222,18 @@ export default class CartView {
       formErrorMess = {};
 
     for (let input of form.elements) {
-      input.addEventListener("change", () => {
-        let value = input.value;
-        if (input.type === "number") {
-          value = Number(value);
-        }
+      if (input.type !== "submit" && input.type !== "button") {
+        input.addEventListener("input", () => {
+          let value = input.value;
+          if (input.type === "number") {
+            value = Number(value);
+          }
 
-        formData[input.name] = value;
-        formErrorMess = validateForm(formData);
-
-        this.updateFormUi(this.checkFormValid(formErrorMess), formErrorMess);
-      });
+          formData[input.name] = value;
+          formErrorMess = validateForm(formData);
+          this.updateFormUi(formErrorMess);
+        });
+      }
     }
   };
 }
