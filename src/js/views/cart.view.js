@@ -47,16 +47,14 @@ export default class CartView {
   handleChangeQuantity = (options, item) => {
     const inputQuantity = item.querySelector(".input-quantity");
     switch (options) {
-      case "plus": {
+      case "plus":
         inputQuantity.value && inputQuantity.value++;
         break;
-      }
-      case "minus": {
+      case "minus":
         inputQuantity.value <= 1
           ? (inputQuantity.value = 1)
           : inputQuantity.value--;
         break;
-      }
     }
   };
 
@@ -85,14 +83,13 @@ export default class CartView {
     const btnUpdate = document.querySelector(".btn-update-cart");
     if (btnUpdate) {
       btnUpdate.addEventListener("click", () => {
-        // get all item deleted marked
         const productRows = document.querySelectorAll(
           ".col-tbody[marked-deleted=true]"
         );
         const deletedIds = Array.from(productRows).map((productRow) =>
           productRow.getAttribute("data-id")
         );
-        // get value input quantity
+
         const inputQuantity = document.querySelectorAll(
           ".col-tbody:not([marked-deleted=true]) .input-quantity"
         );
@@ -112,7 +109,6 @@ export default class CartView {
     this.btnOpenModal.addEventListener("click", () => {
       this.modalCart.style.display = "block";
       this.renderCart(products);
-      // attach event
       this.bindChangeQuantity();
       this.bindDeleteProduct();
       this.bindUpdateCart(handler);
@@ -163,7 +159,7 @@ export default class CartView {
     });
   };
 
-  hanldeDataDropdown = (data, selectId) => {
+  handleDataDropdown = (data, selectId) => {
     const selectElement = document.getElementById(selectId);
     selectElement.innerHTML = "";
     data.forEach((item) => {
@@ -175,11 +171,11 @@ export default class CartView {
   };
 
   handleRenderCountry = (countries) => {
-    this.hanldeDataDropdown(countries, "country");
+    this.handleDataDropdown(countries, "country");
   };
 
   handleRenderStates = (states) => {
-    this.hanldeDataDropdown(states, "states");
+    this.handleDataDropdown(states, "states");
   };
 
   handleDisplayMessageError = (inputElement, message) => {
@@ -197,7 +193,6 @@ export default class CartView {
         return false;
       }
     }
-    
     return true;
   };
 
@@ -208,24 +203,23 @@ export default class CartView {
       const inputElement = form.querySelector(`[name="${fieldName}"]`);
       this.handleDisplayMessageError(inputElement, message);
     }
-
     btnOrder.disabled = !isFormValid;
   };
 
   bindSubmitForm = () => {
-    let form = document.getElementById("form-checkout");
+    const form = document.getElementById("form-checkout");
     let formData = {},
       formErrorMess = {};
 
     for (let input of form.elements) {
       input.addEventListener("change", () => {
-          const value = input.value;
-          if (input.type === "number") {
-            value = Number(value);
-          }
+        let value = input.value;
+        if (input.type === "number") {
+          value = Number(value);
+        }
 
-          formData[input.name] = value;
-          formErrorMess = validateForm(formData);
+        formData[input.name] = value;
+        formErrorMess = validateForm(formData);
 
         this.updateFormUi(this.checkFormValid(formErrorMess), formErrorMess);
       });
