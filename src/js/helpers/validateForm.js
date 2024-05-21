@@ -35,7 +35,9 @@ function validateForm(validationSchema) {
   formError = {};
 
   Object.entries(validationSchema).map(([key, value]) => {
-    validateEmpty({ key: key, value: value });
+    if (key !== "Note") {
+      validateEmpty({ key: key, value: value });     
+    }
 
     if (!formError[key]) {
       if (
