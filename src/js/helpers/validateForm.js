@@ -7,7 +7,7 @@ const validateEmpty = ({ key, value }) => {
 };
 
 const validateInterger = ({ key, value }) => {
-  formError[key] = !REGEX_PATTERNS.isValidInterger.test(value)
+  formError[key] = !REGEX_PATTERNS.VALID_INTERGER.test(value)
     ? `${key} must be a interger`
     : "";
 };
@@ -20,18 +20,18 @@ const validateString = ({ key, value }) => {
 };
 
 const validateEmail = ({ key, value }) => {
-  formError[key] = !REGEX_PATTERNS.isValidEmail.test(value)
+  formError[key] = !REGEX_PATTERNS.VALID_EMAIL.test(value)
     ? `${key} format is invalid`
     : "";
 };
 
 const validatePhone = ({ key, value }) => {
-  formError[key] = !REGEX_PATTERNS.isValidPhone.test(value)
+  formError[key] = !REGEX_PATTERNS.VALID_NUMBER_PHONE.test(value)
     ? `${key} format is invalid`
     : "";
 };
 
-function validateForm(validationSchema) {
+validateForm = (validationSchema) => {
   formError = {};
 
   Object.entries(validationSchema).map(([key, value]) => {
