@@ -37,19 +37,23 @@ export default class CartView {
       plusBtn.addEventListener("click", () => {
         this.handleChangeQuantity("plus", item);
       });
+
       const minusBtn = item.querySelector(".btn-minus");
       minusBtn.addEventListener("click", () => {
         this.handleChangeQuantity("minus", item);
       });
+
     });
   };
 
   handleChangeQuantity = (options, item) => {
     const inputQuantity = item.querySelector(".input-quantity");
+    
     switch (options) {
       case "plus":
         inputQuantity.value && inputQuantity.value++;
         break;
+
       case "minus":
         inputQuantity.value <= 1
           ? (inputQuantity.value = 1)
@@ -218,8 +222,7 @@ export default class CartView {
 
   bindSubmitForm = () => {
     const form = document.getElementById("form-checkout");
-    let formData = {},
-      fieldErrorMess = {};
+    let formData = {}, fieldErrorMess = {};
 
     for (let input of form.elements) {
       input.addEventListener("input", () => {
