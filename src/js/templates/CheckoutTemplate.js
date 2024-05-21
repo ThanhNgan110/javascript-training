@@ -12,8 +12,10 @@ export const orderSummery = (products) => {
   ${formCheckoutTemplate()}
   <div class="flex-col">
   <div class="cart-order">
+  <div class="block-products">
   <p class="name-total">Order Summary</p>
   ${content}
+  </div>
   <p class="name-total-border">Subtotal:<span>$${total}</span></p>
   <p class="name-total-border">Shipping:<span>Free</span></p>
   <p class="name-total-border-none total">Total:<span>$${total}</span></p>
@@ -42,59 +44,59 @@ export const formCheckoutTemplate = () => {
     <p class="title-checkout">Billing Information</p>
     <form id="form-checkout" action="javascript:void(0)">
       <div class="flex-row form-row">
-        <div class="flex-col">
-          <label for="fname name-label">First name</label>
-          <input class="form-control form-control-sm" type="text" name="First Name" placeholder="Your first name">
+        <div class="flex-col flex-col-1">
+          <label for="First Name">First name</label>
+          <input class="form-control form-control-sm" type="text" id="First Name" name="First Name" placeholder="Your first name" autofocus>
           <p class="mess-error error"></p>
         </div>
-        <div class="flex-col">
-          <label for="lname name-label">Last name</label>
-          <input class="form-control form-control-sm" type="text" name="Last Name" placeholder="Your last name">
+        <div class="flex-col flex-col-1">
+          <label for="Last Name">Last name</label>
+          <input class="form-control form-control-sm" type="text" id="Last Name" name="Last Name" placeholder="Your last name">
           <p class="mess-error error"></p>
         </div>
-        <div class="flex-col">
-          <label for="lname name-label">Company name</label>
-          <input class="form-control form-control-sm" type="text" name="Company Name" placeholder="Company name">
+        <div class="flex-col flex-col-1">
+          <label for="Company Name">Company name</label>
+          <input class="form-control form-control-sm" type="text" id="Company Name" name="Company Name" placeholder="Company name">
           <p class="mess-error error"></p>
         </div>
       </div>
       <div class="form-row">
-        <label for="lname name-label">Street Address</label>
-        <input class="form-control form-control-sm input-default" type="text" name="Address" placeholder="Address">
+        <label for="Address">Street Address</label>
+        <input class="form-control form-control-sm input-default" type="text" id="Address" name="Address" placeholder="Address">
         <p class="mess-error error"></p>
       </div>
       <div class="flex-row form-row">
-        <div class="flex-col">
-          <label for="lcountry name-label">Country / Region</label>
+        <div class="flex-col flex-col-2">
+          <label for="country name-label">Country / Region</label>
           <select class="form-control form-control-sm" name="country" id="country">
           </select>
         </div>
-        <div class="flex-col">
+        <div class="flex-col flex-col-2">
           <label for="lstates name-label">States</label>
           <select class="form-control form-control-sm" name="states" id="states">
           </select>
         </div>
-        <div class="flex-col">
-          <label for="lcode name-label">Zip Code</label>
-          <input class="form-control form-control-sm" type="text" name="Zip Code" placeholder="Zip Code">
+        <div class="flex-col flex-col-2">
+          <label for="Zip Code">Zip Code</label>
+          <input class="form-control form-control-sm" type="text" id="Zip Code" name="Zip Code" placeholder="Zip Code">
           <p class="mess-error error"></p>
         </div>
       </div>
       <div class="flex-row form-row">
-        <div class="flex-col">
-          <label for="lemail name-label">Email</label>
-          <input class="form-control form-control-sm" type="email" name="Email" placeholder="Email Address">
+        <div class="flex-col flex-col-3">
+          <label for="Email">Email</label>
+          <input class="form-control form-control-sm" type="email" id="Email" name="Email" placeholder="Email Address">
           <p class="mess-error error"></p>
         </div>
-        <div class="flex-col">
-          <label for="lphone name-label">Phone</label>
-          <input class="form-control form-control-sm" type="text" name="Phone Number" placeholder="Phone number">
+        <div class="flex-col flex-col-3">
+          <label for="Phone Number">Phone</label>
+          <input class="form-control form-control-sm" type="text" id="Phone Number" name="Phone Number" placeholder="Phone number">
           <p class="mess-error error"></p>
         </div>
       </div>
       <div class="block-info-checkout">
         <p class="title-info">Additional Information</p>
-        <div>
+        <div class="flex-col">
           <p class="name-label">Order Notes (Optional)</p>
           <textarea class="form-control form-control-lg" name="Note" rows="2" cols="60"
             placeholder="Notes about your order, e.g. special notes for delivery"></textarea>
