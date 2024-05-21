@@ -97,8 +97,8 @@ export const formCheckoutTemplate = () => {
       <div class="block-info-checkout">
         <p class="title-info">Additional Information</p>
         <div class="flex-col">
-          <p class="name-label">Order Notes (Optional)</p>
-          <textarea class="form-control form-control-lg" name="Note" rows="2" cols="60"
+          <label class="name-label" for="Note">Order Notes (Optional)</label>
+          <textarea class="form-control form-control-lg" id="Note" name="Note" rows="2" cols="60"
             placeholder="Notes about your order, e.g. special notes for delivery"></textarea>
             <p class="mess-error error"></p>
         </div>
