@@ -7,7 +7,6 @@ const validateEmpty = ({ key, value }) => {
 };
 
 const validateInterger = ({ key, value }) => {
-  console.log("hii");
   formError[key] = !REGEX_PATTERNS.isValidInterger.test(value)
     ? `${key} must be a interger`
     : "";
@@ -59,7 +58,7 @@ function validateForm(validationSchema) {
   });
 
   return formError;
-}
+};
 
 export {
   validateString,
