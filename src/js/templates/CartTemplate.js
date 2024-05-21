@@ -25,36 +25,40 @@ export const displayCart = (products) => {
     contentCart = `<tr><td><p class="text-empty">${ALERT_MESSAGE.CART_EMPTY_HEADING}</p></td></tr>`;
   }
   return `
-    <table class="table">
-      <thead>
-        <tr class="col-header">
-          <th class="col-product">PRODUCT</th>
-          <th>PRICE</th>
-          <th>QUANTITY</th>
-          <th>SUBTOTAL</th>
-        </tr>
-      </thead>
-      <tbody>
-        ${contentCart}
-      </tbody>
-      <tfoot>
-        <tr class="col-btn">
-          <td colspan="5">
-            <div class="btn-group">
-              <button id="btn-close-cart" class="btn btn-return">Return to shop</button>
-              <button class="btn btn-update-cart">Update Cart</button>
-            </div>
-          </td>
-        </tr>
-      </tfoot>
-    </table>
-    <div class="cart-total">
-      <p class="name-total">Cart Total</p>
-      <p class="name-total-border">Subtotal:<span>${total}$</span></p>
-      <p class="name-total-border">Shipping:<span>Free</span></p>
-      <p class="name-total-border-none total">Total:<span>${total}$</span></p>
-      <button class="btn btn-checkout">Proceed to checkout</button>
-    </div>`;
+  <div class="block-table">
+  <table class="table">
+  <thead>
+    <tr class="col-header">
+      <th class="col-product">PRODUCT</th>
+      <th>PRICE</th>
+      <th>QUANTITY</th>
+      <th>SUBTOTAL</th>
+    </tr>
+  </thead>
+  <tbody>
+    ${contentCart}
+  </tbody>
+  <tfoot>
+    <tr class="col-btn">
+      <td colspan="5">
+        <div class="btn-group">
+          <button id="btn-close-cart" class="btn btn-return">Return to shop</button>
+          <button class="btn btn-update-cart">Update Cart</button>
+        </div>
+      </td>
+    </tr>
+  </tfoot>
+</table>
+  </div>
+  
+<div class="cart-total">
+  <p class="name-total">Cart Total</p>
+  <p class="name-total-border">Subtotal:<span>${total}$</span></p>
+  <p class="name-total-border">Shipping:<span>Free</span></p>
+  <p class="name-total-border-none total">Total:<span>${total}$</span></p>
+  <button class="btn btn-checkout">Proceed to checkout</button>
+</div>
+   `;
 };
 
 export const cartTemplate = (product) => {
