@@ -38,12 +38,16 @@ function validateForm(validationSchema) {
     validateEmpty({ key: key, value: value });
 
     if (!formError[key]) {
-      if (key === "First Name" || key === "Last Name" || key === "Company Name") {
+      if (
+        key === "First Name" ||
+        key === "Last Name" ||
+        key === "Company Name"
+      ) {
         validateString({ key, value });
       }
 
-      if(key === 'Zip Code') {
-        validateInterger({key, value})
+      if (key === "Zip Code") {
+        validateInterger({ key, value });
       }
 
       if (key === "Email") {
@@ -53,12 +57,11 @@ function validateForm(validationSchema) {
       if (key === "Phone Number") {
         validatePhone({ key, value });
       }
-
     }
   });
 
   return formError;
-};
+}
 
 export {
   validateString,
