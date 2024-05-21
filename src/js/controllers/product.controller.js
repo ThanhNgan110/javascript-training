@@ -3,7 +3,7 @@ import { showSuccess, showError } from "../utils/toastify";
 import { displayLoading, hideLoading } from "../utils/loading";
 import ProductModel from "../models/product.model";
 import CartModel from "../models/cart.model";
-import StatesModel from "../models/states.model";
+import StatesModel from "../models/state.model";
 import ProductView from "../views/product.view";
 import CartView from "../views/cart.view";
 import ProductService from "../services/product.service";
@@ -44,7 +44,7 @@ export default class ProductController {
     this.cartView.bindCheckoutCart(this.handleRenderCheckout.bind(this));
   };
 
-  async handleRenderProductsGrid() {
+  handleRenderProductsGrid = async () => {
     displayLoading();
     const res = await this.productService.getAllProducts();
     this.productModel.setProducts(res);
