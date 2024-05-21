@@ -211,7 +211,7 @@ export default class CartView {
 
     let allFieldsFilled = true;
     for (let input of form.elements) {
-      if (input.type !== "submit" && input.type !== "button" && input.value.trim() === "") {
+      if (input.type !== "submit" && input.type !== "button" && input.name!== "Note" && input.value.trim() === "") {
         allFieldsFilled = false;
         break;
       }
