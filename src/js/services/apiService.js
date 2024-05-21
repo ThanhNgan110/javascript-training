@@ -9,6 +9,7 @@ export default class ApiService {
       const res = await fetch(`${this.baseURL}/${this.endPoint}`, {
         method: "GET",
         headers: { "content-type": "application/json" },
+        cache: 'no-store'
       });
       if (res.ok) {
         return await res.json();
@@ -23,6 +24,7 @@ export default class ApiService {
       const res = await fetch(`${this.baseURL}/${this.endPoint}`, {
         method: "POST",
         headers: { "content-type": "application/json" },
+        cache: 'no-store',
         body: JSON.stringify(data),
       });
       if (res.ok) {
@@ -40,6 +42,7 @@ export default class ApiService {
         {
           method: "PUT",
           headers: { "content-type": "application/json" },
+          cache: 'no-store',
           body: JSON.stringify(payload),
         }
       );
@@ -58,6 +61,7 @@ export default class ApiService {
         {
           method: "PATCH",
           headers: { "content-type": "application/json" },
+          cache: 'no-store',
           body: JSON.stringify(payload),
         }
       );
@@ -74,6 +78,7 @@ export default class ApiService {
       console.log(payload, "payload");
       const res = await fetch(`${this.baseURL}/${this.endPoint}/${payload}`, {
         method: "DELETE",
+        cache: 'no-store'
       });
       if (res.ok) {
         return {
