@@ -42,13 +42,12 @@ export default class CartView {
       minusBtn.addEventListener("click", () => {
         this.handleChangeQuantity("minus", item);
       });
-
     });
   };
 
   handleChangeQuantity = (options, item) => {
     const inputQuantity = item.querySelector(".input-quantity");
-    
+
     switch (options) {
       case "plus":
         inputQuantity.value && inputQuantity.value++;
@@ -137,8 +136,8 @@ export default class CartView {
   };
 
   bindCheckoutCart = (handler) => {
-    const closeCart = querySelector(".btn-checkout");
-    closeCart.addEventListener("click", () => {
+    const btnCheckout = querySelector(".btn-checkout");
+    btnCheckout.addEventListener("click", () => {
       this.modalCart.style.display = "none";
       this.modalCheckout.style.display = "block";
       handler();
@@ -211,7 +210,12 @@ export default class CartView {
 
     let allFieldsFilled = true;
     for (let input of form.elements) {
-      if (input.type !== "submit" && input.type !== "button" && input.name!== "Note" && input.value.trim() === "") {
+      if (
+        input.type !== "submit" &&
+        input.type !== "button" &&
+        input.name !== "Note" &&
+        input.value.trim() === ""
+      ) {
         allFieldsFilled = false;
         break;
       }
@@ -222,7 +226,8 @@ export default class CartView {
 
   bindSubmitForm = () => {
     const form = document.getElementById("form-checkout");
-    let formData = {}, fieldErrorMess = {};
+    let formData = {},
+      fieldErrorMess = {};
 
     for (let input of form.elements) {
       input.addEventListener("input", () => {
