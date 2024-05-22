@@ -3,11 +3,7 @@ import {
   querySelectorAll,
   getElementById,
 } from "../helpers/selector";
-import {
-  displayCart,
-  cartNumberBadge,
-  cartSum,
-} from "../templates/CartTemplate";
+import { displayCart, cartSum } from "../templates/CartTemplate";
 import { orderSummery } from "../templates/CheckoutTemplate";
 import { showSuccess } from "../utils/toastify";
 import { ALERT_MESSAGE } from "../constants/message";
@@ -15,7 +11,6 @@ import { ALERT_MESSAGE } from "../constants/message";
 export default class CartView {
   constructor() {
     this.wrapperCart = querySelector(".wrapper-cart");
-    this.blockCart = querySelector(".block-cart");
     this.btnOpenModal = querySelector(".show-modal");
     this.modalCart = getElementById("modal-cart");
     this.modalCheckout = getElementById("modal-checkout");
@@ -25,7 +20,6 @@ export default class CartView {
   renderCart = (products) => {
     cartSum(products);
     this.wrapperCart.innerHTML = displayCart(products);
-    this.blockCart.innerHTML = cartNumberBadge(products);
   };
 
   renderFormCheckout = (products) => {
