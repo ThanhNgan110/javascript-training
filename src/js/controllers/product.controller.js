@@ -32,6 +32,10 @@ export default class ProductController {
     const products = await this.cartItemService.getAllProductsFromCart();
     this.cartModel.setCart(products);
     this.cartView.renderCart(this.cartModel.getCart());
+    this.bindCartEvents();
+  };
+
+  bindCartEvents = () => {
     this.cartView.bindShowModal(
       this.cartModel.getCart(),
       this.handleUpdateCart,
@@ -41,7 +45,7 @@ export default class ProductController {
     this.cartView.bindChangeQuantity();
     this.cartView.bindUpdateCart(this.handleUpdateCart);
     this.cartView.bindCloseModalCart();
-    this.cartView.bindCheckoutCart(this.handleRenderCheckout.bind(this));
+    this.cartView.bindCheckoutCart(this.handleRenderCheckout);
   };
 
   handleRenderProductsGrid = async () => {
@@ -51,21 +55,15 @@ export default class ProductController {
     this.productView.renderProductGrid(this.productModel.getProducts());
     this.productView.bindAddProducts(this.handleAddProduct);
     hideLoading();
-  }
+  };
 
   handleSearchProducts = async (productName) => {
     const products = await this.productService.getAllProducts();
     this.productModel.setProducts(products);
     const result = this.productModel.searchProductByName(productName);
-
-    if (result === null) {
-      this.productView.displayMessage(
-        ALERT_MESSAGE.SEARCH_PRODUCT_LIST_EMPTY_HEADING
-      );
-    } else {
-      this.productView.displayMessage("");
-    }
-
+    this.productView.displayMessage(
+      result ? "" : ALERT_MESSAGE.SEARCH_PRODUCT_LIST_EMPTY_HEADING
+    );
     this.productView.renderProductGrid(result);
     this.productView.bindAddProducts(this.handleAddProduct);
   };
@@ -83,7 +81,7 @@ export default class ProductController {
       if (!!existingProduct) {
         await this.cartItemService.updateCart({
           ...existingProduct,
-          amount: existingProduct.amount + 1
+          amount: existingProduct.amount + 1,
         });
       } else {
         await this.cartItemService.addProductToCart(product);
@@ -111,9 +109,7 @@ export default class ProductController {
         promises.push(promise);
       }
       await Promise.all(promises);
-    } catch (error) {
-      console.error(error);
-    }
+    } catch (error) {}
   };
 
   handleUpdateProduct = async (updateItems) => {
@@ -136,9 +132,9 @@ export default class ProductController {
     }
   };
 
-  handleUpdateCart = async (quantitys, deletedIds) => {
+  handleUpdateCart = async (quantities, deletedIds) => {
     await Promise.all([
-      this.handleUpdateProduct(quantitys),
+      this.handleUpdateProduct(quantities),
       this.handleDeleteProduct(deletedIds),
     ]);
   };
