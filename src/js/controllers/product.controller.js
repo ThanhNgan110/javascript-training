@@ -6,6 +6,7 @@ import CartModel from "../models/cart.model";
 import StateModel from "../models/state.model";
 import ProductView from "../views/product.view";
 import CartView from "../views/cart.view";
+import CheckoutView from "../views/checkout.view";
 import ProductService from "../services/product.service";
 import CartItemService from "../services/cartItem.service";
 import CountryService from "../services/country.service";
@@ -18,6 +19,7 @@ export default class ProductController {
     this.stateModel = new StateModel();
     this.productView = new ProductView();
     this.cartView = new CartView();
+    this.checkoutView = new CheckoutView();
     this.productService = new ProductService();
     this.cartItemService = new CartItemService();
     this.countryService = new CountryService();
@@ -139,7 +141,7 @@ export default class ProductController {
     const states = await this.stateService.getState();
     this.stateModel.setState(states);
     const listState = this.stateModel.getStateByCountry(countryId);
-    this.cartView.handleRenderStates(listState);
+    this.checkoutView.handleRenderStates(listState);
   };
 
   handleRenderCheckout = async () => {
@@ -147,11 +149,11 @@ export default class ProductController {
     const countries = await this.countryService.getCountry();
     const products = this.cartModel.getCart();
     this.cartView.renderFormCheckout(products);
-    this.cartView.handleRenderCountry(countries);
-    this.cartView.handleDefaultCountry(this.hanldeGetStates, countries);
-    this.cartView.bindEventChangeCountry(this.hanldeGetStates);
+    this.checkoutView.handleRenderCountry(countries);
+    this.checkoutView.handleDefaultCountry(this.hanldeGetStates, countries);
+    this.checkoutView.bindEventChangeCountry(this.hanldeGetStates);
     this.cartView.bindCloseModalCheckout();
-    this.cartView.bindSubmitForm();
+    this.checkoutView.bindSubmitForm();
     hideLoading();
   };
 }
