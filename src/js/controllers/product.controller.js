@@ -34,6 +34,8 @@ export default class ProductController {
     const products = await this.cartItemService.getAllProductsFromCart();
     this.cartModel.setCart(products);
     this.cartView.renderCart(this.cartModel.getCart());
+
+    this.productView.displayToTalProductAndPrice(this.cartModel.totalProductAndPrice(products))
     this.bindCartEvents();
   };
 
