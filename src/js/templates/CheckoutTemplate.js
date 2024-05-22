@@ -11,23 +11,23 @@ export const orderSummery = (products) => {
   return `
   ${formCheckoutTemplate()}
   <div class="flex-col">
-  <div class="cart-order">
-  <div class="block-products">
-  <p class="name-total">Order Summary</p>
-  ${content}
-  </div>
-  <p class="name-total-border">Subtotal:<span>$${total}</span></p>
-  <p class="name-total-border">Shipping:<span>Free</span></p>
-  <p class="name-total-border-none total">Total:<span>$${total}</span></p>
-  <button id="btn-order" type="submit" form="form-checkout" class="btn btn-order" disabled>Place Order</button>
-  </div>
+    <div class="cart-order">
+      <div class="block-products">
+        <p class="name-total">Order Summary</p>
+        ${content}
+      </div>
+      <p class="name-total-border">Subtotal:<span>$${total}</span></p>
+      <p class="name-total-border">Shipping:<span>Free</span></p>
+      <p class="name-total-border-none total">Total:<span>$${total}</span></p>
+      <button id="btn-order" type="submit" form="form-checkout" class="btn btn-order" disabled>Place Order</button>
+    </div>
   <button id="btn-close-checkout" class="btn btn-return">Return to shop</button>
   </div>
   `;
 };
 
 export const orderSummeryTemplate = (product) => {
-  const { id, imgURL, name, amount, price } = product;
+  const { imgURL, name, amount, price } = product;
   return `<div>
           <div class="flex justify-content-between align-center">
             <div class="flex align-center">
