@@ -12,7 +12,21 @@ export default class CartModel {
     return this.products.find((item) => item.id === id);
   };
 
-  checkProductIdExisting(id) {
+  checkProductIdExisting = (id) => {
      return this.getProductById(id);
+  };
+
+  totalProductAndPrice = (products) => {
+    let total = 0;
+    if (products) {
+      products.forEach((item) => {
+        total += parseFloat(item.amount * item.price);
+      });
+    }
+
+    return {
+      product: products,
+      total: total.toFixed(2),
+    };
   };
 }
