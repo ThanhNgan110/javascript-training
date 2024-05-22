@@ -3,25 +3,25 @@ import { showSuccess, showError } from "../utils/toastify";
 import { displayLoading, hideLoading } from "../utils/loading";
 import ProductModel from "../models/product.model";
 import CartModel from "../models/cart.model";
-import StatesModel from "../models/state.model";
+import StateModel from "../models/state.model";
 import ProductView from "../views/product.view";
 import CartView from "../views/cart.view";
 import ProductService from "../services/product.service";
 import CartItemService from "../services/cartItem.service";
 import CountryService from "../services/country.service";
-import StatesService from "../services/states.service";
+import StateService from "../services/state.service";
 
 export default class ProductController {
   constructor() {
     this.productModel = new ProductModel();
     this.cartModel = new CartModel();
-    this.statesModel = new StatesModel();
+    this.stateModel = new StateModel();
     this.productView = new ProductView();
     this.cartView = new CartView();
     this.productService = new ProductService();
     this.cartItemService = new CartItemService();
     this.countryService = new CountryService();
-    this.statesService = new StatesService();
+    this.stateService = new StateService();
 
     this.productView.bindSearchProducts(this.handleSearchProducts);
     this.handleRenderProductsGrid();
@@ -136,9 +136,9 @@ export default class ProductController {
   };
 
   hanldeGetStates = async (countryId) => {
-    const states = await this.statesService.getStates();
-    this.statesModel.setStates(states);
-    const listState = this.statesModel.getStatesByCountry(countryId);
+    const states = await this.stateService.getState();
+    this.stateModel.setState(states);
+    const listState = this.stateModel.getStateByCountry(countryId);
     this.cartView.handleRenderStates(listState);
   };
 

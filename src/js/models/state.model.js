@@ -1,14 +1,14 @@
-import StatesEntity from "./entity/state.entity";
-export default class StatesModel {
-  setStates = (states) => {
-    this.states = states.map((states) => new StatesEntity(states));
+import StateEntity from "./entity/state.entity";
+export default class StateModel {
+  setState = (states) => {
+    this.state = states.map((state) => new StateEntity(state));
   };
 
-  getStates = () => {
-    return this.states;
+  getState = () => {
+    return this.state;
   };
 
-  getStatesByCountry = (countryId) => {
-    return this.states.filter((state) => state.countryId == countryId);
+  getStateByCountry = (countryId) => {
+    return this.state.filter((state) => state.countryId == countryId);
   };
 }

@@ -1,4 +1,4 @@
-export default class StatesEntity {
+export default class StateEntity {
   constructor(data) {
     this.id = data.id;
     this.countryId = data.countryId;
