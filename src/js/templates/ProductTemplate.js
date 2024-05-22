@@ -28,4 +28,16 @@ export const productTemplate = (product) => {
   `;
 }
 
+export const cartNumberBadge = ({product, total}) => {
+  return `
+    <span class="icon icon-medium icon-cart"></span>
+    <span class="icon icon-circle">${product.length}</span>
+    <div class="block-total-cart">
+      <p class="name-cart">Shopping cart</p>
+      <p class="total-price">$${total}</p>
+    </div>`;
+};
+
+
+
 
