@@ -1,4 +1,8 @@
-import { querySelector } from "../helpers/selector";
+import {
+  querySelector,
+  querySelectorAll,
+  getElementById,
+} from "../helpers/selector";
 import {
   displayCart,
   cartNumberBadge,
@@ -14,10 +18,9 @@ export default class CartView {
     this.wrapperCart = querySelector(".wrapper-cart");
     this.blockCart = querySelector(".block-cart");
     this.btnOpenModal = querySelector(".show-modal");
-    this.modalCart = document.getElementById("modal-cart");
-    this.modalCheckout = document.getElementById("modal-checkout");
+    this.modalCart = getElementById("modal-cart");
+    this.modalCheckout = getElementById("modal-checkout");
     this.formCheckout = querySelector(".wrapper-checkout");
-    this.countrySelect = document.getElementById("country");
   }
 
   renderCart = (products) => {
@@ -31,7 +34,7 @@ export default class CartView {
   };
 
   bindChangeQuantity = () => {
-    const inputList = document.querySelectorAll(".input-group.quantity");
+    const inputList = querySelectorAll(".input-group.quantity");
     inputList.forEach((item) => {
       const plusBtn = item.querySelector(".btn-plus");
       plusBtn.addEventListener("click", () => {
@@ -62,7 +65,7 @@ export default class CartView {
   };
 
   bindDeleteProduct = () => {
-    const btnDeletes = document.querySelectorAll(".btn-delete");
+    const btnDeletes = querySelectorAll(".btn-delete");
     btnDeletes.forEach((btnDelete) => {
       btnDelete.addEventListener("click", () => {
         const productId = btnDelete.dataset.id;
@@ -72,7 +75,7 @@ export default class CartView {
   };
 
   bindHiddenProduct = (productId) => {
-    const productRows = document.querySelectorAll(".col-tbody");
+    const productRows = querySelectorAll(".col-tbody");
     productRows.forEach((productRow) => {
       if (productRow.getAttribute("data-id") === productId) {
         productRow.classList.add("marked-deleted");
@@ -83,7 +86,7 @@ export default class CartView {
   };
 
   bindUpdateCart = (handler) => {
-    const btnUpdate = document.querySelector(".btn-update-cart");
+    const btnUpdate = querySelector(".btn-update-cart");
     if (btnUpdate) {
       btnUpdate.addEventListener("click", () => {
         const productRows = document.querySelectorAll(
@@ -93,7 +96,7 @@ export default class CartView {
           productRow.getAttribute("data-id")
         );
 
-        const inputQuantity = document.querySelectorAll(
+        const inputQuantity = querySelectorAll(
           ".col-tbody:not([marked-deleted=true]) .input-quantity"
         );
         const updateItems = [];
@@ -121,7 +124,7 @@ export default class CartView {
   };
 
   bindCloseModal = (btnReturn, modal) => {
-    const closeModal = document.getElementById(btnReturn);
+    const closeModal = getElementById(btnReturn);
     closeModal.addEventListener("click", () => {
       modal.style.display = "none";
     });
@@ -145,7 +148,7 @@ export default class CartView {
   };
 
   handleDefaultCountry = (handler, countries) => {
-    const countrySelect = document.getElementById("country");
+    const countrySelect = getElementById("country");
     if (!countrySelect.value) {
       countrySelect.value = countries[0].id;
     }
@@ -154,7 +157,7 @@ export default class CartView {
   };
 
   bindEventChangeCountry = (handler) => {
-    const countrySelect = document.getElementById("country");
+    const countrySelect = getElementById("country");
     countrySelect.addEventListener("change", () => {
       const selectedCountryId = countrySelect.value;
       handler(selectedCountryId);
@@ -162,7 +165,7 @@ export default class CartView {
   };
 
   handleDataDropdown = (data, selectId) => {
-    const selectElement = document.getElementById(selectId);
+    const selectElement = getElementById(selectId);
     selectElement.innerHTML = "";
     data.forEach((item) => {
       const option = document.createElement("option");
@@ -200,8 +203,8 @@ export default class CartView {
   };
 
   updateFormUi = (formErrorMess) => {
-    const form = document.getElementById("form-checkout");
-    const btnOrder = document.getElementById("btn-order");
+    const form = getElementById("form-checkout");
+    const btnOrder = getElementById("btn-order");
 
     for (const [fieldName, message] of Object.entries(formErrorMess)) {
       const inputElement = form.querySelector(`[name="${fieldName}"]`);
@@ -225,7 +228,7 @@ export default class CartView {
   };
 
   bindSubmitForm = () => {
-    const form = document.getElementById("form-checkout");
+    const form = getElementById("form-checkout");
     let formData = {},
       fieldErrorMess = {};
 
