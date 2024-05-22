@@ -90,13 +90,3 @@ export const cartTemplate = (product) => {
   `;
 };
 
-export const cartNumberBadge = (products) => {
-  const { product, total } = cartSum(products);
-  return `
-    <span class="icon icon-medium icon-cart"></span>
-    <span class="icon icon-circle">${product.length}</span>
-    <div class="block-total-cart">
-      <p class="name-cart">Shopping cart</p>
-      <p class="total-price">$${total}</p>
-    </div>`;
-};
