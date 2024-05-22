@@ -8,13 +8,11 @@ export default class CartModel {
     return this.products;
   };
 
-  checkProductIdExisting(id) {
-    return this.products
-      ? this.products.find((product) => product.id === id)
-      : null;
-  };
-
   getProductById = (id) => {
     return this.products.find((item) => item.id === id);
+  };
+
+  checkProductIdExisting(id) {
+     return this.getProductById(id);
   };
 }
