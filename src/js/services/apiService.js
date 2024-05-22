@@ -75,7 +75,6 @@ export default class ApiService {
 
   async delete(payload) {
     try {
-      console.log(payload, "payload");
       const res = await fetch(`${this.baseURL}/${this.endPoint}/${payload}`, {
         method: "DELETE",
         cache: 'no-store'
