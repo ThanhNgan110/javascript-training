@@ -101,42 +101,38 @@ export default class ProductController {
 
   handleDeleteProduct = async (deletedIds) => {
     try {
-      const promises = [];
-      for (let i = 0; i < deletedIds.length; i++) {
-        const promise = this.cartItemService.deleteProductFromCart(
-          deletedIds[i]
-        );
-        promises.push(promise);
-      }
-      await Promise.all(promises);
+      const promises = deletedIds.map((deleteId) =>
+        this.cartItemService.deleteProductFromCart(deleteId)
+      );
+
+      return promises;
     } catch (error) {}
   };
 
   handleUpdateProduct = async (updateItems) => {
     try {
+      const promises = updateItems.map((item) =>
+        this.cartItemService.updateCart({ id: item.id, amount: item.quantity })
+      );
+      
+      return promises;
+    } catch (error) {
+    }
+  };
+
+  handleUpdateCart = async (quantities, deletedIds) => {
+    try {
       displayLoading();
-      const promises = [];
-      for (let i = 0; i < updateItems.length; i++) {
-        const promise = this.cartItemService.updateCart({
-          id: updateItems[i].id,
-          amount: updateItems[i].quantity,
-        });
-        promises.push(promise);
-      }
-      await Promise.all(promises);
+      await Promise.all([
+        this.handleUpdateProduct(quantities),
+        this.handleDeleteProduct(deletedIds),
+      ]);
       hideLoading();
       showSuccess({ text: ALERT_MESSAGE.UPDATE_CART_SUCCESS_MSG });
       this.handleRenderCart();
     } catch (error) {
       showError({ text: ALERT_MESSAGE.UPDATE_CART_FAILED_MSG });
     }
-  };
-
-  handleUpdateCart = async (quantities, deletedIds) => {
-    await Promise.all([
-      this.handleUpdateProduct(quantities),
-      this.handleDeleteProduct(deletedIds),
-    ]);
   };
 
   hanldeGetStates = async (countryId) => {
