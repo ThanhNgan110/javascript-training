@@ -4,7 +4,6 @@ import {
   getElementById,
 } from "../helpers/selector";
 import { displayCart, cartSum } from "../templates/CartTemplate";
-import { orderSummery } from "../templates/CheckoutTemplate";
 import { showSuccess } from "../utils/toastify";
 import { ALERT_MESSAGE } from "../constants/message";
 
@@ -14,16 +13,11 @@ export default class CartView {
     this.btnOpenModal = querySelector(".show-modal");
     this.modalCart = getElementById("modal-cart");
     this.modalCheckout = getElementById("modal-checkout");
-    this.formCheckout = querySelector(".wrapper-checkout");
   }
 
   renderCart = (products) => {
     cartSum(products);
     this.wrapperCart.innerHTML = displayCart(products);
-  };
-
-  renderFormCheckout = (products) => {
-    this.formCheckout.innerHTML = orderSummery(products);
   };
 
   bindChangeQuantity = () => {
