@@ -92,21 +92,18 @@ export default class CheckoutView {
 
   bindSubmitForm = () => {
     const form = getElementById("form-checkout");
-    let formData = {},
-      fieldErrorMess = {};
+    let fieldErrorMess = {};
 
     for (let input of form.elements) {
       input.addEventListener("input", () => {
-        if (input.type !== "submit" && input.type !== "button") {
-          let value = input.value;
-          if (input.type === "number") {
-            value = Number(value);
-          }
-
-          formData[input.name] = value;
-          fieldErrorMess = validateForm({ [input.name]: value });
-          this.updateFormUi(fieldErrorMess);
+        let value = input.value;
+        if (input.type === "number") {
+          value = Number(value);
         }
+
+        // formData[input.name] = value;
+        fieldErrorMess = validateForm({ [input.name]: value });
+        this.updateFormUi(fieldErrorMess);
       });
     }
   };
