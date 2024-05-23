@@ -31,7 +31,7 @@ const validatePhone = ({ key, value }) => {
     : "";
 };
 
-validateForm = (validationSchema) => {
+const validateForm = (validationSchema) => {
   formError = {};
 
   Object.entries(validationSchema).map(([key, value]) => {
