@@ -10,16 +10,15 @@ export default class ProductView {
     this.btnCloseModal = querySelector(".close-modal");
     this.btnOpenModal = querySelector(".show-modal");
     this.blockCart = querySelector(".block-cart");
-
   }
 
   renderProductGrid = (products) => {
     this.cardBlock.innerHTML = displayProduct(products);
-  }
+  };
 
   displayToTalProductAndPrice = (products) => {
     this.blockCart.innerHTML = cartNumberBadge(products)
-  }
+  };
 
   bindSearchProducts = (handler) => {
     this.searchForm.addEventListener("click", (e) => {
