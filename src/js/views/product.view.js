@@ -16,7 +16,7 @@ export default class ProductView {
     this.cardBlock.innerHTML = displayProduct(products);
   };
 
-  displayToTalProductAndPrice = (products) => {
+  displayTotalProductAndPrice = (products) => {
     this.blockCart.innerHTML = cartNumberBadge(products)
   };
 
