@@ -15,9 +15,24 @@ export default class CartView {
     this.modalCheckout = getElementById("modal-checkout");
   }
 
-  renderCart = (products) => {
+  renderCart = (products, handleUpdateCart, handleCheckout) => {
     cartSum(products);
     this.wrapperCart.innerHTML = displayCart(products);
+    this.bindControlsEvents(handleUpdateCart, handleCheckout);
+  };
+
+  bindControlsEvents = (handleUpdateCart, handleCheckout) => {
+    this.bindChangeQuantity();
+    this.bindDeleteProduct();
+    this.bindUpdateCart(handleUpdateCart);
+    this.bindCloseModalCart();
+    this.bindCheckoutCart(handleCheckout);
+  };
+
+  bindShowModal = () => {
+    this.btnOpenModal.addEventListener("click", () => {
+      this.modalCart.style.display = "block";
+    });
   };
 
   bindChangeQuantity = () => {
@@ -37,7 +52,6 @@ export default class CartView {
 
   handleChangeQuantity = (options, item) => {
     const inputQuantity = item.querySelector(".input-quantity");
-
     switch (options) {
       case "plus":
         inputQuantity.value && inputQuantity.value++;
@@ -96,18 +110,6 @@ export default class CartView {
         handler(updateItems, deletedIds);
       });
     }
-  };
-
-  bindShowModal = (products, handler, handleCheckout) => {
-    this.btnOpenModal.addEventListener("click", () => {
-      this.modalCart.style.display = "block";
-      this.renderCart(products);
-      this.bindChangeQuantity();
-      this.bindDeleteProduct();
-      this.bindUpdateCart(handler);
-      this.bindCloseModalCart();
-      this.bindCheckoutCart(handleCheckout);
-    });
   };
 
   bindCloseModal = (btnReturn, modal) => {
