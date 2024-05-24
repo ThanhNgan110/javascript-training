@@ -1,6 +1,5 @@
 import { querySelector, getElementById } from "../helpers/selector";
 import { orderSummery } from "../templates/CheckoutTemplate";
-import { validateForm } from "../helpers/validateForm";
 export default class CheckoutView {
   constructor() {
     this.formCheckout = querySelector(".wrapper-checkout");
@@ -10,7 +9,7 @@ export default class CheckoutView {
     this.formCheckout.innerHTML = orderSummery(products);
   };
 
-  handleDefaultCountry = (handler, countries) => {
+  setDefaultCountry = (handler, countries) => {
     const countrySelect = getElementById("country");
     if (!countrySelect.value) {
       countrySelect.value = countries[0].id;
