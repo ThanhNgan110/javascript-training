@@ -146,7 +146,7 @@ export default class ProductController {
     const products = this.cartModel.getCart();
     this.checkoutView.renderFormCheckout(products);
     this.checkoutView.handleRenderCountry(countries);
-    this.checkoutView.handleDefaultCountry(this.hanldeGetStates, countries);
+    this.checkoutView.setDefaultCountry(this.hanldeGetStates, countries);
     this.checkoutView.bindEventChangeCountry(this.hanldeGetStates);
     this.cartView.bindCloseModalCheckout();
     this.checkoutView.bindChangeCheckoutForm(this.handleChangeCheckoutForm);
