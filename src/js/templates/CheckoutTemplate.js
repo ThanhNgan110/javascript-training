@@ -46,23 +46,23 @@ export const formCheckoutTemplate = () => {
       <div class="flex-row form-row">
         <div class="flex-col flex-col-1">
           <label for="First Name">First name</label>
-          <input class="form-control form-control-sm" type="text" id="First Name" name="First Name" placeholder="Your first name" autofocus>
+          <input class="form-control form-control-sm" type="text" id="First Name" name="firstName" placeholder="Your first name">
           <p class="mess-error error"></p>
         </div>
         <div class="flex-col flex-col-1">
           <label for="Last Name">Last name</label>
-          <input class="form-control form-control-sm" type="text" id="Last Name" name="Last Name" placeholder="Your last name">
+          <input class="form-control form-control-sm" type="text" id="Last Name" name="lastName" placeholder="Your last name">
           <p class="mess-error error"></p>
         </div>
         <div class="flex-col flex-col-1">
           <label for="Company Name">Company name</label>
-          <input class="form-control form-control-sm" type="text" id="Company Name" name="Company Name" placeholder="Company name">
+          <input class="form-control form-control-sm" type="text" id="Company Name" name="companyName" placeholder="Company name">
           <p class="mess-error error"></p>
         </div>
       </div>
       <div class="form-row">
         <label for="Address">Street Address</label>
-        <input class="form-control form-control-sm input-default" type="text" id="Address" name="Address" placeholder="Address">
+        <input class="form-control form-control-sm input-default" type="text" id="Address" name="address" placeholder="Address">
         <p class="mess-error error"></p>
       </div>
       <div class="flex-row form-row">
@@ -78,19 +78,19 @@ export const formCheckoutTemplate = () => {
         </div>
         <div class="flex-col flex-col-2">
           <label for="Zip Code">Zip Code</label>
-          <input class="form-control form-control-sm" type="text" id="Zip Code" name="Zip Code" placeholder="Zip Code">
+          <input class="form-control form-control-sm" type="text" id="Zip Code" name="zipCode" placeholder="Zip Code">
           <p class="mess-error error"></p>
         </div>
       </div>
       <div class="flex-row form-row">
         <div class="flex-col flex-col-3">
           <label for="Email">Email</label>
-          <input class="form-control form-control-sm" type="email" id="Email" name="Email" placeholder="Email Address">
+          <input class="form-control form-control-sm" type="email" id="Email" name="email" placeholder="Email Address">
           <p class="mess-error error"></p>
         </div>
         <div class="flex-col flex-col-3">
           <label for="Phone Number">Phone</label>
-          <input class="form-control form-control-sm" type="text" id="Phone Number" name="Phone Number" placeholder="Phone number">
+          <input class="form-control form-control-sm" type="text" id="Phone Number" name="phoneNumber" placeholder="Phone number">
           <p class="mess-error error"></p>
         </div>
       </div>
@@ -98,7 +98,7 @@ export const formCheckoutTemplate = () => {
         <p class="title-info">Additional Information</p>
         <div class="flex-col">
           <label class="name-label" for="Note">Order Notes (Optional)</label>
-          <textarea class="form-control form-control-lg" id="Note" name="Note" rows="2" cols="60"
+          <textarea class="form-control form-control-lg" id="Note" name="note" rows="2" cols="60"
             placeholder="Notes about your order, e.g. special notes for delivery"></textarea>
             <p class="mess-error error"></p>
         </div>
