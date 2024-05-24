@@ -35,25 +35,20 @@ export default class ProductController {
   handleRenderCart = async () => {
     const products = await this.cartItemService.getAllProductsFromCart();
     this.cartModel.setCart(products);
-    this.cartView.renderCart(this.cartModel.getCart());
+    this.cartView.renderCart(
+      this.cartModel.getCart(),
+      this.handleUpdateCart,
+      this.handleRenderCheckout
+    );
 
-    this.productView.displayToTalProductAndPrice(
+    this.productView.displayTotalProductAndPrice(
       this.cartModel.totalProductAndPrice(products)
     );
     this.bindCartEvents();
   };
 
   bindCartEvents = () => {
-    this.cartView.bindShowModal(
-      this.cartModel.getCart(),
-      this.handleUpdateCart,
-      this.handleRenderCheckout
-    );
-    this.cartView.bindDeleteProduct(this.handleHiddenProduct);
-    this.cartView.bindChangeQuantity();
-    this.cartView.bindUpdateCart(this.handleUpdateCart);
-    this.cartView.bindCloseModalCart();
-    this.cartView.bindCheckoutCart(this.handleRenderCheckout);
+    this.cartView.bindShowModal();
   };
 
   handleRenderProductsGrid = async () => {
@@ -108,23 +103,19 @@ export default class ProductController {
   };
 
   handleDeleteProduct = async (deletedIds) => {
-    try {
-      const promises = deletedIds.map((deleteId) =>
-        this.cartItemService.deleteProductFromCart(deleteId)
-      );
+    const promises = deletedIds.map((deleteId) =>
+      this.cartItemService.deleteProductFromCart(deleteId)
+    );
 
-      return promises;
-    } catch (error) {}
+    return promises;
   };
 
   handleUpdateProduct = async (updateItems) => {
-    try {
-      const promises = updateItems.map((item) =>
-        this.cartItemService.updateCart({ id: item.id, amount: item.quantity })
-      );
+    const promises = updateItems.map((item) =>
+      this.cartItemService.updateCart({ id: item.id, amount: item.quantity })
+    );
 
-      return promises;
-    } catch (error) {}
+    return promises;
   };
 
   handleUpdateCart = async (quantities, deletedIds) => {
@@ -155,7 +146,7 @@ export default class ProductController {
     const products = this.cartModel.getCart();
     this.checkoutView.renderFormCheckout(products);
     this.checkoutView.handleRenderCountry(countries);
-    this.checkoutView.handleDefaultCountry(this.hanldeGetStates, countries);
+    this.checkoutView.setDefaultCountry(this.hanldeGetStates, countries);
     this.checkoutView.bindEventChangeCountry(this.hanldeGetStates);
     this.cartView.bindCloseModalCheckout();
     this.checkoutView.bindChangeCheckoutForm(this.handleChangeCheckoutForm);
