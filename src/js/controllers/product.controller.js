@@ -4,6 +4,7 @@ import { displayLoading, hideLoading } from "../utils/loading";
 import ProductModel from "../models/product.model";
 import CartModel from "../models/cart.model";
 import StateModel from "../models/state.model";
+import OrderModel from "../models/order.model";
 import ProductView from "../views/product.view";
 import CartView from "../views/cart.view";
 import CheckoutView from "../views/checkout.view";
@@ -17,6 +18,7 @@ export default class ProductController {
     this.productModel = new ProductModel();
     this.cartModel = new CartModel();
     this.stateModel = new StateModel();
+    this.orderModel = new OrderModel();
     this.productView = new ProductView();
     this.cartView = new CartView();
     this.checkoutView = new CheckoutView();
@@ -35,7 +37,9 @@ export default class ProductController {
     this.cartModel.setCart(products);
     this.cartView.renderCart(this.cartModel.getCart());
 
-    this.productView.displayToTalProductAndPrice(this.cartModel.totalProductAndPrice(products))
+    this.productView.displayToTalProductAndPrice(
+      this.cartModel.totalProductAndPrice(products)
+    );
     this.bindCartEvents();
   };
 
@@ -118,10 +122,9 @@ export default class ProductController {
       const promises = updateItems.map((item) =>
         this.cartItemService.updateCart({ id: item.id, amount: item.quantity })
       );
-      
+
       return promises;
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
   handleUpdateCart = async (quantities, deletedIds) => {
@@ -155,7 +158,14 @@ export default class ProductController {
     this.checkoutView.handleDefaultCountry(this.hanldeGetStates, countries);
     this.checkoutView.bindEventChangeCountry(this.hanldeGetStates);
     this.cartView.bindCloseModalCheckout();
-    this.checkoutView.bindSubmitForm();
+    this.checkoutView.bindChangeCheckoutForm(this.handleChangeCheckoutForm);
     hideLoading();
+  };
+
+  handleChangeCheckoutForm = (fieldObject, fieldName) => {
+    this.orderModel.setOrder(fieldObject);
+    const fieldErrorMess = this.orderModel.validate(fieldObject);
+    const formErrorMess = { [fieldName]: fieldErrorMess };
+    this.checkoutView.updateFormUi(formErrorMess);
   };
 }
