@@ -12,6 +12,7 @@
   --color-concrete: #F2F2F2;
   --color-dusty-gray: #999;
   --color-alabaster: #F7F7F7;
+  --color-cornflower-blue: #6195ED;
   --color-danger: #f8d7da;
   --color-success: #d4edda;
 
@@ -20,7 +21,7 @@
   --font-weight-semibold: 600;
 
   --color-text-success: #155724;
-  --color-text-danger: #721c24;
+  --color-text-danger:  #e4505e;
 
   --border-color-success: #c3e6cb;
   --border-color-danger: #f5c6cb;

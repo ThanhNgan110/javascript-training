@@ -1,9 +1,8 @@
 .header-top {
   background-color: var(--color-mine-shaft);
+  justify-content: space-between;
   display: flex;
-  justify-content: space-around;
-  gap: 191px;
-  padding: 13px 0;
+  padding: 13px 180px;
 }
 
 .link {

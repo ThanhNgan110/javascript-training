@@ -5,7 +5,7 @@ export default class ProductEntity {
    * @param {number} data - The data contains of object product.
    */
   constructor(data) {
-    this.productId = data.productId;
+    this.id = data.id;
     this.name = data.name;
     this.price = data.price;
     this.amount = data.amount;

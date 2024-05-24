@@ -1,80 +1,171 @@
-import { showSuccess } from "../utils/toastify";
 import { ALERT_MESSAGE } from "../constants/message";
+import { showSuccess, showError } from "../utils/toastify";
 import { displayLoading, hideLoading } from "../utils/loading";
-
 import ProductModel from "../models/product.model";
 import CartModel from "../models/cart.model";
+import StateModel from "../models/state.model";
+import OrderModel from "../models/order.model";
 import ProductView from "../views/product.view";
 import CartView from "../views/cart.view";
+import CheckoutView from "../views/checkout.view";
 import ProductService from "../services/product.service";
-import CartService from "../services/cart.service";
-import CartController from "../controllers/cart.controller";
+import CartItemService from "../services/cartItem.service";
+import CountryService from "../services/country.service";
+import StateService from "../services/state.service";
 
 export default class ProductController {
   constructor() {
-    this.model = new ProductModel();
+    this.productModel = new ProductModel();
     this.cartModel = new CartModel();
-    this.view = new ProductView();
+    this.stateModel = new StateModel();
+    this.orderModel = new OrderModel();
+    this.productView = new ProductView();
     this.cartView = new CartView();
+    this.checkoutView = new CheckoutView();
     this.productService = new ProductService();
-    this.cartService = new CartService();
-    this.cartController = new CartController();
+    this.cartItemService = new CartItemService();
+    this.countryService = new CountryService();
+    this.stateService = new StateService();
 
-    // Explicit this binding
-    this.view.bindSearchProducts(this.handleSearchProducts);
-    this.view.bindShowModal();
-    this.view.bindHiddenModal();
-
-    // Display initial products
+    this.productView.bindSearchProducts(this.handleSearchProducts);
     this.handleRenderProductsGrid();
+    this.handleRenderCart();
   }
 
-  async handleRenderProductsGrid() {
+  handleRenderCart = async () => {
+    const products = await this.cartItemService.getAllProductsFromCart();
+    this.cartModel.setCart(products);
+    this.cartView.renderCart(this.cartModel.getCart());
+
+    this.productView.displayToTalProductAndPrice(
+      this.cartModel.totalProductAndPrice(products)
+    );
+    this.bindCartEvents();
+  };
+
+  bindCartEvents = () => {
+    this.cartView.bindShowModal(
+      this.cartModel.getCart(),
+      this.handleUpdateCart,
+      this.handleRenderCheckout
+    );
+    this.cartView.bindDeleteProduct(this.handleHiddenProduct);
+    this.cartView.bindChangeQuantity();
+    this.cartView.bindUpdateCart(this.handleUpdateCart);
+    this.cartView.bindCloseModalCart();
+    this.cartView.bindCheckoutCart(this.handleRenderCheckout);
+  };
+
+  handleRenderProductsGrid = async () => {
     displayLoading();
     const res = await this.productService.getAllProducts();
-    this.model.setProducts(res);
-    this.view.renderProductGrid(this.model.getProducts());
-    this.view.bindAddProducts(this.handleAddProducts);
+    this.productModel.setProducts(res);
+    this.productView.renderProductGrid(this.productModel.getProducts());
+    this.productView.bindAddProducts(this.handleAddProduct);
     hideLoading();
-  }
-
-  handleAddProducts = async (productId) => {
-    const products = await this.cartService.getAllProductsFromCart();
-    this.cartModel.setCart(products);
-    const existingProduct = this.cartModel.checkProductIdExisting(productId);
-    const product = this.model.getProductById(productId);
-    if (existingProduct !== undefined) {
-      displayLoading();
-      await this.cartService.updateCart({
-        ...existingProduct,
-        amount: existingProduct.amount + 1,
-      });
-      hideLoading();
-      showSuccess({ text: ALERT_MESSAGE.ADD_PRODUCT_SUCCESS_MSG });
-    } else {
-      displayLoading();
-      await this.cartService.addProductToCart(product);
-      showSuccess({ text: ALERT_MESSAGE.ADD_PRODUCT_SUCCESS_MSG });
-      hideLoading();
-    }
-    const cart = await this.cartService.getAllProductsFromCart();
-    this.cartModel.setCart(cart);
-    this.cartView.renderCart(this.cartModel.getCart());
-    this.cartView.bindChangeQuantity();
-    this.cartView.bindDeleteProduct(this.cartController.handleDeleteProductFromCart);
-    this.cartView.bindUpdateCart(this.cartController.handleUpdateCart);
   };
 
   handleSearchProducts = async (productName) => {
     const products = await this.productService.getAllProducts();
-    this.model.setProducts(products);
-    const result = this.model.searchProductByName(productName);
-    if (result === null) {
-      this.view.displayMessage(ALERT_MESSAGE.SEARCH_PRODUCT_LIST_EMPTY_HEADING);
-    } else {
-      this.view.displayMessage("");
+    this.productModel.setProducts(products);
+    const result = this.productModel.searchProductByName(productName);
+    this.productView.displayMessage(
+      result ? "" : ALERT_MESSAGE.SEARCH_PRODUCT_LIST_EMPTY_HEADING
+    );
+    this.productView.renderProductGrid(result);
+    this.productView.bindAddProducts(this.handleAddProduct);
+  };
+
+  handleAddProduct = async (productId) => {
+    try {
+      displayLoading();
+      const products = this.cartModel.getCart();
+      this.cartModel.setCart(products);
+      let existingProduct = this.cartModel.checkProductIdExisting(productId);
+      const listProduct = this.productModel.getProducts();
+      this.productModel.setProducts(listProduct);
+      const product = this.productModel.getProductById(productId);
+
+      if (!!existingProduct) {
+        await this.cartItemService.updateCart({
+          ...existingProduct,
+          amount: existingProduct.amount + 1,
+        });
+      } else {
+        await this.cartItemService.addProductToCart(product);
+      }
+
+      hideLoading();
+      showSuccess({ text: ALERT_MESSAGE.ADD_PRODUCT_SUCCESS_MSG });
+      await this.handleRenderCart();
+    } catch (error) {
+      showError({ text: ALERT_MESSAGE.ADD_PRODUCT_FAILED_MSG });
     }
-    await this.view.renderProductGrid(result);
+  };
+
+  handleHiddenProduct = (id) => {
+    this.view.bindHiddenProduct(id);
+  };
+
+  handleDeleteProduct = async (deletedIds) => {
+    try {
+      const promises = deletedIds.map((deleteId) =>
+        this.cartItemService.deleteProductFromCart(deleteId)
+      );
+
+      return promises;
+    } catch (error) {}
+  };
+
+  handleUpdateProduct = async (updateItems) => {
+    try {
+      const promises = updateItems.map((item) =>
+        this.cartItemService.updateCart({ id: item.id, amount: item.quantity })
+      );
+
+      return promises;
+    } catch (error) {}
+  };
+
+  handleUpdateCart = async (quantities, deletedIds) => {
+    try {
+      displayLoading();
+      await Promise.all([
+        this.handleUpdateProduct(quantities),
+        this.handleDeleteProduct(deletedIds),
+      ]);
+      hideLoading();
+      showSuccess({ text: ALERT_MESSAGE.UPDATE_CART_SUCCESS_MSG });
+      this.handleRenderCart();
+    } catch (error) {
+      showError({ text: ALERT_MESSAGE.UPDATE_CART_FAILED_MSG });
+    }
+  };
+
+  hanldeGetStates = async (countryId) => {
+    const states = await this.stateService.getState();
+    this.stateModel.setState(states);
+    const listState = this.stateModel.getStateByCountry(countryId);
+    this.checkoutView.handleRenderStates(listState);
+  };
+
+  handleRenderCheckout = async () => {
+    displayLoading();
+    const countries = await this.countryService.getCountry();
+    const products = this.cartModel.getCart();
+    this.checkoutView.renderFormCheckout(products);
+    this.checkoutView.handleRenderCountry(countries);
+    this.checkoutView.handleDefaultCountry(this.hanldeGetStates, countries);
+    this.checkoutView.bindEventChangeCountry(this.hanldeGetStates);
+    this.cartView.bindCloseModalCheckout();
+    this.checkoutView.bindChangeCheckoutForm(this.handleChangeCheckoutForm);
+    hideLoading();
+  };
+
+  handleChangeCheckoutForm = (fieldObject, fieldName) => {
+    this.orderModel.setOrder(fieldObject);
+    const fieldErrorMess = this.orderModel.validate(fieldObject);
+    const formErrorMess = { [fieldName]: fieldErrorMess };
+    this.checkoutView.updateFormUi(formErrorMess);
   };
 }
-

@@ -2,11 +2,11 @@ import { querySelector } from "../helpers/selector";
 let loader = querySelector(".loading");
 
 const displayLoading = () => {
-  return loader.classList.remove("hidden");
+  loader.style.display = 'block';
 };
 
 const hideLoading = () => {
-  return loader.classList.add("hidden");
+  loader.style.display = 'none';
 };
 
 export { displayLoading, hideLoading };

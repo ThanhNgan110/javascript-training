@@ -1,5 +1,5 @@
 import { querySelector } from "../helpers/selector";
-import { displayProduct } from "../templates/ProductTemplate";
+import { displayProduct, cartNumberBadge } from "../templates/ProductTemplate";
 export default class ProductView {
   constructor() {
     this.cardBlock = querySelector(".card-block");
@@ -9,12 +9,16 @@ export default class ProductView {
     this.modal = querySelector(".modal");
     this.btnCloseModal = querySelector(".close-modal");
     this.btnOpenModal = querySelector(".show-modal");
-    this.overlay = querySelector(".overlay");
+    this.blockCart = querySelector(".block-cart");
   }
 
-  renderProductGrid(products) {
+  renderProductGrid = (products) => {
     this.cardBlock.innerHTML = displayProduct(products);
-  }
+  };
+
+  displayToTalProductAndPrice = (products) => {
+    this.blockCart.innerHTML = cartNumberBadge(products)
+  };
 
   bindSearchProducts = (handler) => {
     this.searchForm.addEventListener("click", (e) => {
@@ -36,17 +40,4 @@ export default class ProductView {
       });
     });
   };
-
-  bindShowModal = () => {
-    this.btnCloseModal.addEventListener("click", () => {
-      return this.modal.classList.add("hidden");
-    });
-  };
-
-  bindHiddenModal = () => {
-    this.btnOpenModal.addEventListener("click", () => {
-      return this.modal.classList.remove("hidden");
-    });
-  };
-
 }

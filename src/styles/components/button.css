@@ -12,6 +12,7 @@
 }
 
 .btn-search:hover {
+  padding: 13px 23px;
   background-color: var(--color-white);
   color: var(--color-green);
   border: 1px solid;
@@ -55,22 +56,22 @@
   border: var(--color-white);
 }
 
-.btn-checkout {
-  padding: 16px 140px;
+.btn-checkout, .btn-order {
   background-color: var(--color-green);
-  border-radius: 43px;
   border: var(--color-white);
   font-size: 16px;
   font-weight: var(--font-weight-semibold);
   color: var(--color-white);
+  border-radius: 43px;
+  padding: 16px 140px;
+  white-space: nowrap;
 }
 
 .btn-checkout:hover {
+  padding: 15px 139px;
   background-color: var(--color-white);
   color: var(--color-green);
-  transform: scale(1.1);
-  border: 1px solid;
-  border-color: var(--color-green);
+  border: 1px solid var(--color-green);
 }
 
 .btn-return, .btn-update-cart {
@@ -88,6 +89,7 @@
   color: var(--color-green);
   border: 1px solid;
   border-color: var(--color-green);
+  padding: 13px 31px;
 }
 
 .btn-delete {

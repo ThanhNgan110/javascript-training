@@ -8,16 +8,13 @@ export default class ProductModel {
     return this.products;
   };
 
-  getProductById(productId) {
-    return this.products.find(product => product.productId === productId);
-  }
+  getProductById(id) {
+    return this.products.find(product => product.id === id);
+  };
 
   searchProductByName = (productName) => {
     const result = this.products.filter((product) =>
-      product.name.toLowerCase().includes(productName.toLowerCase())
-    );
+    product.name.toLowerCase().includes(productName.toLowerCase()));
     return result.length > 0 ? result : null;
-  }
-  
-
+  };
 }

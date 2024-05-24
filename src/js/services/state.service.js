@@ -1,11 +1,11 @@
 import { API } from "../constants/config";
 import ApiService from "./apiService";
-export default class ProductService {
+export default class StateService {
   constructor() {
-    this.apiService = new ApiService(API.URL_API, API.END_POINT_PRODUCT);
+    this.apiService = new ApiService(API.URL_API, API.END_POINT_STATES);
   }
 
-  getAllProducts = async () => {
+  getState = async () => {
     return await this.apiService.get();
   };
 }
