@@ -79,7 +79,7 @@ export default class CheckoutView {
       if (
         input.type !== "submit" &&
         input.type !== "button" &&
-        input.name !== "Note" &&
+        input.name !== "note" &&
         input.value.trim() === ""
       ) {
         allFieldsFilled = false;
@@ -90,20 +90,16 @@ export default class CheckoutView {
     btnOrder.disabled = !allFieldsFilled || !this.checkFormValid(formErrorMess);
   };
 
-  bindSubmitForm = () => {
+  bindChangeCheckoutForm = (handler) => {
     const form = getElementById("form-checkout");
-    let fieldErrorMess = {};
-
     for (let input of form.elements) {
       input.addEventListener("input", () => {
         let value = input.value;
         if (input.type === "number") {
           value = Number(value);
         }
-
-        // formData[input.name] = value;
-        fieldErrorMess = validateForm({ [input.name]: value });
-        this.updateFormUi(fieldErrorMess);
+        
+        handler({[input.name] : value}, input.name);
       });
     }
   };
