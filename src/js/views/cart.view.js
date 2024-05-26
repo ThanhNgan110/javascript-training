@@ -15,23 +15,24 @@ export default class CartView {
     this.modalCheckout = getElementById("modal-checkout");
   }
 
-  renderCart = (products, handleUpdateCart, handleCheckout) => {
+  renderCart = ({ products, handleUpdateCart, handleRenderCheckout }) => {
     cartSum(products);
     this.wrapperCart.innerHTML = displayCart(products);
-    this.bindControlsEvents(handleUpdateCart, handleCheckout);
+    this.bindControlsEvents(handleUpdateCart, handleRenderCheckout);
   };
 
-  bindControlsEvents = (handleUpdateCart, handleCheckout) => {
+  bindControlsEvents = (handleUpdateCart, handleRenderCheckout) => {
     this.bindChangeQuantity();
     this.bindDeleteProduct();
     this.bindUpdateCart(handleUpdateCart);
     this.bindCloseModalCart();
-    this.bindCheckoutCart(handleCheckout);
+    this.bindCheckoutCart(handleRenderCheckout);
   };
 
-  bindShowModal = () => {
+  bindShowModal = (handler) => {
     this.btnOpenModal.addEventListener("click", () => {
       this.modalCart.style.display = "block";
+      handler();
     });
   };
 

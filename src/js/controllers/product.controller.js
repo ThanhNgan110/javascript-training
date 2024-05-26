@@ -27,28 +27,27 @@ export default class ProductController {
     this.countryService = new CountryService();
     this.stateService = new StateService();
 
+    this.init();
+  }
+
+  init = () => {
     this.productView.bindSearchProducts(this.handleSearchProducts);
     this.handleRenderProductsGrid();
     this.handleRenderCart();
+    this.cartView.bindShowModal(this.handleRenderCart);
   }
 
   handleRenderCart = async () => {
     const products = await this.cartItemService.getAllProductsFromCart();
     this.cartModel.setCart(products);
-    this.cartView.renderCart(
-      this.cartModel.getCart(),
-      this.handleUpdateCart,
-      this.handleRenderCheckout
-    );
-
+    this.cartView.renderCart({
+      products: this.cartModel.getCart(),
+      handleUpdateCart: this.handleUpdateCart,
+      handleRenderCheckout: this.handleRenderCheckout
+    });
     this.productView.displayTotalProductAndPrice(
       this.cartModel.totalProductAndPrice(products)
     );
-    this.bindCartEvents();
-  };
-
-  bindCartEvents = () => {
-    this.cartView.bindShowModal();
   };
 
   handleRenderProductsGrid = async () => {
@@ -98,10 +97,6 @@ export default class ProductController {
     }
   };
 
-  handleHiddenProduct = (id) => {
-    this.view.bindHiddenProduct(id);
-  };
-
   handleDeleteProduct = async (deletedIds) => {
     const promises = deletedIds.map((deleteId) =>
       this.cartItemService.deleteProductFromCart(deleteId)
@@ -122,8 +117,8 @@ export default class ProductController {
     try {
       displayLoading();
       await Promise.all([
-        this.handleUpdateProduct(quantities),
         this.handleDeleteProduct(deletedIds),
+        this.handleUpdateProduct(quantities),
       ]);
       hideLoading();
       showSuccess({ text: ALERT_MESSAGE.UPDATE_CART_SUCCESS_MSG });
