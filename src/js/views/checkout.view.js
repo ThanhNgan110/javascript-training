@@ -69,11 +69,14 @@ export default class CheckoutView {
     const btnOrder = getElementById("btn-order");
 
     for (const [fieldName, message] of Object.entries(formErrorMess)) {
-      const inputElement = form.querySelector(`[name="${fieldName}"]`);
-      this.handleDisplayMessageError(inputElement, message);
+      if (fieldName !== 'note') {
+        const inputElement = form.querySelector(`[name="${fieldName}"]`);
+        this.handleDisplayMessageError(inputElement, message);
+      }
     }
 
     let allFieldsFilled = true;
+
     for (let input of form.elements) {
       if (
         input.type !== "submit" &&
@@ -93,12 +96,7 @@ export default class CheckoutView {
     const form = getElementById("form-checkout");
     for (let input of form.elements) {
       input.addEventListener("input", () => {
-        let value = input.value;
-        if (input.type === "number") {
-          value = Number(value);
-        }
-        
-        handler({[input.name] : value}, input.name);
+        handler({ [input.name]: input.value }, input.name);
       });
     }
   };
