@@ -1,12 +1,12 @@
 import { querySelector, getElementById } from "../helpers/selector";
-import { orderSummery } from "../templates/checkout.template";
+import { orderSummary } from "../templates/checkout.template";
 export default class CheckoutView {
   constructor() {
     this.formCheckout = querySelector(".wrapper-checkout");
   }
 
   renderFormCheckout = (products) => {
-    this.formCheckout.innerHTML = orderSummery(products);
+    this.formCheckout.innerHTML = orderSummary(products);
   };
 
   setDefaultCountry = (handler, countries) => {

@@ -1,7 +1,7 @@
 import { cartSum } from "./cart.template";
 let total = "";
 
-export const orderSummery = (products) => {
+export const orderSummary = (products) => {
   const cartSummery = cartSum(products);
   total = cartSummery.total;
   let content = "";
