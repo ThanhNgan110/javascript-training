@@ -3,7 +3,7 @@ import {
   querySelectorAll,
   getElementById,
 } from "../helpers/selector";
-import { displayCart, cartSum } from "../templates/CartTemplate";
+import { displayCart, cartSum } from "../templates/cart.template";
 import { showSuccess } from "../utils/toastify";
 import { ALERT_MESSAGE } from "../constants/message";
 

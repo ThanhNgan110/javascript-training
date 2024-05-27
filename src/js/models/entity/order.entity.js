@@ -4,7 +4,7 @@ import {
   validateEmail,
   validateString,
   validatePhone,
-} from "../../helpers/validateForm";
+} from "../../helpers/validate";
 
 export default class OrderEntity {
   constructor(data) {
