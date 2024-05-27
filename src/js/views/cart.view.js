@@ -10,7 +10,7 @@ import { ALERT_MESSAGE } from "../constants/message";
 export default class CartView {
   constructor() {
     this.wrapperCart = querySelector(".wrapper-cart");
-    this.btnOpenModal = querySelector(".show-modal");
+    this.btnOpenModal = getElementById("btn-open-modal");
     this.modalCart = getElementById("modal-cart");
     this.modalCheckout = getElementById("modal-checkout");
   }
@@ -88,7 +88,7 @@ export default class CartView {
   };
 
   bindUpdateCart = (handler) => {
-    const btnUpdate = querySelector(".btn-update-cart");
+    const btnUpdate = getElementById("btn-update-cart");
     if (btnUpdate) {
       btnUpdate.addEventListener("click", () => {
         const productRows = document.querySelectorAll(
@@ -129,7 +129,7 @@ export default class CartView {
   };
 
   bindCheckoutCart = (handler) => {
-    const btnCheckout = querySelector(".btn-checkout");
+    const btnCheckout = getElementById("btn-checkout");
     btnCheckout.addEventListener("click", () => {
       this.modalCart.style.display = "none";
       this.modalCheckout.style.display = "block";

@@ -43,7 +43,7 @@ export const displayCart = (products) => {
       <td colspan="5">
         <div class="btn-group">
           <button id="btn-close-cart" class="btn btn-return">Return to shop</button>
-          <button class="btn btn-update-cart">Update Cart</button>
+          <button id="btn-update-cart" class="btn btn-update-cart">Update Cart</button>
         </div>
       </td>
     </tr>
@@ -56,7 +56,7 @@ export const displayCart = (products) => {
   <p class="name-total-border">Subtotal:<span>${total}$</span></p>
   <p class="name-total-border">Shipping:<span>Free</span></p>
   <p class="name-total-border-none total">Total:<span>${total}$</span></p>
-  <button class="btn btn-checkout">Proceed to checkout</button>
+  <button id="btn-checkout" class="btn btn-checkout">Proceed to checkout</button>
 </div>
    `;
 };
@@ -84,7 +84,7 @@ export const cartTemplate = (product) => {
         <p class="product-subtotal">${subtotal}$</p>
       </td>
       <td>
-        <button class="btn btn-delete" data-id=${id}><span class="icon icon-close"></span></button>
+        <button id="btn-delete" class="btn btn-delete" data-id=${id}><span class="icon icon-close"></span></button>
       </td>
     </tr>
   `;

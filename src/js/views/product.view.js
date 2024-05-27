@@ -1,14 +1,11 @@
-import { querySelector } from "../helpers/selector";
+import { getElementById, querySelector } from "../helpers/selector";
 import { displayProduct, cartNumberBadge } from "../templates/product.template";
 export default class ProductView {
   constructor() {
     this.cardBlock = querySelector(".card-block");
-    this.searchForm = querySelector(".search-form");
-    this.inputSearch = querySelector(".input-search");
+    this.searchForm = getElementById("search-form");
+    this.inputSearch = getElementById("input-search");
     this.messageContent = querySelector(".message-empty");
-    this.modal = querySelector(".modal");
-    this.btnCloseModal = querySelector(".close-modal");
-    this.btnOpenModal = querySelector(".show-modal");
     this.blockCart = querySelector(".block-cart");
   }
 
