@@ -111,15 +111,7 @@
       "id": "1"
     }
   ],
-  "cartItems": [
-    {
-      "id": "db45",
-      "name": "Eggplant",
-      "price": 14.99,
-      "amount": 1,
-      "imgURL": "https://github.com/ThanhNgan110/javascript-training/assets/94752353/698ed29d-34f8-4e4d-b852-4883fc58f118"
-    }
-  ],
+  "cartItems": [],
   "country": [
     {
       "id": "1",
