@@ -122,7 +122,7 @@ export default class ProductController {
       ]);
       hideLoading();
       showSuccess({ text: ALERT_MESSAGE.UPDATE_CART_SUCCESS_MSG });
-      this.handleRenderCart();
+     await this.handleRenderCart();
     } catch (error) {
       showError({ text: ALERT_MESSAGE.UPDATE_CART_FAILED_MSG });
     }
