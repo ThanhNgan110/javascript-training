@@ -3,11 +3,11 @@ import { orderSummary } from "../templates/checkout.template";
 
 export default class CheckoutView {
   constructor() {
-    this.formCheckout = querySelector(".wrapper-checkout");
+    this.wrapperCheckout = querySelector(".wrapper-checkout");
   }
 
   renderFormCheckout = (products) => {
-    this.formCheckout.innerHTML = orderSummary(products);
+    this.wrapperCheckout.innerHTML = orderSummary(products);
   };
 
   setDefaultCountry = (handler, countries) => {
