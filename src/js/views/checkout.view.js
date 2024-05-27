@@ -1,5 +1,5 @@
 import { querySelector, getElementById } from "../helpers/selector";
-import { orderSummary } from "../templates/CheckoutTemplate";
+import { orderSummary } from "../templates/checkout.template";
 export default class CheckoutView {
   constructor() {
     this.formCheckout = querySelector(".wrapper-checkout");

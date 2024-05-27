@@ -1,5 +1,5 @@
 import { querySelector } from "../helpers/selector";
-import { displayProduct, cartNumberBadge } from "../templates/ProductTemplate";
+import { displayProduct, cartNumberBadge } from "../templates/product.template";
 export default class ProductView {
   constructor() {
     this.cardBlock = querySelector(".card-block");

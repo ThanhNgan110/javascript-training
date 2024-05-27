@@ -1,4 +1,4 @@
-import { cartSum } from "./CartTemplate";
+import { cartSum } from "./cart.template";
 let total = "";
 
 export const orderSummary = (products) => {
