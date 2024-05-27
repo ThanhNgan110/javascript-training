@@ -8,7 +8,7 @@
 ## TIMELINE
 
 - Expected: 72 hours (2024/03/14- 2024/03/26)
-- Total: 120 hours (2024/03/14 - 2024/05/27)
+- Total: 160 hours (2024/03/14 - 2024/05/27)
 
 ## TEAM SIZE
 
