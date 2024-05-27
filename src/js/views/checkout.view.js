@@ -1,5 +1,6 @@
 import { querySelector, getElementById } from "../helpers/selector";
 import { orderSummary } from "../templates/checkout.template";
+
 export default class CheckoutView {
   constructor() {
     this.formCheckout = querySelector(".wrapper-checkout");
@@ -60,7 +61,6 @@ export default class CheckoutView {
         return false;
       }
     }
-
     return true;
   };
 
@@ -69,10 +69,11 @@ export default class CheckoutView {
     const btnOrder = getElementById("btn-order");
 
     for (const [fieldName, message] of Object.entries(formErrorMess)) {
-      if (fieldName !== 'note') {
+      if (fieldName !== "note") {
         const inputElement = form.querySelector(`[name="${fieldName}"]`);
         this.handleDisplayMessageError(inputElement, message);
       }
+      
     }
 
     let allFieldsFilled = true;
@@ -82,6 +83,8 @@ export default class CheckoutView {
         input.type !== "submit" &&
         input.type !== "button" &&
         input.name !== "note" &&
+        input.tagName.toLowerCase() !== "textarea" &&
+        input.tagName.toLowerCase() !== "select" &&
         input.value.trim() === ""
       ) {
         allFieldsFilled = false;
@@ -89,14 +92,18 @@ export default class CheckoutView {
       }
     }
 
-    btnOrder.disabled = !allFieldsFilled || !this.checkFormValid(formErrorMess);
+    const isFormValid = this.checkFormValid(formErrorMess);
+
+    btnOrder.disabled = !allFieldsFilled || !isFormValid;
   };
 
   bindChangeCheckoutForm = (handler) => {
     const form = getElementById("form-checkout");
     for (let input of form.elements) {
       input.addEventListener("input", () => {
-        handler({ [input.name]: input.value }, input.name);
+        if (input.tagName.toLowerCase() !== "select") {
+          handler({ [input.name]: input.value }, input.name);
+        }
       });
     }
   };

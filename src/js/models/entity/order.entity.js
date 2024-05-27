@@ -46,6 +46,9 @@ export default class OrderEntity {
             formError = validatePhone({ key, value });
             break;
 
+          case "note":
+            formError = validateString({key, value});
+
           default:
             break;
         }
