@@ -51,7 +51,7 @@
 - Clone source
 
 ```
-https://github.com/ThanhNgan110/javascript-training
+git clone https://github.com/ThanhNgan110/javascript-training
 ```
 
 - Git checkout feature/practice
