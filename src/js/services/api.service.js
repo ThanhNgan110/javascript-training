@@ -33,24 +33,6 @@ export default class ApiService {
     }
   };
 
-  async put(payload) {
-    try {
-      const res = await fetch(
-        `${this.baseURL}/${this.endPoint}/${payload.id}`,
-        {
-          method: "PUT",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify(payload),
-        }
-      );
-      if (res.ok) {
-        return res.json();
-      }
-    } catch (error) {
-      throw new Error(`Put data fail ${error.message}`);
-    }
-  };
-
   async patch(payload) {
     try {
       const res = await fetch(
