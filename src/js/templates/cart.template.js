@@ -35,12 +35,12 @@ export const displayCart = (products) => {
       <th>SUBTOTAL</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody id="tbody">
     ${contentCart}
   </tbody>
   <tfoot>
     <tr class="col-btn">
-      <td colspan="5">
+      <td>
         <div class="btn-group">
           <button id="btn-close-cart" class="btn btn-return">Return to shop</button>
           <button id="btn-update-cart" class="btn btn-update-cart">Update Cart</button>
@@ -75,9 +75,9 @@ export const cartTemplate = (product) => {
       <td>${price}</td>
       <td>
         <div class="input-group quantity">
-          <button class="btn btn-minus" data-id=${productId}><span class="icon icon-minus"></span></button>
+          <button class="btn btn-minus" data-id=${productId} data-type="btn-minus"><span class="icon icon-minus"></span></button>
           <input type="text" class="input-quantity" data-id=${id} name="input-quantity" value=${amount} readonly/>
-          <button class="btn btn-plus" data-id=${productId}><span class="icon icon-plus"></span></button>
+          <button class="btn btn-plus" data-id=${productId} data-type="btn-plus"><span class="icon icon-plus"></span></button>
         </div>
       </td>
       <td>
