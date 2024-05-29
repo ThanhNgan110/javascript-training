@@ -6,8 +6,8 @@ const validateEmpty = ({ key, value }) => {
 };
 
 const validateInteger = ({ key, value }) => {
-  return !REGEX_PATTERNS.VALID_INTERGER.test(value)
-    ? `${LABELS[key]} must be a interger`
+  return !REGEX_PATTERNS.VALID_INTEGER.test(value)
+    ? `${LABELS[key]} must be a integer`
     : "";
 };
 
