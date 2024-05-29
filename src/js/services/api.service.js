@@ -26,7 +26,7 @@ export default class ApiService {
         body: JSON.stringify(data),
       });
       if (res.ok) {
-        return res.json();
+       return await res.json();
       }
     } catch (error) {
       throw new Error(`Post data fail ${error.message}`);
@@ -44,7 +44,7 @@ export default class ApiService {
         }
       );
       if (res.ok) {
-        return res.json();
+        return await res.json();
       }
     } catch (error) {
       throw new Error(`Patch data fail ${error.message}`);
@@ -57,7 +57,7 @@ export default class ApiService {
         method: "DELETE"
       });
       if (res.ok) {
-        return res.json();
+        return await res.json();
       }
     } catch (error) {
       throw new Error(`DELETE data fail ${error.message}`);
