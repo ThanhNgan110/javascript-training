@@ -73,7 +73,6 @@ export default class CheckoutView {
         const inputElement = form.querySelector(`[name="${fieldName}"]`);
         this.handleDisplayMessageError(inputElement, message);
       }
-      
     }
 
     let allFieldsFilled = true;
