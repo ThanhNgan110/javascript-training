@@ -35,7 +35,7 @@ export const displayCart = (products) => {
       <th>SUBTOTAL</th>
     </tr>
   </thead>
-  <tbody id="tbody">
+  <tbody id="cart-table-body">
     ${contentCart}
   </tbody>
   <tfoot>
@@ -62,7 +62,7 @@ export const displayCart = (products) => {
 };
 
 export const cartTemplate = (product) => {
-  const { id, productId, name, price, imgURL, amount } = product;
+  const { id, name, price, imgURL, amount } = product;
   const subtotal = (price * amount).toFixed(2);
   return `
     <tr class="col-tbody" data-id=${id} >
@@ -75,9 +75,21 @@ export const cartTemplate = (product) => {
       <td>${price}</td>
       <td>
         <div class="input-group quantity">
-          <button class="btn btn-minus" data-id=${productId} data-type="btn-minus"><span class="icon icon-minus"></span></button>
+          <button
+            class="btn btn-minus"
+            data-type="minus"
+            data-id=${id}
+          >
+            <span class="icon icon-minus"></span>
+          </button>
           <input type="text" class="input-quantity" data-id=${id} name="input-quantity" value=${amount} readonly/>
-          <button class="btn btn-plus" data-id=${productId} data-type="btn-plus"><span class="icon icon-plus"></span></button>
+          <button
+            class="btn btn-plus"
+            data-type="plus"
+            data-id=${id}
+          >
+            <span class="icon icon-plus"></span>
+          </button>
         </div>
       </td>
       <td>
@@ -89,4 +101,3 @@ export const cartTemplate = (product) => {
     </tr>
   `;
 };
-
