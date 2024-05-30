@@ -22,8 +22,7 @@ export default class CartView {
   };
 
   bindControlsEvents = (handleUpdateCart, handleRenderCheckout) => {
-    this.bindChangeQuantity();
-    this.bindDeleteProduct();
+    this.bindChangeActions();
     this.bindUpdateCart(handleUpdateCart);
     this.bindCloseModalCart();
     this.bindCheckoutCart(handleRenderCheckout);
@@ -36,7 +35,7 @@ export default class CartView {
     });
   };
 
-  bindChangeQuantity = () => {
+  bindChangeActions = () => {
     const cartTableBody = getElementById("cart-table-body");
     cartTableBody.addEventListener("click", (e) => {
       const dataType =
@@ -53,6 +52,10 @@ export default class CartView {
 
         case "plus":
           this.handleChangeQuantity(cartTableBody, "plus", dataId);
+          break;
+
+        case "remove":
+          this.bindHiddenProduct(dataId);
           break;
 
         default:
@@ -76,16 +79,6 @@ export default class CartView {
           : inputQuantity.value--;
         break;
     }
-  };
-
-  bindDeleteProduct = () => {
-    const btnDeletes = querySelectorAll(".btn-delete");
-    btnDeletes.forEach((btnDelete) => {
-      btnDelete.addEventListener("click", () => {
-        const productId = btnDelete.dataset.id;
-        this.bindHiddenProduct(productId);
-      });
-    });
   };
 
   bindHiddenProduct = (productId) => {
