@@ -97,7 +97,7 @@ export default class ProductController {
     }
   };
 
-  handleDeleteProduct = async (deletedIds) => {
+  handleDeleteCartItem = async (deletedIds) => {
     const promises = deletedIds.map((deleteId) =>
       this.cartItemService.deleteProductFromCart(deleteId)
     );
@@ -105,7 +105,7 @@ export default class ProductController {
     return promises;
   };
 
-  handleUpdateProduct = async (updateItems) => {
+  handleUpdateCartItem = async (updateItems) => {
     const promises = updateItems.map((item) =>
       this.cartItemService.updateCart({ id: item.id, amount: item.quantity })
     );
@@ -117,8 +117,8 @@ export default class ProductController {
     try {
       displayLoading();
       await Promise.all([
-        this.handleDeleteProduct(deletedIds),
-        this.handleUpdateProduct(quantities),
+        this.handleDeleteCartItem(deletedIds),
+        this.handleUpdateCartItem(quantities),
       ]);
       hideLoading();
       showSuccess({ text: ALERT_MESSAGE.UPDATE_CART_SUCCESS_MSG });
@@ -128,7 +128,7 @@ export default class ProductController {
     }
   };
 
-  hanldeGetStates = async (countryId) => {
+  handleGetStates = async (countryId) => {
     const states = await this.stateService.getState();
     this.stateModel.setState(states);
     const listState = this.stateModel.getStateByCountry(countryId);
@@ -141,8 +141,8 @@ export default class ProductController {
     const products = this.cartModel.getCart();
     this.checkoutView.renderFormCheckout(products);
     this.checkoutView.handleRenderCountry(countries);
-    this.checkoutView.setDefaultCountry(this.hanldeGetStates, countries);
-    this.checkoutView.bindEventChangeCountry(this.hanldeGetStates);
+    this.checkoutView.setDefaultCountry(this.handleGetStates, countries);
+    this.checkoutView.bindEventChangeCountry(this.handleGetStates);
     this.cartView.bindCloseModalCheckout();
     this.checkoutView.bindChangeCheckoutForm(this.handleChangeCheckoutForm);
     hideLoading();

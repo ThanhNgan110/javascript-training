@@ -22,8 +22,7 @@ export default class CartView {
   };
 
   bindControlsEvents = (handleUpdateCart, handleRenderCheckout) => {
-    this.bindChangeQuantity();
-    this.bindDeleteProduct();
+    this.bindChangeActions();
     this.bindUpdateCart(handleUpdateCart);
     this.bindCloseModalCart();
     this.bindCheckoutCart(handleRenderCheckout);
@@ -36,24 +35,40 @@ export default class CartView {
     });
   };
 
-  bindChangeQuantity = () => {
-    const inputList = querySelectorAll(".input-group.quantity");
-    inputList.forEach((item) => {
-      const plusBtn = item.querySelector(".btn-plus");
-      plusBtn.addEventListener("click", () => {
-        this.handleChangeQuantity("plus", item);
-      });
+  bindChangeActions = () => {
+    const cartTableBody = getElementById("cart-table-body");
+    cartTableBody.addEventListener("click", (e) => {
+      const dataType =
+        e.target.getAttribute("data-type") ||
+        e.target.parentNode.getAttribute("data-type");
+      const dataId =
+        e.target.getAttribute("data-id") ||
+        e.target.parentNode.getAttribute("data-id");
 
-      const minusBtn = item.querySelector(".btn-minus");
-      minusBtn.addEventListener("click", () => {
-        this.handleChangeQuantity("minus", item);
-      });
+      switch (dataType) {
+        case "minus":
+          this.handleChangeQuantity(cartTableBody, "minus", dataId);
+          break;
+
+        case "plus":
+          this.handleChangeQuantity(cartTableBody, "plus", dataId);
+          break;
+
+        case "remove":
+          this.bindHiddenProduct(dataId);
+          break;
+
+        default:
+          break;
+      }
     });
   };
 
-  handleChangeQuantity = (options, item) => {
-    const inputQuantity = item.querySelector(".input-quantity");
-    switch (options) {
+  handleChangeQuantity = (cartTableBody, type, dataId) => {
+    const inputQuantity = cartTableBody.querySelector(
+      `input[data-id="${dataId}"]`
+    );
+    switch (type) {
       case "plus":
         inputQuantity.value && inputQuantity.value++;
         break;
@@ -64,16 +79,6 @@ export default class CartView {
           : inputQuantity.value--;
         break;
     }
-  };
-
-  bindDeleteProduct = () => {
-    const btnDeletes = querySelectorAll(".btn-delete");
-    btnDeletes.forEach((btnDelete) => {
-      btnDelete.addEventListener("click", () => {
-        const productId = btnDelete.dataset.id;
-        this.bindHiddenProduct(productId);
-      });
-    });
   };
 
   bindHiddenProduct = (productId) => {

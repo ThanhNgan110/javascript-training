@@ -35,12 +35,12 @@ export const displayCart = (products) => {
       <th>SUBTOTAL</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody id="cart-table-body">
     ${contentCart}
   </tbody>
   <tfoot>
     <tr class="col-btn">
-      <td colspan="5">
+      <td>
         <div class="btn-group">
           <button id="btn-close-cart" class="btn btn-return">Return to shop</button>
           <button id="btn-update-cart" class="btn btn-update-cart">Update Cart</button>
@@ -62,7 +62,7 @@ export const displayCart = (products) => {
 };
 
 export const cartTemplate = (product) => {
-  const { id, productId, name, price, imgURL, amount } = product;
+  const { id, name, price, imgURL, amount } = product;
   const subtotal = (price * amount).toFixed(2);
   return `
     <tr class="col-tbody" data-id=${id} >
@@ -75,18 +75,29 @@ export const cartTemplate = (product) => {
       <td>${price}</td>
       <td>
         <div class="input-group quantity">
-          <button class="btn btn-minus" data-id=${productId}><span class="icon icon-minus"></span></button>
+          <button
+            class="btn btn-minus"
+            data-type="minus"
+            data-id=${id}
+          >
+            <span class="icon icon-minus"></span>
+          </button>
           <input type="text" class="input-quantity" data-id=${id} name="input-quantity" value=${amount} readonly/>
-          <button class="btn btn-plus" data-id=${productId}><span class="icon icon-plus"></span></button>
+          <button
+            class="btn btn-plus"
+            data-type="plus"
+            data-id=${id}
+          >
+            <span class="icon icon-plus"></span>
+          </button>
         </div>
       </td>
       <td>
         <p class="product-subtotal">${subtotal}$</p>
       </td>
       <td>
-        <button id="btn-delete" class="btn btn-delete" data-id=${id}><span class="icon icon-close"></span></button>
+        <button id="btn-delete" class="btn btn-delete" data-type="remove" data-id=${id}><span class="icon icon-close"></span></button>
       </td>
     </tr>
   `;
 };
-
