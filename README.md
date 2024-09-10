@@ -2,7 +2,7 @@
 
 ## OVERVIEW
 
-- This is the document provided required for Typescript practice
+- This is the document provided required for Javascript practice
 - Design [Figma](<https://www.figma.com/file/4dPrq93GgtmlwmRfs7E3jf/Shopery---Organic-eCommerce-Shop-Website-Figma-Template-(Community)-(Community)?type=design&node-id=460-42486&mode=design&t=LfaCeksXjTSoiIBg-0>)
 
 ## TIMELINE
@@ -19,15 +19,12 @@
 - DOM manipulation.
 - Structure project following MVC pattern.
 - ES6 features.
-- Switch practice JavaScript to TypeScript
-- Get familiar with TypeScript language and understand the power of typed language, best practices.
-
 
 ## TECHNICAL STACK
 
 - HTML5
 - CSS3
-- TYPESCRIPT
+- JAVASCRIPT
 - JSON SERVER
 - PARCEL
 - VERCEL
