@@ -2,13 +2,13 @@
 
 ## OVERVIEW
 
-- This is the document provided required for Javascript practice
+- This is the document provided required for Typescript practice
 - Design [Figma](<https://www.figma.com/file/4dPrq93GgtmlwmRfs7E3jf/Shopery---Organic-eCommerce-Shop-Website-Figma-Template-(Community)-(Community)?type=design&node-id=460-42486&mode=design&t=LfaCeksXjTSoiIBg-0>)
 
 ## TIMELINE
 
-- Expected: 72 hours (2024/03/14 - 2024/03/26)
-- Total: 200 hours (2024/03/14 - 2024/05/27)
+- Expected:  6 Days (2024/08/27 - 2024/09/05).
+- Total: 
 
 ## TEAM SIZE
 
@@ -19,12 +19,15 @@
 - DOM manipulation.
 - Structure project following MVC pattern.
 - ES6 features.
+- Switch practice JavaScript to TypeScript
+- Get familiar with TypeScript language and understand the power of typed language, best practices.
+
 
 ## TECHNICAL STACK
 
 - HTML5
 - CSS3
-- JAVASCRIPT
+- TYPESCRIPT
 - JSON SERVER
 - PARCEL
 - VERCEL
